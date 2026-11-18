@@ -7,6 +7,9 @@ When designing, implementing, reviewing, or changing **visible frontend UI**, re
 1. [Usage and precedence](ai-skills/00_COMO_USAR_EN_CHATGPT.md)
 2. [Taste Skill — ChatGPT adaptation](ai-skills/01_Taste_Skill_ChatGPT.md)
 3. [UI/UX Pro Max — ChatGPT adaptation](ai-skills/02_UI_UX_Pro_Max_ChatGPT.md)
+4. [Visual style reference](DESIGN.md)
+
+Consult `DESIGN.md` as the current visual reference for frontend design (colors, typography, spacing and component styling). It references the Ease Health aesthetic as inspiration; do not treat that brand's identity, content, or health context as Tucanthon project requirements. Follow explicit product and user requirements when they differ.
 
 Use UI/UX Pro Max primarily for usability, accessibility, component states, navigation, responsive layout, typography, and consistent design tokens. Use Taste Skill primarily for art direction, composition, visual hierarchy, page identity, and appropriate microinteractions.
 
