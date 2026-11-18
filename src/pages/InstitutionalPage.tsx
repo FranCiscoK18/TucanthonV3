@@ -79,11 +79,11 @@ function TargetStatus({ indicator }: { indicator: Indicator }) {
   const meets = indicator.targetDirection === 'menor-o-igual' ? indicator.value <= indicator.target : indicator.value >= indicator.target;
   return meets ? (
     <Pill tone="forest" icon={CircleCheck}>
-      Dentro de la meta DEMO ({targetText(indicator)})
+      Dentro de la meta de referencia ({targetText(indicator)})
     </Pill>
   ) : (
     <Pill tone="warning" icon={CircleAlert}>
-      Fuera de la meta DEMO ({targetText(indicator)})
+      Fuera de la meta de referencia ({targetText(indicator)})
     </Pill>
   );
 }
@@ -142,7 +142,7 @@ function PilotSection() {
     <section aria-labelledby="piloto" className="card card-slate">
       <SectionHeading
         id="piloto"
-        eyebrow="Operación simulada"
+        eyebrow="Escenario de seguimiento"
         title="Piloto de 90 días"
         description="Cuatro etapas y las preguntas de decisión que se responden al cierre."
       />
@@ -155,7 +155,7 @@ function PilotSection() {
               <div>
                 <div className="flex items-baseline justify-between gap-3">
                   <p className="font-semibold text-charcoal">
-                    Día {pilot.currentDay} de {pilot.totalDays} <span className="font-normal text-muted">(simulado)</span>
+                    Día {pilot.currentDay} de {pilot.totalDays} <span className="font-normal text-muted">(referencia ilustrativa)</span>
                   </p>
                   <p className="text-sm text-muted tabular-nums">{progress} %</p>
                 </div>
@@ -175,7 +175,7 @@ function PilotSection() {
                   <li key={stage.id} className="rounded-[12px] bg-cream-paper p-4">
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <h3 className="text-[1.25rem]">{stage.name}</h3>
-                      <Pill tone={stageTone[stage.status]}>{stageLabel[stage.status]} · DEMO</Pill>
+                      <Pill tone={stageTone[stage.status]}>{stageLabel[stage.status]}</Pill>
                     </div>
                     <p className="text-sm text-muted">
                       Días {stage.startDay}–{stage.endDay}
@@ -279,7 +279,7 @@ export function InstitutionalPage() {
       <PageHeader
         eyebrow="Datos agregados"
         title="Centro de vigilancia epidemiológica"
-        description="Herramientas simuladas para que el sector salud explore señales, zonas prioritarias, reportes revisados y seguimiento institucional. Las métricas operativas se muestran más abajo."
+        description="Herramientas para que el sector salud explore señales, zonas prioritarias, reportes revisados y seguimiento institucional. Las métricas operativas se muestran más abajo."
         meta={
           <>
             <DataKindBadge kind="estimado" compact />
@@ -357,7 +357,7 @@ export function InstitutionalPage() {
                       note: `${formatInteger(row.reports)} reportes`,
                     }))}
                 />
-                <p className="mt-2 text-xs text-muted">Valores: reportes por cada 100 mil habitantes (población estimada DEMO).</p>
+                <p className="mt-2 text-xs text-muted">Valores: reportes por cada 100 mil habitantes (población de referencia).</p>
               </div>
               <div>
                 <h2 className="mb-5 text-[1.75rem] sm:text-[2rem]">Participación por canal</h2>
@@ -385,7 +385,7 @@ export function InstitutionalPage() {
         <SectionHeading
           id="prioritarias"
           title="Zonas prioritarias"
-          description={`Puntaje: señal estadística en datos oficiales DEMO (2 puntos), ovitrampas positivas ≥ ${VECTOR_THRESHOLD_PCT} % en la última semana (1 punto) y al menos ${MIN_PUBLIC_COUNT} observaciones revisadas de posibles criaderos en 4 semanas (1 punto). Los reportes sin verificar se muestran como contexto y no suman.`}
+          description={`Puntaje: señal estadística en datos ilustrativos (2 puntos), ovitrampas positivas ≥ ${VECTOR_THRESHOLD_PCT} % en la última semana (1 punto) y al menos ${MIN_PUBLIC_COUNT} observaciones revisadas de posibles criaderos en 4 semanas (1 punto). Los reportes sin verificar se muestran como contexto y no suman.`}
         />
         <Notice tone="caution" className="mb-4">
           {TEXTS.priorityCaveat}
@@ -436,7 +436,7 @@ export function InstitutionalPage() {
         />
         <p className="mb-3 flex items-start gap-2 text-sm text-muted">
           <FileSpreadsheet className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-          Exportación simulada: el archivo se genera en tu navegador e incluye zona, semana, categoría, estado y conteo. No contiene
+          Exportación de información ilustrativa: el archivo se genera en tu navegador e incluye zona, semana, categoría, estado y conteo. No contiene
           datos personales.
         </p>
         {exportMessage && (
