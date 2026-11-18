@@ -11,7 +11,7 @@ export function Footer() {
         </p>
         <div className="mt-6 grid gap-6 text-[13.5px] text-muted md:grid-cols-3">
           <p>
-            Un reporte ciudadano es una observación, no un caso clínico confirmado. No se cobra por reportar ni hay comisiones por pacientes o referencias.
+            Un reporte ciudadano es una observación, no un caso clínico confirmado. No se cobra por reportar y la plataforma no ofrece atención clínica.
           </p>
           <p>
             No se publican domicilios ni ubicaciones individuales: solo agregados por zonas amplias. Mapa base © colaboradores de OpenStreetMap.

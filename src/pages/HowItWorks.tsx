@@ -150,7 +150,7 @@ export default function HowItWorks() {
             <p className="font-semibold text-forest">Lo que no existe en Ondara</p>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-[15px]">
               <li>Cobros a ciudadanos por reportar o consultar.</li>
-              <li>Comisiones por pacientes o referencias médicas.</li>
+              <li>Intermediación de consultas o servicios de atención clínica.</li>
               <li>Subsidios o adjudicaciones presupuestas.</li>
             </ul>
           </div>
