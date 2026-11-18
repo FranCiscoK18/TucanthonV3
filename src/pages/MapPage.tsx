@@ -4,7 +4,6 @@ import { Link, useSearchParams } from 'react-router';
 import { LazyMap } from '../components/map/LazyMap';
 import { MapLegend } from '../components/map/MapLegend';
 import { ZoneDetail } from '../components/map/ZoneDetail';
-import { DataKindBadge, DemoTag } from '../components/ui/Badges';
 import { Button } from '../components/ui/Button';
 import { SelectField } from '../components/ui/Form';
 import { Notice } from '../components/ui/Notice';
@@ -103,15 +102,6 @@ export function MapPage() {
         eyebrow="Datos por zona"
         title="Mapa epidemiológico"
         description="Agregados por zonas amplias de Cancún. Ningún punto representa a una persona ni un domicilio."
-        meta={
-          <>
-            <DataKindBadge kind="oficial-demo" compact />
-            <DataKindBadge kind="estimado" compact />
-            <DataKindBadge kind="reporte-ciudadano" compact />
-            <DataKindBadge kind="simulado" compact />
-            <DemoTag />
-          </>
-        }
       />
 
       <button
