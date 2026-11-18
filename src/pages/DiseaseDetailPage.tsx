@@ -3,7 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router';
 import { BarList } from '../components/charts/BarList';
 import { TrendChart } from '../components/charts/TrendChart';
 import { SignalCriteria } from '../components/SignalCriteria';
-import { DataKindBadge, DemoTag, Pill } from '../components/ui/Badges';
+import { Pill } from '../components/ui/Badges';
 import { SelectField } from '../components/ui/Form';
 import { Notice } from '../components/ui/Notice';
 import { PageHeader, SectionHeading } from '../components/ui/PageHeader';
@@ -44,8 +44,6 @@ export function DiseaseDetailPage() {
         meta={
           <>
             <Pill tone="forest">{categoryLabels[disease.category]}</Pill>
-            <DataKindBadge kind="oficial-demo" compact />
-            <DemoTag />
           </>
         }
       />
