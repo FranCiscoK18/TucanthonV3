@@ -1,7 +1,7 @@
 import type { DataKind, DemoRecord, ISODate, ISODateTime } from './common';
 import type { ModerationDecision, ReportStatus } from './participation';
 
-export type UserRole = 'invitado' | 'ciudadano' | 'admin';
+export type UserRole = 'invitado' | 'admin';
 
 export type SessionRole = Exclude<UserRole, 'invitado'>;
 

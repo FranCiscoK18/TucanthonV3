@@ -7,6 +7,7 @@ import { BrigadesPage } from '../pages/BrigadesPage';
 import { DiseaseDetailPage } from '../pages/DiseaseDetailPage';
 import { DiseasesPage } from '../pages/DiseasesPage';
 import { HomePage } from '../pages/HomePage';
+import { LandingPage } from '../pages/LandingPage';
 import { HowItWorksPage } from '../pages/HowItWorksPage';
 import { InstitutionalPage } from '../pages/InstitutionalPage';
 import { LoginPage } from '../pages/LoginPage';
@@ -23,7 +24,8 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <RouteErrorPage />,
     children: [
-      { index: true, element: <HomePage /> },
+      { index: true, element: <LandingPage /> },
+      { path: 'inicio', element: <HomePage /> },
       { path: 'como-funciona', element: <HowItWorksPage /> },
       { path: 'mapa', element: <MapPage /> },
       { path: 'enfermedades', element: <DiseasesPage /> },
@@ -32,14 +34,7 @@ export const router = createBrowserRouter([
       { path: 'brigadas/:activityId', element: <BrigadeDetailPage /> },
       { path: 'reportar', element: <ReportNewPage /> },
       { path: 'acceso', element: <LoginPage /> },
-      {
-        path: 'mis-reportes',
-        element: (
-          <RequireArea area="mis-reportes">
-            <MyReportsPage />
-          </RequireArea>
-        ),
-      },
+      { path: 'mis-reportes', element: <MyReportsPage /> },
       {
         path: 'institucion',
         element: (

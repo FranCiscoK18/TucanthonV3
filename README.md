@@ -64,29 +64,29 @@ public/brand/     Logotipo e isotipo de Ondara (PNG con fondo transparente)
 
 | Ruta | Vista | Acceso |
 |---|---|---|
-| `/` | Inicio: qué es y qué no es, resumen de señales, accesos rápidos y avisos informativos | Público |
+| `/` | Landing inicial: presentación de Ondara, público objetivo, funciones y botones de acceso | Público |
+| `/inicio` | Resumen público de señales, accesos rápidos y avisos informativos | Público |
 | `/como-funciona` | Seis etapas con responsable, regla de integridad, canales, modelo de servicio y piloto | Público |
 | `/mapa` | Mapa con seis capas separadas, filtros, panel de zona y tabla | Público |
 | `/enfermedades` | Catálogo, criterios de señal y señales activas | Público |
 | `/enfermedades/:id` | Tendencia, señal, comparación de periodos, datos por semana y zona, vigilancia vectorial | Público |
 | `/brigadas` y `/brigadas/:id` | Brigadas y campañas en lista y mapa, con detalle | Público |
 | `/reportar` | Formulario de reporte sin datos personales; folio al enviar | Público |
-| `/acceso` | Selector de rol (login mock) | Público |
-| `/mis-reportes` | Seguimiento de reportes propios (el admin puede abrirla, pero no aparece en su menú) | `ciudadano`, `admin` |
+| `/acceso` | Inicio de sesión administrativa DEMO (credenciales ficticias) | Público |
+| `/mis-reportes` | Seguimiento de reportes guardados en este navegador sin cuenta | Público |
 | `/institucion` | Centro de vigilancia epidemiológica (señales, zonas y métricas) | `admin` |
 | `/administracion` | Fuentes, moderación, bitácora y separación de módulos | `admin` |
 
-Sin sesión, una ruta protegida redirige a `/acceso?siguiente=…` y vuelve a la ruta pedida al elegir un rol válido. Con un rol sin permiso, muestra «Sin permiso». El menú lateral y las pestañas móviles solo muestran lo que el rol puede abrir.
+Sin sesión, las rutas administrativas redirigen a `/acceso?siguiente=…`; el acceso DEMO solo activa el rol `admin`. El menú lateral y las pestañas móviles muestran las secciones correspondientes. La ciudadanía nunca requiere cuenta para consultar o reportar; «Mis reportes» funciona con almacenamiento del navegador.
 
 ## 4. Roles mock
 
 | Rol | Acceso | Alias en pantalla |
 |---|---|---|
-| invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades y brigadas. Puede enviar reportes. | — |
-| ciudadano | Todo lo anterior, más seguimiento de reportes propios | Ciudadanía DEMO |
+| invitado (sin sesión) | Landing, inicio público, mapa, enfermedades, brigadas, reportes y su seguimiento local | — |
 | admin | Centro de vigilancia, reportes, moderación, fuentes y bitácora | Administrador de salud (DEMO) |
 
-**No es autenticación ni autorización real.** Las restricciones existen solo en la interfaz y se pueden eludir desde el navegador.
+**No es autenticación ni autorización real.** El único acceso simulado es el administrativo; las credenciales ficticias se muestran en pantalla. Las restricciones existen solo en la interfaz y se pueden eludir desde el navegador.
 
 ## 5. Datos mock y servicios simulados
 
@@ -107,7 +107,7 @@ Sin sesión, una ruta protegida redirige a `/acceso?siguiente=…` y vuelve a la
 | `ondara.demo.reportes` | Reportes propios enviados desde este navegador |
 | `ondara.demo.bitacora` | Bitácora de acciones institucionales (sin datos personales) |
 
-La moderación de los reportes de ejemplo y el estado de las fuentes se **reconstruyen leyendo la bitácora**, así que no se necesitan más claves. En la DEMO todos los roles comparten el navegador: lo que moderes como `admin` se ve en «Mis reportes» como ciudadanía. Así se puede probar el ciclo completo.
+La moderación de los reportes de ejemplo y el estado de las fuentes se **reconstruyen leyendo la bitácora**, así que no se necesitan más claves. En la DEMO las pantallas públicas y la sesión administrativa comparten el navegador: lo que se modera como `admin` se refleja en «Mis reportes», sin requerir una sesión ciudadana. Así se puede probar el ciclo completo.
 
 ## 6. Mapa
 

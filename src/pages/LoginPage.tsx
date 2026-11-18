@@ -1,82 +1,99 @@
-import { Building2, CircleUserRound, ShieldAlert, HeartHandshake, ClipboardCheck } from 'lucide-react';
-import { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router';
-import { AREA_ROLES, type AreaId } from '../app/access';
+import { Building2, Eye, EyeOff, LockKeyhole, ShieldAlert } from 'lucide-react';
+import { useState, type FormEvent } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router';
 import { useSession } from '../app/session';
 import { Button, ButtonLink } from '../components/ui/Button';
-import { Notice } from '../components/ui/Notice';
-import { PageHeader } from '../components/ui/PageHeader';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import type { SessionRole } from '../types';
 
-function safeNext(value: string | null): string | null {
-  return value && value.startsWith('/') && !value.startsWith('//') ? value : null;
+const DEMO_USER = 'salud@ondara.demo';
+const DEMO_PASSWORD = 'ONDARA2026';
+
+function safeDestination(value: string | null): string {
+  if (value && (value === '/institucion' || value.startsWith('/institucion?') || value === '/administracion' || value.startsWith('/administracion?'))) return value;
+  return '/institucion';
 }
+
 export function LoginPage() {
-  useDocumentTitle('Accesos de Ondara');
-  const { role: currentRole, signIn } = useSession();
-  const navigate = useNavigate();
+  useDocumentTitle('Acceso administrativo · Ondara');
+  const { role, signIn } = useSession();
   const [params] = useSearchParams();
-  const [pending, setPending] = useState<SessionRole | null>(null);
-  const next = safeNext(params.get('siguiente'));
-  const requested = params.get('area');
-  const area: AreaId | null = requested && Object.prototype.hasOwnProperty.call(AREA_ROLES, requested)
-    ? requested as AreaId : null;
-  const choose = async (role: SessionRole) => {
-    setPending(role);
-    try {
-      await signIn(role);
-      navigate(next && (!area || AREA_ROLES[area].includes(role)) ? next : role === 'admin' ? '/institucion' : '/', { replace: true });
-    } finally {
-      setPending(null);
+  const navigate = useNavigate();
+  const [user, setUser] = useState(DEMO_USER);
+  const [password, setPassword] = useState(DEMO_PASSWORD);
+  const [visible, setVisible] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState('');
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (user.trim().toLowerCase() !== DEMO_USER || password !== DEMO_PASSWORD) {
+      setError('Usa las credenciales ficticias que aparecen debajo del formulario.');
+      return;
     }
+    setError('');
+    setPending(true);
+    try {
+      await signIn('admin');
+      navigate(safeDestination(params.get('siguiente')), {replace: true});
+    } catch {
+      setError('No se pudo activar la sesión de prueba. Intenta de nuevo.');
+    } finally { setPending(false); }
   };
   return (
-    <>
-      <PageHeader eyebrow="Acceso DEMO" title="¿Cómo quieres entrar a Ondara?"
-        description="La ciudadanía aporta observaciones; el personal del sector salud analiza y administra. Los accesos son completamente simulados." />
-      <Notice tone="caution" title="Sesiones de demostración" icon={ShieldAlert} className="mb-7">
-        No hay cuentas ni contraseñas reales. Los controles de acceso son únicamente visuales y no deben utilizarse con datos reales.
-      </Notice>
-      <div className="grid gap-5 lg:grid-cols-2">
-        <section className="rounded-[20px] bg-keylime-wash p-6 sm:p-8" aria-labelledby="acceso-ciudadano">
-          <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-cream-paper text-forest-ink"><CircleUserRound className="size-7" /></span>
-          <p className="eyebrow mt-5">Portal público</p>
-          <h2 id="acceso-ciudadano" className="mt-2 text-[2rem]">Usuarios y ciudadanía</h2>
-          <p className="mt-3 leading-relaxed">Conoce las señales de tu zona, consulta campañas y envía una observación sin identificarte. Los aliados comunitarios usan este mismo portal.</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <ButtonLink to="/reportar">Enviar un reporte</ButtonLink>
-            <ButtonLink to="/mapa" variant="secondary">Explorar el mapa</ButtonLink>
-          </div>
-          <div className="mt-6 rounded-xl bg-cream-paper p-4">
-            <p className="flex items-center gap-2 font-semibold text-forest-ink"><HeartHandshake className="size-5" /> Modo aliado comunitario</p>
-            <p className="mt-1 text-sm text-muted">Un mismo acceso público permite facilitar reportes mediante un código QR o enlace precargado.</p>
-          </div>
-          <div className="mt-5 border-t border-forest-ink/15 pt-4">
-            <p className="mb-3 text-sm">Opcional: activar una sesión ficticia para consultar «Mis reportes».</p>
-            <Button variant="secondary" icon={ClipboardCheck} loading={pending === 'ciudadano'} disabled={pending === 'admin'} onClick={() => choose('ciudadano')}>
-              {currentRole === 'ciudadano' ? 'Continuar como ciudadanía DEMO' : 'Activar sesión de ciudadanía DEMO'}
-            </Button>
-          </div>
+    <div className="mx-auto max-w-5xl py-6 lg:py-12">
+      <div className="grid overflow-hidden rounded-[22px] border border-border-mist lg:grid-cols-2">
+        <section className="bg-slate-hush p-7 sm:p-10 lg:p-12" aria-labelledby="admin-presentacion">
+          <div className="inline-flex size-14 items-center justify-center rounded-[18px] bg-cream-paper text-forest-ink"><Building2 className="size-7" /></div>
+          <p className="eyebrow mt-8">Portal institucional · DEMO</p>
+          <h1 id="admin-presentacion" className="mt-3 text-[2.3rem] sm:text-[3rem]">Centro de vigilancia epidemiológica</h1>
+          <p className="mt-5 leading-relaxed">Un espacio de trabajo para que el administrador de salud explore tendencias, observe zonas prioritarias, revise reportes ciudadanos y documente su seguimiento.</p>
+          <ul className="mt-7 space-y-3 text-sm">
+            <li className="flex gap-2"><LockKeyhole className="mt-0.5 size-4 shrink-0 text-forest-ink" /> Acceso exclusivo para el perfil administrativo de la demostración.</li>
+            <li className="flex gap-2"><ShieldAlert className="mt-0.5 size-4 shrink-0 text-forest-ink" /> Las acciones y estadísticas son ficticias; no son decisiones ni alertas oficiales.</li>
+          </ul>
+          <Link to="/" className="link mt-8 inline-block text-sm">Volver a la portada pública</Link>
         </section>
-        <section className="rounded-[20px] bg-slate-hush p-6 sm:p-8" aria-labelledby="acceso-salud">
-          <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-cream-paper text-forest-ink"><Building2 className="size-7" /></span>
-          <p className="eyebrow mt-5">Portal institucional</p>
-          <h2 id="acceso-salud" className="mt-2 text-[2rem]">Administrador de salud</h2>
-          <p className="mt-3 leading-relaxed">Accede a la vigilancia epidemiológica, los datos agregados, zonas prioritarias, revisión de reportes, decisiones e intervenciones simuladas.</p>
-          <div className="mt-6 space-y-3 rounded-xl bg-cream-paper p-5">
-            <p className="font-semibold text-forest-ink">Herramientas del administrador</p>
-            <ul className="list-disc space-y-1 pl-5 text-sm leading-relaxed">
-              <li>Consultar señales y comparar zonas epidemiológicas.</li>
-              <li>Validar observaciones, canalizarlas y documentar su seguimiento.</li>
-              <li>Revisar fuentes, indicadores y la bitácora DEMO.</li>
-            </ul>
-            <Button className="mt-3 w-full" loading={pending === 'admin'} disabled={pending === 'ciudadano'} onClick={() => choose('admin')}>
-              {currentRole === 'admin' ? 'Continuar como administrador DEMO' : 'Entrar como administrador de salud'}
-            </Button>
-          </div>
+        <section className="bg-cream-paper p-7 sm:p-10 lg:p-12" aria-labelledby="admin-login-titulo">
+          {role === 'admin' ? (
+            <div className="flex h-full flex-col justify-center">
+              <p className="eyebrow">Sesión DEMO activa</p>
+              <h2 id="admin-login-titulo" className="mt-3 text-[2rem]">Ya tienes acceso al panel</h2>
+              <p className="mt-3 text-muted">El perfil administrativo está habilitado en este navegador.</p>
+              <ButtonLink to="/institucion" className="mt-7">Ir al centro de vigilancia</ButtonLink>
+              <ButtonLink to="/administracion" className="mt-3" variant="secondary">Gestionar reportes</ButtonLink>
+            </div>
+          ) : (
+            <form onSubmit={submit} noValidate>
+              <p className="eyebrow">Inicio de sesión</p>
+              <h2 id="admin-login-titulo" className="mt-2 text-[2rem]">Acceso administrativo</h2>
+              <p className="mt-2 text-sm text-muted">Ingresa con las credenciales de demostración. No se conecta a ningún servidor.</p>
+              <div className="mt-7">
+                <label htmlFor="admin-usuario" className="block text-sm font-semibold text-forest-ink">Usuario DEMO</label>
+                <input id="admin-usuario" type="text" autoComplete="off" value={user} onChange={e=>setUser(e.target.value)}
+                  className="mt-2 w-full rounded-xl border border-line bg-cream-paper px-4 py-3" required />
+              </div>
+              <div className="mt-5">
+                <label htmlFor="admin-clave" className="block text-sm font-semibold text-forest-ink">Contraseña DEMO</label>
+                <div className="relative mt-2">
+                  <input id="admin-clave" type={visible ? 'text' : 'password'} autoComplete="off" value={password} onChange={e=>setPassword(e.target.value)}
+                    className="w-full rounded-xl border border-line bg-cream-paper px-4 py-3 pr-14" required />
+                  <button type="button" onClick={()=>setVisible(!visible)} aria-label={visible ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                    className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-forest-ink">
+                    {visible ? <EyeOff className="size-5" /> : <Eye className="size-5" />}
+                  </button>
+                </div>
+              </div>
+              {error && <p className="mt-4 rounded-xl bg-danger-50 p-3 text-sm text-danger-700" role="alert">{error}</p>}
+              <Button type="submit" loading={pending} disabled={pending} className="mt-7 w-full" icon={LockKeyhole}>Entrar al panel del sector salud</Button>
+              <div className="mt-6 rounded-xl bg-keylime-wash p-4 text-sm">
+                <p className="font-semibold text-forest-ink">Credenciales ficticias</p>
+                <p className="mt-2">Usuario: <code className="font-mono">salud@ondara.demo</code></p>
+                <p>Contraseña: <code className="font-mono">ONDARA2026</code></p>
+              </div>
+              <p className="mt-5 text-xs leading-relaxed text-muted">No es autenticación real. Esta pantalla es solo un prototipo frontend y no debe proteger datos auténticos.</p>
+            </form>
+          )}
         </section>
       </div>
-    </>
+    </div>
   );
 }
