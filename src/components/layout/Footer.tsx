@@ -23,7 +23,6 @@ export function Footer() {
           <nav aria-label="Enlaces del pie de página">
             <p className="text-sm font-semibold text-charcoal">Información y acceso</p>
             <ul className="mt-2 space-y-1.5 text-sm">
-              <li><Link className="link" to="/como-funciona">Cómo funciona Ondara</Link></li>
               <li><Link className="link" to="/normativa">Normativa y fuentes de datos</Link></li>
               <li><Link className="link" to="/acceso">Acceso administrativo</Link></li>
             </ul>
