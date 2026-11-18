@@ -14,7 +14,6 @@ import { LoginPage } from '../pages/LoginPage';
 import { MapPage } from '../pages/MapPage';
 import { MyReportsPage } from '../pages/MyReportsPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
-import { RegulationsPage } from '../pages/RegulationsPage';
 import { ReportNewPage } from '../pages/ReportNewPage';
 import { RouteErrorPage } from '../pages/RouteErrorPage';
 import { RequireArea } from './RequireArea';
@@ -34,7 +33,6 @@ export const router = createBrowserRouter([
       { path: 'brigadas', element: <BrigadesPage /> },
       { path: 'brigadas/:activityId', element: <BrigadeDetailPage /> },
       { path: 'reportar', element: <ReportNewPage /> },
-      { path: 'normativa', element: <RegulationsPage /> },
       { path: 'acceso', element: <LoginPage /> },
       { path: 'mis-reportes', element: <MyReportsPage /> },
       {

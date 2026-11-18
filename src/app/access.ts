@@ -1,5 +1,5 @@
 /**
- * Matriz de acceso por rol (punto 5). Es una restricción de interfaz para la DEMO,
+ * Matriz de acceso por rol. Es una restricción de interfaz para la DEMO,
  * NO una medida de seguridad: no hay backend que la haga cumplir.
  */
 import type { UserRole } from '../types';
@@ -11,7 +11,6 @@ export type AreaId =
   | 'enfermedades'
   | 'brigadas'
   | 'reportar'
-  | 'normativa'
   | 'mis-reportes'
   | 'institucion'
   | 'administracion';
@@ -26,7 +25,6 @@ export const AREA_ROLES: Record<AreaId, readonly UserRole[]> = {
   enfermedades: EVERYONE,
   brigadas: EVERYONE,
   reportar: EVERYONE,
-  normativa: EVERYONE,
   'mis-reportes': EVERYONE,
   institucion: ['admin'],
   administracion: ['admin'],

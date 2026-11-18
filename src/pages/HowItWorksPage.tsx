@@ -1,6 +1,5 @@
 import {
   ArrowDown,
-  ArrowRight,
   Building2,
   ClipboardCheck,
   Handshake,
@@ -159,7 +158,7 @@ export function HowItWorksPage() {
         <SectionHeading
           id="canales"
           title="Canales de entrada"
-          description="Todos llevan al mismo formulario breve. Ninguno pide nombre, teléfono, correo ni domicilio. WhatsApp no se ofrece como canal anónimo."
+          description="Todos llevan al mismo formulario breve. Ninguno pide nombre, teléfono, correo ni domicilio."
         />
         <ul className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {CHANNELS.map((channel) => {
@@ -208,7 +207,7 @@ export function HowItWorksPage() {
           <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">
             <li>Solo se publican agregados por zonas amplias; nunca domicilios ni puntos individuales.</li>
             <li>Los conteos ciudadanos menores a {MIN_PUBLIC_COUNT} se muestran como «&lt;{MIN_PUBLIC_COUNT}».</li>
-            <li>La información pública (módulo A) y la participación (módulo B) operan por separado.</li>
+            <li>La información pública y los reportes ciudadanos se guardan por separado.</li>
             <li>Los reportes no se vinculan con la identidad de quien los envía.</li>
           </ul>
         </div>
@@ -234,9 +233,6 @@ export function HowItWorksPage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <ButtonLink to="/reportar" icon={ShieldCheck}>
             Enviar un reporte
-          </ButtonLink>
-          <ButtonLink to="/normativa" variant="secondary" icon={ArrowRight} iconPosition="end">
-            Normativa y fuentes
           </ButtonLink>
         </div>
       </section>

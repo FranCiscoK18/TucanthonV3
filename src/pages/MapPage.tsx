@@ -1,4 +1,4 @@
-import { Layers, RotateCcw, Syringe } from 'lucide-react';
+import { ChevronDown, Layers, RotateCcw, SlidersHorizontal, Syringe } from 'lucide-react';
 import { useCallback, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { LazyMap } from '../components/map/LazyMap';
@@ -93,11 +93,14 @@ export function MapPage() {
   const selectedActivity = data?.activities.find((activity) => activity.id === selectedActivityId);
   const officialEmpty = data !== undefined && data.zones.every((zone) => zone.oficial.count === 0);
   const filtersChanged = params.toString().length > 0;
+  const activeFilterCount = ['clasificacion', 'enfermedad', 'periodo', 'zona'].filter((key) => params.has(key)).length;
+  // En móvil los filtros empiezan plegados para que el mapa quede en la primera pantalla.
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   return (
     <>
       <PageHeader
-        eyebrow="Capas separadas por tipo de dato"
+        eyebrow="Datos por zona"
         title="Mapa epidemiológico"
         description="Agregados por zonas amplias de Cancún. Ningún punto representa a una persona ni un domicilio."
         meta={
@@ -111,8 +114,23 @@ export function MapPage() {
         }
       />
 
+      <button
+        type="button"
+        className="mb-3 inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-card bg-border-mist/60 px-4 text-[0.9375rem] font-semibold text-forest-ink sm:hidden"
+        aria-expanded={filtersOpen}
+        aria-controls="filtros-mapa"
+        onClick={() => setFiltersOpen((open) => !open)}
+      >
+        <span className="inline-flex items-center gap-2">
+          <SlidersHorizontal className="size-4" aria-hidden="true" />
+          Filtros{activeFilterCount > 0 ? ` (${activeFilterCount})` : ''}
+        </span>
+        <ChevronDown className={`size-4 transition-transform ${filtersOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+      </button>
+
       <form
-        className="mb-5 grid grid-cols-1 gap-3 rounded-card bg-border-mist/60 p-4 sm:grid-cols-2 xl:grid-cols-[repeat(4,minmax(0,1fr))_auto]"
+        id="filtros-mapa"
+        className={`mb-5 ${filtersOpen ? 'grid' : 'hidden'} grid-cols-1 gap-3 rounded-card bg-border-mist/60 p-4 sm:grid sm:grid-cols-2 xl:grid-cols-[repeat(4,minmax(0,1fr))_auto]`}
         aria-label="Filtros del mapa"
         onSubmit={(event) => event.preventDefault()}
       >

@@ -1,9 +1,7 @@
-import { MessageSquarePlus } from 'lucide-react';
 import { NavLink } from 'react-router';
 import { NAV_GROUP_LABELS, navItemsFor, type NavItem } from '../../app/navigation';
 import { useSession } from '../../app/session';
 import { cx } from '../../utils/cx';
-import { ButtonLink } from '../ui/Button';
 
 function groupItems(items: NavItem[]): Array<[NavItem['group'], NavItem[]]> {
   const groups: Array<[NavItem['group'], NavItem[]]> = [];
@@ -48,13 +46,6 @@ export function SideNav() {
           </ul>
         </div>
       ))}
-      <div className="rounded-card bg-mint-veil p-4">
-        <p className="text-sm font-semibold text-forest-ink">¿Viste un posible criadero?</p>
-        <p className="mt-1 text-sm text-muted">Envíalo sin cuenta y sin datos personales.</p>
-        <ButtonLink to="/reportar" size="sm" icon={MessageSquarePlus} className="mt-3 w-full">
-          Reportar
-        </ButtonLink>
-      </div>
     </nav>
   );
 }

@@ -72,7 +72,6 @@ public/brand/     Logotipo e isotipo de Ondara (PNG con fondo transparente)
 | `/enfermedades/:id` | Tendencia, señal, comparación de periodos, datos por semana y zona, vigilancia vectorial | Público |
 | `/brigadas` y `/brigadas/:id` | Brigadas y campañas en lista y mapa, con detalle | Público |
 | `/reportar` | Formulario de reporte sin datos personales; folio al enviar | Público |
-| `/normativa` | Marcos a revisar y fuentes de datos DEMO | Público |
 | `/acceso` | Inicio de sesión administrativa DEMO (credenciales ficticias) | Público |
 | `/mis-reportes` | Seguimiento de reportes guardados en este navegador sin cuenta | Público |
 | `/institucion` | Centro de vigilancia epidemiológica (señales, zonas y métricas) | `admin` |
@@ -85,7 +84,7 @@ Sin sesión, las rutas administrativas redirigen a `/acceso?siguiente=…`; el a
 | Rol | Acceso | Alias en pantalla |
 |---|---|---|
 | invitado (sin sesión) | Landing, inicio público, mapa, enfermedades, brigadas, reportes y su seguimiento local | — |
-| admin | Centro de vigilancia, reportes, moderación, fuentes y bitácora | Administrador del sector salud (DEMO) |
+| admin | Centro de vigilancia, reportes, moderación, fuentes y bitácora | Administrador de salud (DEMO) |
 
 **No es autenticación ni autorización real.** El único acceso simulado es el administrativo; las credenciales ficticias se muestran en pantalla. Las restricciones existen solo en la interfaz y se pueden eludir desde el navegador.
 
@@ -137,13 +136,12 @@ La moderación de los reportes de ejemplo y el estado de las fuentes se **recons
 
 ## 8. Decisiones tomadas
 
-0. **Sin directorio, citas ni perfil médico:** `main` retiró estas funciones (PR #3 y #4); esta versión tampoco las incluye.
-
-1. **Se reemplazó el prototipo anterior** («EpiRadar Cancún», commit `74478ef`): no tenía acceso público ni las seis capas, y sus roles y estados no coincidían con el nuevo alcance.
-2. **Versiones estables** de cada librería. MapLibre se usa en la línea 6 porque las versiones 6.4 y anteriores tienen un aviso crítico de seguridad (XSS en `DOM.sanitize`).
-3. **Gráficas SVG propias** en lugar de Recharts, para no sumar peso.
-4. **Paleta extendida:** `DESIGN.md` pide no añadir colores, pero distinguir tipos de dato es un requisito del producto. Se añadieron tonos validados solo para tipos de dato y capas.
-5. **Sin mayúsculas sostenidas:** las etiquetas superiores van en tipo oración, en lugar de las mayúsculas que sugiere `DESIGN.md`.
+1. **Sin directorio, citas ni perfil médico:** `main` retiró estas funciones (PR #3 y #4); esta versión tampoco las incluye.
+2. **Se reemplazó el prototipo anterior** («EpiRadar Cancún», commit `74478ef`): no tenía acceso público ni las seis capas, y sus roles y estados no coincidían con el nuevo alcance.
+3. **Versiones estables** de cada librería. MapLibre se usa en la línea 6 porque las versiones 6.4 y anteriores tienen un aviso crítico de seguridad (XSS en `DOM.sanitize`).
+4. **Gráficas SVG propias** en lugar de Recharts, para no sumar peso.
+5. **Paleta extendida:** `DESIGN.md` pide no añadir colores, pero distinguir tipos de dato es un requisito del producto. Se añadieron tonos validados solo para tipos de dato y capas.
+6. **Sin mayúsculas sostenidas:** las etiquetas superiores van en tipo oración, en lugar de las mayúsculas que sugiere `DESIGN.md`.
 7. **Reportes sin datos personales:** no se piden nombre, teléfono, correo ni domicilio, y se detectan teléfonos, correos, direcciones y CURP en el texto libre. La foto es simulada (no se sube ninguna imagen) y WhatsApp no se ofrece como canal.
 8. **«Avisos informativos»** en lugar de «alertas», para evitar lenguaje de alarma. El tipo de datos sigue siendo `Alert`.
 9. **Regla operativa DEMO:** sin ampliación en 15 días, el reporte se cierra por información insuficiente. La cola de moderación muestra primero los pendientes y permite buscar por folio.

@@ -8,7 +8,7 @@ export const roleLabels: Record<UserRole, string> = {
 
 /** Alias genérico de cada rol: la DEMO nunca pide ni guarda un nombre real. */
 export const roleAliases: Record<SessionRole, string> = {
-  admin: 'Autoridad sanitaria (DEMO)',
+  admin: 'Administrador de salud (DEMO)',
 };
 
 export const roleAccessSummary: Record<UserRole, string> = {

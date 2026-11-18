@@ -4,7 +4,6 @@ import {
   Check,
   Map as MapIcon,
   MessageSquarePlus,
-  Scale,
   Syringe,
   Workflow,
   X,
@@ -54,16 +53,23 @@ interface QuickLink {
   title: string;
   text: string;
   icon: LucideIcon;
-  tone: string;
 }
 
+/** «Enviar un reporte» no se repite aquí: ya es la acción secundaria del hero. */
 const QUICK_LINKS: QuickLink[] = [
-  { to: '/mapa', title: 'Mapa epidemiológico', text: 'Seis capas separadas por tipo de dato.', icon: MapIcon, tone: 'bg-keylime-wash' },
-  { to: '/brigadas', title: 'Brigadas y campañas', text: 'Vacunación y prevención por zona.', icon: Syringe, tone: 'bg-mint-veil' },
-  { to: '/reportar', title: 'Enviar un reporte', text: 'Sin cuenta y sin datos personales.', icon: MessageSquarePlus, tone: 'bg-sage-mist' },
-  { to: '/enfermedades', title: 'Enfermedades y señales', text: 'Tendencias con criterios visibles.', icon: BookOpenText, tone: 'bg-keylime-wash' },
-  { to: '/normativa', title: 'Normativa y fuentes', text: 'Marcos a revisar y fuentes DEMO.', icon: Scale, tone: 'bg-slate-hush' },
+  { to: '/mapa', title: 'Mapa epidemiológico', text: 'Registros, reportes y brigadas por zona.', icon: MapIcon },
+  { to: '/enfermedades', title: 'Enfermedades y señales', text: 'Tendencias y cómo se detecta una señal.', icon: BookOpenText },
+  { to: '/brigadas', title: 'Brigadas y campañas', text: 'Vacunación y prevención cerca de ti.', icon: Syringe },
 ];
+
+/** Filas de la tabla de Inicio: primero las señales activas y luego las de más registros. */
+const HOME_TABLE_ROWS = 6;
+
+function homeRows(items: DiseaseCatalog['items']): DiseaseCatalog['items'] {
+  return [...items]
+    .sort((a, b) => Number(b.signal.status === 'senal') - Number(a.signal.status === 'senal') || b.last4 - a.last4)
+    .slice(0, HOME_TABLE_ROWS);
+}
 
 function HeroPreview({ catalog, participation }: { catalog?: DiseaseCatalog; participation?: ParticipationSummary }) {
   const { today } = getDemoClock();
@@ -158,14 +164,14 @@ export function HomePage() {
 
       <section aria-labelledby="accesos">
         <SectionHeading id="accesos" title="Accesos rápidos" description="Las funciones públicas no requieren descarga ni cuenta." />
-        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {QUICK_LINKS.map((link) => {
             const Icon = link.icon;
             return (
               <li key={link.to}>
                 <Link
                   to={link.to}
-                  className={`group flex h-full items-start gap-4 rounded-card p-5 transition-colors hover:bg-sage-mist ${link.tone}`}
+                  className="group flex h-full items-start gap-4 rounded-card bg-keylime-wash p-5 transition-colors hover:bg-mint-veil"
                 >
                   <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-cream-paper text-forest-ink">
                     <Icon className="size-5" aria-hidden="true" />
@@ -211,9 +217,6 @@ export function HomePage() {
               </li>
             ))}
           </ul>
-          <Notice tone="integrity" className="mt-5">
-            {TEXTS.integrityRule}
-          </Notice>
         </div>
       </section>
 
@@ -222,7 +225,7 @@ export function HomePage() {
           id="resumen"
           eyebrow="Datos oficiales DEMO"
           title="Enfermedades y señales monitoreadas"
-          description="Registros agregados de toda la ciudad: últimas 4 semanas frente a las 4 previas."
+          description="Registros agregados de toda la ciudad. La columna «Cambio» compara las últimas 4 semanas con las 4 previas; la regla de señal usa otra ventana (2 semanas frente a las 8 anteriores)."
           actions={
             <ButtonLink to="/enfermedades" variant="secondary" size="sm" icon={ArrowRight} iconPosition="end">
               Ver catálogo completo
@@ -235,7 +238,8 @@ export function HomePage() {
               <div className="relative overflow-x-auto rounded-card border border-border-mist" tabIndex={0} aria-label="Tabla de resumen, desplazable">
                 <table className="table-base min-w-[40rem]">
                   <caption className="sr-only">
-                    Resumen DEMO de registros por enfermedad o señal, últimas 4 semanas, con estado de la regla de señal
+                    Resumen DEMO de las {HOME_TABLE_ROWS} enfermedades o señales más relevantes, últimas 4 semanas, con estado de
+                    la regla de señal
                   </caption>
                   <thead>
                     <tr>
@@ -244,12 +248,12 @@ export function HomePage() {
                       <th scope="col" className="text-right">
                         Últimas 4 sem.
                       </th>
-                      <th scope="col">Cambio</th>
+                      <th scope="col">Cambio vs. 4 sem. previas</th>
                       <th scope="col">Regla de señal</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {data.items.map((item) => (
+                    {homeRows(data.items).map((item) => (
                       <tr key={item.disease.id}>
                         <th scope="row" className="font-medium">
                           <Link className="link" to={`/enfermedades/${item.disease.id}`}>
@@ -281,7 +285,6 @@ export function HomePage() {
       <section aria-labelledby="avisos">
         <SectionHeading
           id="avisos"
-          eyebrow="Sin lenguaje de alarma"
           title="Avisos informativos"
           description="Cada aviso indica su fuente, fecha, criterio y limitación. Ninguno es una alerta oficial."
         />
@@ -290,7 +293,7 @@ export function HomePage() {
             <ul className="grid grid-cols-1 gap-4 md:grid-cols-2">
               {data.map((alert) => (
                 <li key={alert.id}>
-                  <AlertCard alert={alert} />
+                  <AlertCard alert={alert} compact />
                 </li>
               ))}
             </ul>
