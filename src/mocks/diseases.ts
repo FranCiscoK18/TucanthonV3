@@ -22,7 +22,7 @@ export const categoryOrder: DiseaseCategory[] = [
 
 const OFFICIAL_SOURCE = 'fuente-registro-semanal';
 const BASE_MONITORING =
-  'En esta DEMO se representa con conteos semanales simulados por zona, como si provinieran de un registro oficial agregado.';
+  'Se visualiza mediante conteos semanales ilustrativos por zona, sin conexión a registros oficiales.';
 
 export const diseases: Disease[] = [
   {
@@ -34,7 +34,7 @@ export const diseases: Disease[] = [
     summary: 'Infección viral transmitida por mosquitos Aedes.',
     description:
       'Infección viral transmitida por la picadura de mosquitos Aedes aegypti infectados. Puede causar fiebre y malestar general; algunas personas desarrollan formas graves que requieren atención médica oportuna.',
-    monitoring: `${BASE_MONITORING} Se complementa con la capa entomológica DEMO de ovitrampas.`,
+    monitoring: `${BASE_MONITORING} Se complementa con la capa entomológica de referencia de ovitrampas.`,
     prevention:
       'Eliminar recipientes que acumulen agua, usar repelente y mosquiteros, y seguir las indicaciones de la autoridad sanitaria.',
     sourceId: OFFICIAL_SOURCE,
@@ -50,7 +50,7 @@ export const diseases: Disease[] = [
     summary: 'Infección viral transmitida por mosquitos Aedes.',
     description:
       'Infección viral transmitida por mosquitos Aedes. Suele causar fiebre y dolor en las articulaciones, que en algunas personas se prolonga por semanas.',
-    monitoring: `${BASE_MONITORING} Se complementa con la capa entomológica DEMO de ovitrampas.`,
+    monitoring: `${BASE_MONITORING} Se complementa con la capa entomológica de referencia de ovitrampas.`,
     prevention: 'Las mismas medidas que para el dengue: eliminar criaderos, usar repelente y proteger ventanas y camas.',
     sourceId: OFFICIAL_SOURCE,
     hasVectorData: true,
