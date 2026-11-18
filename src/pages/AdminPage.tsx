@@ -2,7 +2,7 @@ import { ClipboardCheck, Database, History, Lock, ShieldCheck, SplitSquareHorizo
 import { useState, type FormEvent } from 'react';
 import { useSession } from '../app/session';
 import { ReportStatusPill, StatusTimeline } from '../components/reports/ReportStatus';
-import { DataKindBadge, DemoTag, Pill } from '../components/ui/Badges';
+import { Pill } from '../components/ui/Badges';
 import { Button } from '../components/ui/Button';
 import { Dialog } from '../components/ui/Dialog';
 import { InputField, RadioCards, SelectField, TextAreaField } from '../components/ui/Form';
@@ -96,11 +96,10 @@ function SourcesSection() {
         {(sources) => (
           <div className="relative overflow-x-auto rounded-card border border-border-mist" tabIndex={0} aria-label="Tabla de fuentes, desplazable">
             <table className="table-base min-w-[60rem]">
-              <caption className="sr-only">Fuentes de datos de referencia con tipo, responsable, periodo, fecha de corte y estado</caption>
+              <caption className="sr-only">Fuentes de datos de referencia con responsable, periodo, fecha de corte y estado</caption>
               <thead>
                 <tr>
                   <th scope="col">Fuente</th>
-                  <th scope="col">Tipo</th>
                   <th scope="col">Responsable</th>
                   <th scope="col">Periodo</th>
                   <th scope="col">Corte</th>
@@ -119,9 +118,6 @@ function SourcesSection() {
                         {source.module === 'A' ? 'Información pública' : 'Participación ciudadana'}
                       </span>
                     </th>
-                    <td>
-                      <DataKindBadge kind={source.kind} compact />
-                    </td>
                     <td>{source.responsible}</td>
                     <td className="text-muted">{source.period}</td>
                     <td className="whitespace-nowrap">{formatDate(source.cutoffDate)}</td>
@@ -643,7 +639,6 @@ export function AdminPage() {
         eyebrow="Administrador de salud"
         title="Gestión y validación de reportes"
         description="Fuentes de datos, moderación, bitácora y separación entre información pública y reportes. Los registros y métricas de ejemplo son ilustrativos."
-        meta={<DemoTag />}
       />
       <nav aria-label="Secciones de administración" className="mb-10">
         <ul className="flex flex-wrap gap-2">
