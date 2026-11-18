@@ -14,16 +14,13 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { Fragment } from 'react';
-import { DataKindBadge } from '../components/ui/Badges';
 import { ButtonLink } from '../components/ui/Button';
 import { Notice } from '../components/ui/Notice';
 import { PageHeader, SectionHeading } from '../components/ui/PageHeader';
-import { DATA_KIND_META } from '../config/dataKinds';
 import { MIN_PUBLIC_COUNT } from '../config/demo';
 import { TEXTS } from '../config/texts';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { pilotStages } from '../mocks/pilot';
-import type { DataKind } from '../types';
 
 interface Stage {
   name: string;
@@ -95,8 +92,6 @@ const CHANNELS: Array<{ name: string; icon: LucideIcon; text: string }> = [
     text: 'Organizaciones vecinales capacitadas que ayudan a reportar, sin recopilar datos personales.',
   },
 ];
-
-const KINDS: DataKind[] = ['oficial-demo', 'estimado', 'reporte-ciudadano', 'simulado'];
 
 export function HowItWorksPage() {
   useDocumentTitle('Cómo funciona');
@@ -171,22 +166,6 @@ export function HowItWorksPage() {
               </li>
             );
           })}
-        </ul>
-      </section>
-
-      <section aria-labelledby="tipos" className="mt-16">
-        <SectionHeading
-          id="tipos"
-          title="Cuatro tipos de dato, siempre distinguibles"
-          description="Cada dato muestra su tipo con color, icono y texto. Los indicadores ilustrativos y los reportes ciudadanos se representan con símbolos diferentes."
-        />
-        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          {KINDS.map((kind) => (
-            <li key={kind} className="flex flex-col gap-2 rounded-card border border-border-mist p-5">
-              <DataKindBadge kind={kind} className="self-start" />
-              <p className="leading-relaxed text-muted">{DATA_KIND_META[kind].description}</p>
-            </li>
-          ))}
         </ul>
       </section>
 
