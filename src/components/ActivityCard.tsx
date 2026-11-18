@@ -16,7 +16,7 @@ const statusTone: Record<ActivityStatus, Tone> = {
 };
 
 export function ActivityStatusPill({ status }: { status: ActivityStatus }) {
-  return <Pill tone={statusTone[status]}>{activityStatusLabels[status]} · DEMO</Pill>;
+  return <Pill tone={statusTone[status]}>{activityStatusLabels[status]}</Pill>;
 }
 
 export function ActivityTypePill({ activity }: { activity: HealthActivity }) {
