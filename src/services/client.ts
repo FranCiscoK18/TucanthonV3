@@ -6,7 +6,7 @@
 import { getServiceConfig } from './config';
 
 export class DemoServiceError extends Error {
-  constructor(message = 'No se pudo completar la solicitud. Es un fallo simulado del modo prueba.') {
+  constructor(message = 'No se pudo completar la solicitud. Vuelve a intentarlo.') {
     super(message);
     this.name = 'DemoServiceError';
   }
@@ -23,7 +23,7 @@ export class ValidationError extends Error {
 }
 
 export class NotFoundError extends Error {
-  constructor(message = 'No encontramos el recurso solicitado en los datos DEMO.') {
+  constructor(message = 'No encontramos la información solicitada.') {
     super(message);
     this.name = 'NotFoundError';
   }
