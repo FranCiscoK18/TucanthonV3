@@ -11,13 +11,6 @@ const FEATURES = [
   { title: 'Participación ciudadana', text: 'Comparte una observación de tu entorno sin registrarte y sigue su estado en este navegador.', to: '/reportar', icon: MessageSquarePlus, tone: 'bg-ciudadano-50' },
 ] as const;
 
-const STEPS = [
-  { title: 'Observamos', text: 'La ciudadanía y los aliados comunitarios aportan observaciones por zona, sin identidades.' },
-  { title: 'Organizamos', text: 'Ondara diferencia las observaciones, las estimaciones y las fuentes epidemiológicas.' },
-  { title: 'Revisamos', text: 'El personal administrador valida y canaliza lo relevante; no confirma diagnósticos.' },
-  { title: 'Prevenimos', text: 'El sector salud visualiza tendencias y puede documentar acciones de seguimiento.' },
-] as const;
-
 export function LandingPage() {
   useDocumentTitle('Bienvenido a Ondara Cancún');
   return (
@@ -107,22 +100,6 @@ export function LandingPage() {
           <h2 className="mt-2 text-[2rem]">Analiza información para orientar decisiones</h2>
           <p className="mt-3 leading-relaxed">El personal administrador cuenta con vistas de vigilancia, zonas prioritarias, revisión de reportes y seguimiento de acciones.</p>
         </div>
-      </section>
-
-      <section aria-labelledby="landing-proceso">
-        <div className="mb-6 max-w-3xl">
-          <p className="eyebrow">Cómo funciona</p>
-          <h2 id="landing-proceso" className="mt-2 text-[2rem] sm:text-[2.7rem]">De una observación a información útil</h2>
-          <p className="mt-3 text-muted">Los reportes comunitarios complementan la vigilancia, pero nunca se presentan como diagnósticos confirmados.</p>
-        </div>
-        <ol className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-          {STEPS.map((item, i) => <li key={item.title} className="rounded-[16px] border border-border-mist bg-cream-paper p-5">
-            <span className="inline-flex size-10 items-center justify-center rounded-full bg-keylime-wash font-semibold text-forest-ink">{i+1}</span>
-            <h3 className="mt-4 text-[1.4rem]">{item.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
-          </li>)}
-        </ol>
-        <div className="mt-5"><ButtonLink to="/como-funciona" variant="ghost" icon={ArrowRight} iconPosition="end">Conocer las etapas en detalle</ButtonLink></div>
       </section>
 
       <section className="rounded-[22px] bg-forest-ink px-6 py-10 text-cream-paper sm:px-10 lg:flex lg:items-center lg:justify-between lg:gap-8 lg:px-12">
