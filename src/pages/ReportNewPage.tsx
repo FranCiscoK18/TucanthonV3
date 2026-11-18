@@ -1,6 +1,5 @@
 import { Camera, CheckCircle2, ClipboardList, ImageOff, MessageSquarePlus, ShieldCheck, Trash2 } from 'lucide-react';
 import { useMemo, useRef, useState, type FormEvent } from 'react';
-import { Link } from 'react-router';
 import { ReportStatusPill, StatusGuide } from '../components/reports/ReportStatus';
 import { DataKindBadge, DemoTag } from '../components/ui/Badges';
 import { Button, ButtonLink } from '../components/ui/Button';
