@@ -22,7 +22,7 @@ export function NoPermissionPage({ area }: { area: AreaId }) {
         {allowed.join(', ')}.
       </p>
       <div className="mt-6 flex flex-wrap justify-center gap-3">
-        <ButtonLink to={`/acceso?area=${area}`}>Cambiar de rol</ButtonLink>
+        <ButtonLink to={`/acceso?area=${area}`}>Ir al acceso administrativo</ButtonLink>
         <ButtonLink to="/" variant="secondary">
           Ir al inicio
         </ButtonLink>

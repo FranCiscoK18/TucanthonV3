@@ -49,7 +49,7 @@ export function Footer() {
               </li>
               <li>
                 <Link className="link" to="/acceso">
-                  Roles de la demostración
+                  Acceso administrativo
                 </Link>
               </li>
             </ul>

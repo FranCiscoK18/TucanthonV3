@@ -14,9 +14,8 @@ export function readSession(): MockSession | null {
   return readStored(STORAGE_KEYS.session, isMockSession);
 }
 
-/** Los roles institucionales quedan en bitácora; la actividad ciudadana no se registra. */
+/** Solo el administrador inicia sesión DEMO; la actividad ciudadana no se registra. */
 function logSessionEvent(session: MockSession, kind: 'inicio-sesion' | 'cierre-sesion'): void {
-  if (session.role === 'ciudadano') return;
   appendAudit({
     actorRole: session.role,
     actorLabel: session.alias,
