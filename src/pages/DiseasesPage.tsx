@@ -41,9 +41,9 @@ export function DiseasesPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Catálogo DEMO"
+        eyebrow="Catálogo epidemiológico"
         title="Enfermedades y señales"
-        description="Descripciones generales, tendencias simuladas y una regla de señal con criterios visibles. Nada de lo que aparece aquí es un diagnóstico."
+        description="Descripciones generales, tendencias ilustrativas y una regla de señal con criterios visibles. Nada de lo que aparece aquí es un diagnóstico."
         meta={
           <>
             <DataKindBadge kind="oficial-demo" compact />
@@ -67,7 +67,7 @@ export function DiseasesPage() {
                   id="senales"
                   eyebrow="Regla estadística transparente"
                   title="Señales por incremento inusual"
-                  description={`Evaluadas sobre registros oficiales DEMO con corte al ${formatDate(data.cutoff)}.`}
+                  description={`Evaluadas sobre registros ilustrativos con corte al ${formatDate(data.cutoff)}.`}
                 />
                 <SignalCriteria />
                 <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -183,13 +183,13 @@ export function DiseasesPage() {
                             <p className="text-[1.5rem] font-semibold leading-tight text-charcoal">{formatInteger(item.last4)}</p>
                             <ChangeText current={item.last4} previous={item.previous4} />
                           </div>
-                          <Sparkline values={item.sparkline} label={`Tendencia de 8 semanas de ${item.disease.name}, DEMO`} />
+                          <Sparkline values={item.sparkline} label={`Tendencia de 8 semanas de ${item.disease.name}, ilustrativa`} />
                         </div>
                         <div className="mt-3">
                           <SignalBadge status={item.signal.status} ratio={item.signal.ratio} />
                         </div>
                         <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-border-mist pt-3 text-sm">
-                          <span className="text-muted">Fuente DEMO</span>
+                          <span className="text-muted">Datos ilustrativos</span>
                           <Link
                             className="inline-flex min-h-10 items-center gap-1 font-semibold text-forest-ink hover:underline"
                             to={`/enfermedades/${item.disease.id}`}
