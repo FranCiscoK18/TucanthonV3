@@ -178,7 +178,7 @@ export function HowItWorksPage() {
         <SectionHeading
           id="tipos"
           title="Cuatro tipos de dato, siempre distinguibles"
-          description="Cada dato muestra su tipo con color, icono y texto. Nunca se mezclan datos oficiales DEMO con reportes ciudadanos en un mismo símbolo."
+          description="Cada dato muestra su tipo con color, icono y texto. Los indicadores ilustrativos y los reportes ciudadanos se representan con símbolos diferentes."
         />
         <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {KINDS.map((kind) => (
@@ -199,7 +199,7 @@ export function HowItWorksPage() {
             <li>No se cobra a la ciudadanía por reportar ni por consultar información.</li>
             <li>No hay comisiones por pacientes ni por referencias médicas.</li>
             <li>Los aliados comunitarios utilizan el portal ciudadano para facilitar observaciones sin acceder a datos personales.</li>
-            <li>Esta DEMO no presupone ningún subsidio ni adjudicación.</li>
+            <li>La presentación no presupone ningún subsidio ni adjudicación.</li>
           </ul>
         </div>
         <div className="card card-slate">
@@ -217,7 +217,7 @@ export function HowItWorksPage() {
         <SectionHeading
           id="piloto"
           title="Piloto de 90 días"
-          description="Antes de crecer, el servicio se prueba en zonas acotadas y se evalúa con métricas de utilidad, oportunidad, seguimiento, cobertura y sostenibilidad."
+          description="Antes de crecer, el servicio se evalúa en zonas acotadas y se evalúa con métricas de utilidad, oportunidad, seguimiento, cobertura y sostenibilidad."
         />
         <ol className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {pilotStages.map((stage) => (
