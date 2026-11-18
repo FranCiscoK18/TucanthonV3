@@ -12,7 +12,13 @@ import { DataKindBadge } from '../ui/Badges';
 function LayerSymbol({ layer }: { layer: MapLayerMeta }) {
   const Icon = layer.icon;
   if (layer.id === 'oficial') {
-    return <span className="inline-block size-5 shrink-0 rounded-[4px]" style={{ backgroundColor: OFFICIAL_SCALE[4] }} aria-hidden="true" />;
+    return (
+      <span
+        className="inline-block h-5 w-7 shrink-0 rounded-[4px]"
+        style={{ background: `linear-gradient(90deg, ${OFFICIAL_SCALE.slice(1).join(', ')})` }}
+        aria-hidden="true"
+      />
+    );
   }
   return (
     <span
@@ -31,14 +37,16 @@ function OfficialScale({ breaks }: { breaks: number[] }) {
   }
   const classes = [
     { label: '0', color: OFFICIAL_SCALE[0] },
-    ...breaks.map((limit, index) => ({
-      label: `${index === 0 ? 1 : (breaks[index - 1] ?? 0) + 1}–${limit}`,
-      color: OFFICIAL_SCALE[index + 1] ?? OFFICIAL_SCALE[5],
-    })),
+    ...breaks.flatMap((limit, index) => {
+      const lower = index === 0 ? 1 : (breaks[index - 1] ?? 0) + 1;
+      return lower <= limit
+        ? [{ label: lower === limit ? String(limit) : `${lower}–${limit}`, color: OFFICIAL_SCALE[index + 1] }]
+        : [];
+    }),
   ];
   return (
     <div className="mt-2">
-      <p className="text-xs text-muted">Registros ilustrativos en el periodo, por zona</p>
+      <p className="text-xs text-muted">Cantidad de registros por zona · verde = menor, rojo = mayor</p>
       <ul className="mt-1.5 grid grid-cols-3 gap-x-3 gap-y-1 text-xs tabular-nums">
         {classes.map((item) => (
           <li key={item.label} className="flex items-center gap-1.5 whitespace-nowrap">
@@ -47,6 +55,7 @@ function OfficialScale({ breaks }: { breaks: number[] }) {
           </li>
         ))}
       </ul>
+      <p className="mt-2 text-xs text-muted">Escala relativa a los filtros seleccionados; no mide gravedad clínica ni constituye una alerta oficial.</p>
     </div>
   );
 }

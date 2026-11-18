@@ -1,7 +1,6 @@
-import { Activity, ArrowRight, BookOpenText, Building2, Check, ClipboardCheck, MapPinned, MessageSquarePlus, ShieldCheck, Syringe, TrendingUp, Users } from 'lucide-react';
+import { Activity, ArrowRight, BookOpenText, Building2, Check, ClipboardCheck, MapPinned, MessageSquarePlus, Syringe, TrendingUp, Users } from 'lucide-react';
 import { Link } from 'react-router';
 import { ButtonLink } from '../components/ui/Button';
-import { Notice } from '../components/ui/Notice';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 
 const FEATURES = [
@@ -113,10 +112,9 @@ export function LandingPage() {
           <ButtonLink to="/reportar" variant="secondary" icon={MessageSquarePlus}>Enviar reporte</ButtonLink>
         </div>
       </section>
-      <Notice tone="integrity" title="Integridad de la información">
-        <ShieldCheck className="mr-1 inline size-4" aria-hidden="true" />
-        Las observaciones ciudadanas no confirman casos ni brotes. Los indicadores mostrados utilizan datos ilustrativos y no representan condiciones reales de salud.
-      </Notice>
+      <p className="text-sm leading-relaxed text-muted">
+        Las observaciones ciudadanas no confirman casos ni brotes. Los indicadores de esta presentación son ilustrativos y no representan cifras epidemiológicas oficiales.
+      </p>
     </div>
   );
 }

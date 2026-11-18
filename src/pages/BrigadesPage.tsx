@@ -5,7 +5,6 @@ import { activitiesDataset, ONLY_BRIGADES } from '../components/map/activitiesDa
 import { LazyMap } from '../components/map/LazyMap';
 import { Button } from '../components/ui/Button';
 import { SelectField } from '../components/ui/Form';
-import { Notice } from '../components/ui/Notice';
 import { PageHeader } from '../components/ui/PageHeader';
 import { SourceMeta } from '../components/ui/SourceMeta';
 import { AsyncContent, EmptyState, LoadingState } from '../components/ui/States';
@@ -48,13 +47,8 @@ export function BrigadesPage() {
       <PageHeader
         eyebrow="Agenda de referencia"
         title="Brigadas y campañas sanitarias"
-        description="Vacunación y prevención por zona, con ubicación aproximada. Las sedes son referencias generales de espacios públicos."
+        description="Vacunación y prevención por zona, con ubicaciones aproximadas. Consulta con la autoridad sanitaria antes de acudir: estas actividades son referencias, no convocatorias confirmadas."
       />
-
-      <Notice tone="caution" title="Agenda ilustrativa" className="mb-6">
-        Las actividades y sedes de esta agenda son ilustrativas, no convocatorias reales. Consulta las campañas confirmadas
-        con la autoridad sanitaria antes de acudir.
-      </Notice>
 
       <form
         className="mb-6 grid grid-cols-1 gap-3 rounded-card bg-border-mist/60 p-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-6"

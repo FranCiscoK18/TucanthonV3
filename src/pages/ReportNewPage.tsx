@@ -369,7 +369,7 @@ export function ReportNewPage() {
               <ul className="mt-3 list-disc space-y-2 pl-5 text-[0.9375rem] leading-relaxed">
                 <li>No pedimos nombre, teléfono, correo ni domicilio.</li>
                 <li>Solo registramos la zona amplia, nunca coordenadas.</li>
-                <li>En vistas públicas, los conteos menores a 3 se muestran como «&lt;3».</li>
+                <li>En vistas públicas, cuando hay 1 o 2 reportes se muestra el intervalo «1–2» para proteger la privacidad.</li>
                 <li>El reporte se guarda únicamente en este navegador.</li>
               </ul>
             </div>
