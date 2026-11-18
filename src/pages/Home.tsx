@@ -6,7 +6,6 @@ import {
   Map,
   Megaphone,
   Scale,
-  Stethoscope,
   Syringe,
   X,
   type LucideIcon,
@@ -41,7 +40,6 @@ const IS_NOT = [
 const QUICK_LINKS: Array<{ to: string; title: string; text: string; icon: LucideIcon }> = [
   { to: '/mapa', title: 'Mapa por capas', text: 'Datos agregados por zona, cada tipo en su propia capa.', icon: Map },
   { to: '/brigadas', title: 'Brigadas y campañas', text: 'Vacunación y prevención por zona, fecha y horario.', icon: Syringe },
-  { to: '/directorio', title: 'Directorio de salud', text: 'Servicios informativos, sin comisiones.', icon: Stethoscope },
   { to: '/reportes', title: 'Enviar un reporte', text: 'Una observación breve, anónima y por zona.', icon: Megaphone },
   { to: '/normativa', title: 'Normativa y fuentes', text: 'Marcos a revisar y procedencia de los datos.', icon: Scale },
   { to: '/enfermedades', title: 'Enfermedades y señales', text: 'Tendencias y criterios transparentes.', icon: Activity },

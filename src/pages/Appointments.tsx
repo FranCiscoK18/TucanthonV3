@@ -1,6 +1,6 @@
 import { CalendarCheck2, CalendarDays, CalendarX2, CheckCircle2, Clock, Globe, MapPin } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { DemoBadge } from '../components/ui/Badges';
 import { EmptyState, ErrorState, LoadingState, Notice } from '../components/ui/Feedback';
 import { Field, describedBy, fieldIds } from '../components/ui/Form';
@@ -42,7 +42,7 @@ export default function Appointments() {
       <PageHeader
         eyebrow="Agenda simulada"
         title="Mis citas"
-        description="Agenda una cita presencial o en línea con un servicio del directorio. Las citas son simuladas y solo se guardan en este navegador."
+        description="Agenda una cita presencial o en línea seleccionando un servicio de salud DEMO en el formulario. Las citas son simuladas y solo se guardan en este navegador."
       />
       <Notice tone="caution" title="Citas DEMO">
         Ninguna cita llega a un profesional real. No escribas datos personales ni información clínica sensible.
@@ -153,7 +153,7 @@ function BookingForm({ initialDoctorId, onBooked }: { initialDoctorId: string; o
         <li>
           <p className="eyebrow mb-3">1 · Servicio y modalidad</p>
           <div className="grid gap-4 md:grid-cols-[1fr_auto]">
-            <Field id="cita-doctorId" label="Servicio del directorio" required error={errors.doctorId}>
+            <Field id="cita-doctorId" label="Servicio de salud DEMO" required error={errors.doctorId}>
               <select
                 id="cita-doctorId"
                 className="input"
@@ -370,12 +370,7 @@ function MyAppointments({ refreshKey }: { refreshKey: number }) {
         <EmptyState
           icon={CalendarDays}
           title="Aún no tienes citas"
-          description="Elige un servicio del directorio o usa el formulario de arriba para agendar una cita simulada."
-          action={
-            <Link to="/directorio" className="btn btn-secondary">
-              Ir al directorio
-            </Link>
-          }
+          description="Usa el formulario de arriba para agendar una cita simulada."
         />
       ) : (
         <ul className="space-y-3">

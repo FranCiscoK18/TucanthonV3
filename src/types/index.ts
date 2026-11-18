@@ -168,7 +168,7 @@ export interface Campaign extends DemoRecord {
 }
 
 // ---------------------------------------------------------------------------
-// Directorio y citas
+// Servicios de salud y citas
 // ---------------------------------------------------------------------------
 
 export type Modality = 'presencial' | 'en_linea';
@@ -261,7 +261,7 @@ export interface ReviewedObservation extends DemoRecord {
 // Fuentes, bitácora y panel institucional
 // ---------------------------------------------------------------------------
 
-export type DataSourceType = 'oficial-demo' | 'estimado' | 'ciudadano' | 'entomologico-demo' | 'campanas-demo' | 'directorio-demo';
+export type DataSourceType = 'oficial-demo' | 'estimado' | 'ciudadano' | 'entomologico-demo' | 'campanas-demo';
 export type DataSourceStatus = 'activa' | 'pausada' | 'en_validacion';
 
 export interface DataSource extends DemoRecord {

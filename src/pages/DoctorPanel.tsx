@@ -1,5 +1,4 @@
 import { CalendarDays, Globe, MapPin } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { useSession } from '../app/SessionContext';
 import { DataKindBadge } from '../components/ui/Badges';
 import { EmptyState, ErrorState, LoadingState, Notice } from '../components/ui/Feedback';
@@ -28,7 +27,7 @@ export default function DoctorPanel() {
       <PageHeader
         eyebrow="Rol médico DEMO"
         title="Mi perfil y agenda"
-        description="Vista simulada para profesionales del directorio. Este rol no tiene acceso a reportes ciudadanos individuales."
+        description="Vista simulada para profesionales de salud. Este rol no tiene acceso a reportes ciudadanos individuales."
       />
       {doctor && (
         <div className="grid gap-4 md:grid-cols-[1fr_320px]">
@@ -47,9 +46,6 @@ export default function DoctorPanel() {
               </li>
               <li>Precio DEMO: {formatCurrency(doctor.priceMxn)}</li>
             </ul>
-            <Link to={`/directorio/${doctor.id}`} className="link mt-4 inline-block text-[14px]">
-              Ver mi perfil público
-            </Link>
           </div>
           <div className="space-y-3">
             <NoCommissionNote />

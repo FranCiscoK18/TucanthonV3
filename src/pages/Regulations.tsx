@@ -17,7 +17,6 @@ const SOURCE_KIND: Record<DataSourceType, DataKind> = {
   ciudadano: 'ciudadano',
   'entomologico-demo': 'vector',
   'campanas-demo': 'brigada',
-  'directorio-demo': 'simulado',
 };
 
 export default function Regulations() {

@@ -74,7 +74,7 @@ export type BookingErrors = Partial<Record<keyof BookingInput, string>>;
 export function validateBooking(input: Partial<BookingInput>): BookingErrors {
   const errors: BookingErrors = {};
   const doctor = input.doctorId ? doctorById(input.doctorId) : undefined;
-  if (!doctor) errors.doctorId = 'Elige un servicio del directorio.';
+  if (!doctor) errors.doctorId = 'Elige un servicio de salud DEMO.';
   if (!input.modality) errors.modality = 'Elige la modalidad.';
   else if (doctor && !doctor.modalities.includes(input.modality)) errors.modality = 'Este servicio no ofrece esa modalidad.';
   if (!input.date) errors.date = 'Elige una fecha.';

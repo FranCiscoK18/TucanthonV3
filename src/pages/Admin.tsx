@@ -31,7 +31,6 @@ const sourceTypeLabels: Record<DataSourceType, string> = {
   ciudadano: 'Ciudadano',
   'entomologico-demo': 'Entomológico DEMO',
   'campanas-demo': 'Campañas DEMO',
-  'directorio-demo': 'Directorio DEMO',
 };
 const sourceStatusLabels: Record<DataSourceStatus, string> = { activa: 'Activa', pausada: 'Pausada', en_validacion: 'En validación' };
 
@@ -425,7 +424,7 @@ function ConfigPanel() {
             Información pública
           </h2>
           <ul className="mt-3 list-disc space-y-1.5 pl-5 text-[14.5px]">
-            <li>Contiene: agregados DEMO por zona, catálogo, brigadas, directorio y normativa.</li>
+            <li>Contiene: agregados DEMO por zona, catálogo, brigadas y normativa.</li>
             <li>Sin datos personales. Conteos ciudadanos menores a 3 se ocultan.</li>
             <li>Retención: se conserva el histórico agregado por semana; las versiones se marcan con fecha de corte.</li>
             <li>Eliminación: una fuente retirada deja de publicarse y se registra en la bitácora.</li>
