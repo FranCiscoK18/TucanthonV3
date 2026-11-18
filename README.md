@@ -1,100 +1,152 @@
-# EpiRadar Cancún — Plataforma Integral de Inteligencia Epidemiológica, Prevención y Atención Médica
+# Ondara Cancún — Plataforma de Inteligencia Epidemiológica Participativa
 
-**DEMO 100 % FRONTEND.** React + TypeScript + Vite + Tailwind CSS v4 + React Router + MapLibre GL JS.
+**Frontend DEMO.** React + TypeScript (estricto) + Vite + Tailwind CSS v4 + React Router + MapLibre GL JS + Recharts.
 
-> ⚠️ **Todo el contenido sanitario es ficticio.** El proyecto no contiene registros epidemiológicos reales, sistemas clínicos, usuarios verificados, credenciales médicas válidas, campañas oficiales ni citas con profesionales de la salud. No diagnostica, no declara brotes y no sustituye a autoridades ni atención médica. Las ubicaciones son centroides ilustrativos, nunca domicilios de personas enfermas.
+> **Ondara complementa, no sustituye, a las autoridades sanitarias. No diagnostica ni confirma casos. Información DEMO para validación.**
+>
+> Todos los datos son simulados y llevan `isDemo: true` en el código y la etiqueta **DEMO** en la interfaz. No hay backend, base de datos, autenticación real ni integración con sistemas oficiales. Ninguna pantalla muestra datos personales, domicilios ni ubicaciones individuales.
 
-## Requisitos y ejecución
+## Instalación y ejecución
 
-Node.js **20.19+ o 22+** y npm. Para ejecutar localmente:
+Requisitos: Node.js 20.19+ o 22+ y npm.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Abrir la dirección local que muestre Vite (habitualmente `http://localhost:5173`). Para comprobar el build de producción y los tipos:
+Abre la URL que muestre Vite (normalmente `http://localhost:5173`).
+
+Otros comandos:
 
 ```bash
-npm run typecheck
-npm run build
-npm run preview
+npm run typecheck   # tsc estricto, sin emitir
+npm run build       # typecheck + build de producción en dist/
+npm run preview     # sirve dist/
 ```
 
-No se requieren variables de entorno, backend, credenciales, base de datos ni Docker. **El mapa sí necesita conexión a Internet para descargar los mosaicos base de OpenStreetMap**; los marcadores y capas de la app son locales y ficticios.
+No se necesitan variables de entorno. El **mapa base** necesita Internet (teselas de OpenStreetMap); si no cargan, las capas DEMO por zona siguen visibles sobre un fondo liso.
+
+### Modo prueba (errores simulados)
+
+Los servicios simulados tienen latencia de 300–800 ms y pueden fallar a propósito para probar estados de error:
+
+- URL: `http://localhost:5173/?modoPrueba=1` (30 % de fallos)
+- Variable: `VITE_DEMO_ERROR_RATE=0.3 npm run dev`
+- Interruptor en **Administración → Configuración** (rol `admin`, solo en memoria)
+
+La configuración vive en un solo lugar: `src/config/demo.ts`.
 
 ## Estructura
 
-- `src/app/`: contexto de sesión mock, guardas de navegación y rutas.
-- `src/components/layout/`: cabecera, navegación responsive y pie de página.
-- `src/components/ui/`: estados de carga, error y vacío; badges DEMO, tarjetas, formularios.
-- `src/components/maps/`: visualización MapLibre con cuatro capas GeoJSON independientes.
-- `src/components/charts/`: gráfica SVG accesible sin librerías pesadas.
-- `src/pages/`: nueve áreas del producto más login y perfil de médico.
-- `src/types/models.ts`: `Disease`, `DiseaseCategory`, `Region`, `AggregatedCase`, `VectorRecord`, `VaccinationBrigade`, `Doctor`, `DoctorSchedule`, `Appointment`, `CitizenReport`, `Alert`, `DataSource`, `UserRole`, `AuditLog` y tipos auxiliares.
-- `src/mocks/data.ts`: **única fuente central de escenarios inventados**, etiquetados en código y UI.
-- `src/services/demoService.ts`: funciones `async` simuladas, latencia artificial y persistencia local limitada.
-- `src/hooks/useDemoData.ts`: carga asíncrona, reintento, errores y cancelación de efectos desmontados.
-- `src/utils/`: formatos y fechas.
-- `src/index.css`: tokens de diseño y componentes básicos inspirados en `DESIGN.md`.
+```
+src/
+├── app/                 # Router, sesión mock, guardas de rol, matriz de acceso y menú por rol
+├── components/
+│   ├── layout/          # Header, navegación lateral (escritorio), pestañas inferiores (móvil), footer con avisos
+│   ├── map/             # OndaraMap (MapLibre, 6 capas separadas)
+│   ├── charts/          # TrendChart y PeriodBars (Recharts), Sparkline (SVG propio)
+│   └── ui/              # Badges (DEMO, tipo de dato, estado), estados de carga/vacío/error, formularios, layout
+├── config/              # demo.ts (latencia, tasa de error, claves de localStorage) y dataKinds.ts (color+icono+forma por tipo de dato)
+├── hooks/               # useAsync (carga, error, reintento, condiciones de carrera), useDocumentTitle
+├── mocks/               # Datos DEMO centralizados y deterministas (semilla fija)
+├── pages/               # Una vista por ruta (carga diferida)
+├── services/            # Funciones async simuladas con latencia y fallo configurable
+├── types/               # Modelo de datos TypeScript
+└── utils/               # Fechas, formato, CSV, cálculo de señales
+```
 
-Los documentos `AGENTS.md`, `DESIGN.md` y `ai-skills/` preexistentes en el repositorio deben conservarse.
+## Rutas
 
-## Rutas y roles mock
-
-| Ruta | Pantalla | Acceso DEMO |
+| Ruta | Vista | Acceso |
 |---|---|---|
-| `/acceso` | Elegir rol | Todos |
-| `/` | Inicio ciudadano | `ciudadano` |
-| `/mapa` | Mapa epidemiológico | `ciudadano` |
-| `/enfermedades` | Catálogo y filtros | `ciudadano` |
-| `/enfermedades/:id` | Tendencia y criterios | `ciudadano` |
-| `/brigadas` | Campañas y mapa | `ciudadano` |
-| `/directorio` | Especialistas DEMO | `ciudadano` |
-| `/medicos/:id` | Perfil del profesional | `ciudadano` |
-| `/citas` | Agenda y reservas ficticias | `ciudadano` |
-| `/reportes` | Registro de riesgo ambiental | `ciudadano` |
-| `/medico` | Perfil y agenda del profesional DEMO 01 | `medico` |
-| `/institucion` | Tablas, indicadores, CSV | `institucion`, `admin` |
-| `/administracion` | Fuentes, moderación y bitácora | `admin` |
+| `/` | Inicio: qué es y qué no es, avisos informativos, resumen de enfermedades, accesos rápidos | Público |
+| `/como-funciona` | Flujo de seis etapas, regla de integridad, estados, canales | Público |
+| `/mapa` | Mapa por capas, filtros, panel de zona, tabla alternativa | Público |
+| `/enfermedades` | Catálogo con clasificación y señales | Público |
+| `/enfermedades/:id` | Tendencia, criterios de señal, comparación de periodos, tabla | Público |
+| `/brigadas` · `/brigadas/:id` | Lista/mapa de brigadas, campañas, detalle | Público |
+| `/directorio` · `/directorio/:id` | Búsqueda y filtros, perfil con horarios y botón «Agendar» | Público |
+| `/reportes` | Formulario de reporte anónimo | Público |
+| `/normativa` | Marcos a revisar, privacidad, fuentes DEMO | Público |
+| `/acceso` | Selector de rol mock | Público |
+| `/citas` | Flujo de cita y citas guardadas | `ciudadano`, `admin` |
+| `/reportes/mios` | Reportes propios con historial de estados | `ciudadano`, `admin` |
+| `/medico` | Perfil y agenda simulada | `medico`, `admin` |
+| `/institucion` | Métricas, zonas prioritarias, agregados, CSV, piloto de 90 días | `institucion`, `admin` |
+| `/administracion` | Fuentes, moderación, bitácora, configuración de módulos A/B | `admin` |
+| `/sin-permiso`, `*` | Sin permiso / no encontrada | Público |
 
-La selección de rol es únicamente una demostración de flujo visual: **no es autenticación ni autorización segura**. Las rutas restringidas son guards de frontend y se pueden eludir desde las herramientas de desarrollo del navegador; nunca usar en producción para datos sensibles.
+## Roles mock
 
-## Modelo DEMO, filtros y límites
+| Rol | Acceso |
+|---|---|
+| invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades, brigadas, directorio, normativa. Puede enviar reportes. |
+| ciudadano | Lo anterior, más citas y seguimiento de reportes propios. |
+| medico | Lo público, más su perfil y agenda simulada. No ve reportes individuales. |
+| institucion | Lo público, más el panel institucional con datos agregados. |
+| admin | Todo, incluida administración y bitácora. |
 
-- **Epidemiología:** registros **institucionales ficticios DEMO** agregados por región, enfermedad, periodo y clasificación ficticia; nunca individualizados. No representan fuentes oficiales.
-- **Entomología:** índices **estimados DEMO** arbitrarios; no miden presencia real de vectores ni implican riesgo sanitario individual.
-- **Reportes ciudadanos:** triángulos y tablas separados de las capas clínicas; avisos ambientales **no verificados**, nunca casos.
-- **Brigadas:** símbolos de cruz y fechas ficticias; **no acudir** a sedes señaladas.
-- **Mapa:** OpenStreetMap como referencia geográfica general. Los puntos demográficos son centroides ilustrativos, no límites legales, sedes reales ni domicilios de pacientes. Debe tener acceso a Internet para mostrar el fondo cartográfico.
-- **Enfermedades:** las alertas estadísticas se activan únicamente si el último valor DEMO es mayor que 135 % de la media de los tres anteriores y hay al menos 10 registros inventados. **No es una definición clínica de brote.**
-- **Directorio:** nombres, credenciales `DEMO-000X`, precios y horarios son enteramente ficticios.
-- **Exportación CSV:** genera un archivo de escenario ficticio con texto DEMO; no realiza peticiones de red.
+- La sesión se elige en `/acceso` y se guarda en `localStorage`. **No es autenticación**: las guardas son solo de interfaz y se pueden eludir desde las herramientas del navegador.
+- Sin sesión, una ruta protegida redirige a `/acceso` (y vuelve al destino tras elegir un rol permitido). Con un rol sin permiso, redirige a `/sin-permiso`.
+- El menú (lateral y pestañas inferiores) solo muestra los módulos que el rol puede abrir (`src/app/navigation.ts`, `src/app/access.ts`).
 
-## Persistencia y funcionamiento simulado
+## Datos DEMO (`src/mocks`)
 
-Solo se usan estas tres claves de `localStorage`:
+| Archivo | Contenido |
+|---|---|
+| `regions.ts` | 7 zonas amplias de Cancún con polígonos **ilustrativos** (no límites oficiales) y población estimada |
+| `diseases.ts` | 10 enfermedades en 5 clasificaciones; `AggregatedCase` (zona × semana × enfermedad, `source: "oficial-demo"`); `VectorRecord` |
+| `reports.ts` | `CitizenReport` de terceros (generados con semilla), etiquetas y significado de estados, derivación de `ReviewedObservation` |
+| `brigades.ts` | `VaccinationBrigade` y `Campaign` ficticias, ubicadas por zona |
+| `doctors.ts` | `Doctor` y `DoctorSchedule` con credenciales `DEMO-000X` |
+| `alerts.ts` | `Alert` informativos con fuente, fecha, criterio y limitación |
+| `institutional.ts` | `Indicator`, zonas prioritarias, `PilotStage`, preguntas de decisión, marcos normativos |
+| `sources.ts` | `DataSource` con tipo, responsable, periodo, corte, cobertura y limitaciones |
+
+Los datos son deterministas (generador con semilla) y tienen fecha de corte fija **15-nov-2026** (semanas 35–46).
+
+### Persistencia
+
+Solo cuatro claves de `localStorage` (`src/config/demo.ts`):
 
 | Clave | Contenido |
 |---|---|
-| `epiradar-demo-session` | Rol de la sesión sin seguridad real |
-| `epiradar-demo-appointments` | Citas ficticias guardadas en este navegador |
-| `epiradar-demo-reports` | Reportes ambientales propios guardados en este navegador |
+| `ondara-demo:sesion` | Rol mock |
+| `ondara-demo:citas` | Citas creadas en este navegador |
+| `ondara-demo:reportes-propios` | Reportes creados en este navegador (solo el nombre de la foto, nunca la imagen) |
+| `ondara-demo:bitacora` | Bitácora de acciones simuladas (sin datos personales) |
 
-La foto de un reporte **no se sube ni se guarda**; únicamente se conserva el **nombre del archivo** para demostrar el campo. No deben ingresarse datos personales reales. Estados de moderación de reportes de ejemplo, fuentes activadas y bitácora administrativa viven solo en memoria, y desaparecen al recargar. Ningún `fetch()` envía datos sanitarios a una API.
+Si `localStorage` no está disponible, la app sigue funcionando en memoria. La moderación de reportes de terceros y los cambios de fuentes viven en memoria y se reinician al recargar.
 
-## Arquitectura y decisiones de UX
+## Decisiones tomadas
 
-Los filtros funcionan sobre arrays locales con operaciones deterministas. El mapa tiene fuentes GeoJSON separadas por capa (`epidemiologia`, `entomologia`, `reportes`, `brigadas`) y controles de visibilidad individuales. Se utilizan símbolos, tamaños, colores, etiquetas y leyendas diferentes. Las actualizaciones de filtros reconstruyen fuentes locales sin refrescar toda la SPA.
+1. **Reconstrucción completa.** El repositorio contenía un prototipo anterior («EpiRadar Cancún») con otro alcance (rutas solo para ciudadano, 4 capas, sin acceso público). Se reemplazó `src/` por la implementación de Ondara; se conservan `AGENTS.md`, `DESIGN.md` y `ai-skills/`.
+2. **Documento conceptual.** La «Propuesta conceptual: Inteligencia epidemiológica participativa» no está en el repositorio. Los textos de qué es / qué no es, el flujo de seis etapas, las métricas primarias y el piloto se tomaron de lo citado en el encargo. **Las cinco preguntas de decisión se derivaron de las cinco métricas primarias y deben validarse con el documento.**
+3. **Seis capas, seis codificaciones.** Oficial = relleno de zona en verdes; estimado = contorno punteado + etiqueta «≈»; reporte ciudadano = círculo azul; observación revisada = rombo violeta; brigada = cuadrado magenta «+»; vectorial = hexágono ocre. Cada una con icono y etiqueta textual (`src/config/dataKinds.ts`). Con seis categorías ningún conjunto de colores es distinguible para todo tipo de daltonismo; por eso la forma, el icono y la etiqueta son la identidad principal, y el color es secundario.
+4. **Marcadores como botones HTML** (no símbolos WebGL) para que sean accesibles con teclado y lector de pantalla, sin depender de fuentes de glifos externas. Además hay una **tabla de zonas** como alternativa al mapa.
+5. **Indicador estimado:** tasa = registros DEMO del periodo ÷ población estimada de la zona × 10 000. Se explica en el panel de la zona y en la fuente.
+6. **Privacidad en capas ciudadanas:** conteos de 1–2 se muestran como «<3». El formulario de reporte rechaza texto que parezca correo, teléfono o dirección.
+7. **Señales:** suma de las últimas 2 semanas ≥ 1.5 × (promedio de las 8 semanas previas × 2) y al menos 10 registros (`src/utils/signals.ts`). Siempre con el texto: «Esta señal indica que un dato cambió respecto a su línea base; no es un diagnóstico ni la confirmación de un brote».
+8. **Rol `medico`** ve las vistas públicas además de su perfil y agenda (las funciones públicas no requieren cuenta). **Rol `admin`** puede usar citas y reportes propios («Todo»).
+9. **Estado «verificado»** = «revisado como observación útil». La moderación (admin) permite aprobar, pedir ampliación o descartar con motivo; en reportes verificados, canalizar o cerrar. Si moderas un reporte creado en este navegador, el cambio aparece en «Mis reportes».
+10. **Mapa base:** teselas raster públicas de OpenStreetMap (`https://tile.openstreetmap.org`, © colaboradores de OpenStreetMap, ODbL), desaturadas. Su política de uso admite tráfico moderado; para producción se recomienda un proveedor propio o con acuerdo de uso.
+11. **Diseño:** sigue `DESIGN.md` (crema, bosque, salvia, pizarra; serif ligera para títulos, sans para UI; superficies planas, radio 14 px) como referencia visual, sin adoptar la marca Ease Health. Los colores de tipo de dato son una extensión funcional necesaria para distinguir capas.
 
-El diseño replica los **principios**, no la marca, de `DESIGN.md`: crema, bosque, salvia y azul grisáceo; encabezados serif ligeros y UI sans; tarjetas planas sin sombras, radio de 14px y espaciado generoso. Se usan colores semánticos adicionales limitados en capas cartográficas para prevenir confusiones entre categorías.
+## Accesibilidad
 
-Accesibilidad: etiquetas visibles, foco perceptible, navegación de teclado, enlaces para saltar al contenido, textos alternativos de la gráfica, objetivos táctiles cómodos y preferencias de movimiento reducido. **La revisión manual con lector de pantalla y pruebas cross-browser aún son necesarias antes de producción.**
+Etiquetas visibles y errores asociados con `aria-describedby`, foco visible, enlace «Saltar al contenido», foco al contenido principal al navegar, pestañas con flechas en Administración, objetivos táctiles ≥ 44 px, `prefers-reduced-motion`, tablas con encabezados y alternativa textual de gráficas y mapa. Ningún estado se comunica solo con color.
 
-## Lo que NO incluye
+## Limitaciones
 
-Sin backend, APIs de salud, autenticación, almacenamiento de fotos, geolocalización individual, datos oficiales, diagnóstico automatizado, integración con hospitales, notificaciones push, pagos, Docker o migraciones.
+- Sin backend, API, autenticación ni integración con sistemas oficiales. Las guardas de rol no son seguridad.
+- Datos, fuentes, credenciales, precios, horarios y brigadas inventados.
+- Polígonos de zona ilustrativos, no límites legales.
+- Las reglas de retención y eliminación de los módulos A/B están en texto; no hay servidor que las ejecute.
+- El mapa base requiere Internet; el resto de la app no.
+- Recharts y MapLibre se cargan en diferido, pero siguen siendo los paquetes más pesados del build.
+- Pendiente antes de producción: revisión con lector de pantalla, pruebas en varios navegadores y dispositivos reales, y dictamen jurídico de privacidad.
 
-## Licencia y fuentes
+## Créditos
 
-Prototipo demostrativo de Tucanthon 2026. Créditos cartográficos © colaboradores de OpenStreetMap. Las guías de diseño originales del repositorio conservan sus atribuciones.
+Prototipo Tucanthon 2026. Mapa base © colaboradores de OpenStreetMap. Las guías de `ai-skills/` conservan sus atribuciones originales.
