@@ -28,8 +28,8 @@ export interface MapLayerMeta {
   limitation: string;
 }
 
-/** Escala secuencial de la capa oficial: clase 0 (sin registros) y clases 1–5. */
-export const OFFICIAL_SCALE = ['#f1f0ec', '#e2f1de', '#bfe0b8', '#8cc287', '#4f8f57', '#1f5a2b'] as const;
+/** Secuencia de cantidad relativa: sin registros, verde claro, verde, verde intenso, lima, amarillo, naranja y rojo. */
+export const OFFICIAL_SCALE = ['#f1f0ec', '#ddf2df', '#94d49c', '#5bb676', '#d9df67', '#f3d45e', '#eea04c', '#d65349'] as const;
 
 export const MAP_LAYERS: MapLayerMeta[] = [
   {
@@ -42,7 +42,7 @@ export const MAP_LAYERS: MapLayerMeta[] = [
     color: '#2f6b3a',
     tint: '#e1f4df',
     ink: '#0f3e17',
-    symbol: 'Relleno verde por zona (más oscuro = más registros)',
+    symbol: 'Zonas coloreadas de verde claro a rojo según la cantidad relativa de registros (de menor a mayor)',
     description: 'Serie ilustrativa agregada por zona y semana para explicar el análisis epidemiológico.',
     limitation: 'Datos de referencia, sin conexión a registros oficiales. No representan cifras reales.',
   },
@@ -73,7 +73,7 @@ export const MAP_LAYERS: MapLayerMeta[] = [
     ink: '#8a3417',
     symbol: 'Ficha de conteo con círculo terracota',
     description: 'Conteo agregado de reportes pendientes o en revisión en la zona. Nunca se muestran puntos individuales.',
-    limitation: `${TEXTS.participationCaveat} Los conteos menores a ${MIN_PUBLIC_COUNT} se publican como «<${MIN_PUBLIC_COUNT}».`,
+    limitation: `${TEXTS.participationCaveat} Los conteos positivos menores a ${MIN_PUBLIC_COUNT} se muestran como «1–${MIN_PUBLIC_COUNT - 1}» para proteger la privacidad.`,
   },
   {
     id: 'observaciones',
