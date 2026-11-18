@@ -8,7 +8,6 @@ import { DiseaseDetailPage } from '../pages/DiseaseDetailPage';
 import { DiseasesPage } from '../pages/DiseasesPage';
 import { HomePage } from '../pages/HomePage';
 import { LandingPage } from '../pages/LandingPage';
-import { HowItWorksPage } from '../pages/HowItWorksPage';
 import { InstitutionalPage } from '../pages/InstitutionalPage';
 import { LoginPage } from '../pages/LoginPage';
 import { MapPage } from '../pages/MapPage';
@@ -27,7 +26,6 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <LandingPage /> },
       { path: 'inicio', element: <HomePage /> },
-      { path: 'como-funciona', element: <HowItWorksPage /> },
       { path: 'mapa', element: <MapPage /> },
       { path: 'enfermedades', element: <DiseasesPage /> },
       { path: 'enfermedades/:diseaseId', element: <DiseaseDetailPage /> },
