@@ -283,7 +283,7 @@ export function MapPage() {
               <div className="relative mt-3 overflow-x-auto" tabIndex={0} aria-label="Tabla de datos del mapa, desplazable">
                 <table className="table-base min-w-[44rem]">
                   <caption className="pb-2 text-left text-sm text-muted">
-                    {data.diseaseLabel} · {data.periodLabel}. Conteos ciudadanos menores a 3 se muestran como «&lt;3».
+                    {data.diseaseLabel} · {data.periodLabel}. Por privacidad, 1 o 2 reportes se muestran como «1–2».
                   </caption>
                   <thead>
                     <tr>
