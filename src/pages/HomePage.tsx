@@ -296,7 +296,6 @@ export function HomePage() {
           )}
         </AsyncContent>
       </section>
-
     </div>
   );
 }
