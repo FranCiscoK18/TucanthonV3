@@ -1,24 +1,13 @@
-import {
-  ArrowRight,
-  BookOpenText,
-  Check,
-  Map as MapIcon,
-  MessageSquarePlus,
-  Syringe,
-  X,
-  type LucideIcon,
-} from 'lucide-react';
+import { ArrowRight, Map as MapIcon, MessageSquarePlus } from 'lucide-react';
 import { Link } from 'react-router';
 import { AlertCard } from '../components/AlertCard';
 import { Sparkline } from '../components/charts/Sparkline';
 import { ButtonLink } from '../components/ui/Button';
-import { Notice } from '../components/ui/Notice';
 import { SectionHeading } from '../components/ui/PageHeader';
 import { ChangeText, SignalBadge } from '../components/ui/SignalBadge';
 import { SourceMeta } from '../components/ui/SourceMeta';
 import { AsyncContent, LoadingState, Skeleton } from '../components/ui/States';
 import { Waves } from '../components/ui/Waves';
-import { TEXTS } from '../config/texts';
 import { useAsync } from '../hooks/useAsync';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { getActivitiesMock } from '../mocks/activities';
@@ -30,35 +19,6 @@ import { getParticipationSummary, type ParticipationSummary } from '../services/
 import { formatDate, formatDateLong } from '../utils/dates';
 import { formatDecimal, formatInteger } from '../utils/format';
 import { getDemoClock } from '../mocks/clock';
-
-const IS_ITEMS = [
-  'Un lugar para consultar información de salud por zonas amplias de Cancún, con fuente y fecha de corte.',
-  'Un canal para enviar observaciones breves sin descarga ni cuenta: sitio móvil, códigos QR o aliados comunitarios.',
-  'Un apoyo que ordena, revisa y canaliza esas observaciones a la autoridad competente, con seguimiento visible.',
-  'Un complemento de la vigilancia oficial.',
-];
-
-const IS_NOT_ITEMS = [
-  'No diagnostica ni confirma casos o brotes.',
-  'No emite alertas oficiales ni sustituye a la autoridad sanitaria.',
-  'No publica domicilios ni ubicaciones de personas enfermas.',
-  'No cobra por reportar ni recibe comisiones por pacientes o referencias.',
-  'No garantiza que la autoridad actúe sobre un reporte.',
-];
-
-interface QuickLink {
-  to: string;
-  title: string;
-  text: string;
-  icon: LucideIcon;
-}
-
-/** «Enviar un reporte» no se repite aquí: ya es la acción secundaria del hero. */
-const QUICK_LINKS: QuickLink[] = [
-  { to: '/mapa', title: 'Mapa epidemiológico', text: 'Registros, reportes y brigadas por zona.', icon: MapIcon },
-  { to: '/enfermedades', title: 'Enfermedades y señales', text: 'Tendencias y cómo se detecta una señal.', icon: BookOpenText },
-  { to: '/brigadas', title: 'Brigadas y campañas', text: 'Vacunación y prevención cerca de ti.', icon: Syringe },
-];
 
 /** Filas de la tabla de Inicio: primero las señales activas y luego las de más registros. */
 const HOME_TABLE_ROWS = 6;
@@ -77,7 +37,7 @@ function HeroPreview({ catalog, participation }: { catalog?: DiseaseCatalog; par
   const signal = catalog?.items.find((item) => item.signal.status === 'senal');
 
   return (
-    <div className="grid gap-3" aria-label="Vista previa de indicadores ilustrativos">
+    <div className="grid gap-3" aria-label="Vista previa de indicadores">
       <div className="rounded-card bg-cream-paper p-5">
         <div className="flex items-center justify-end gap-2">
           <span className="text-xs text-muted">Corte {catalog ? formatDate(catalog.cutoff) : '…'}</span>
@@ -156,68 +116,10 @@ export function HomePage() {
         <Waves className="absolute inset-x-0 bottom-0 h-16 w-full sm:h-20" />
       </section>
 
-      <section aria-labelledby="accesos">
-        <SectionHeading id="accesos" title="Accesos rápidos" description="Las funciones públicas no requieren descarga ni cuenta." />
-        <ul className="grid grid-cols-1 gap-3 md:grid-cols-3">
-          {QUICK_LINKS.map((link) => {
-            const Icon = link.icon;
-            return (
-              <li key={link.to}>
-                <Link
-                  to={link.to}
-                  className="group flex h-full items-start gap-4 rounded-card bg-keylime-wash p-5 transition-colors hover:bg-mint-veil"
-                >
-                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-cream-paper text-forest-ink">
-                    <Icon className="size-5" aria-hidden="true" />
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="flex items-center gap-1.5 font-semibold text-forest-ink">
-                      {link.title}
-                      <ArrowRight
-                        className="size-4 transition-transform duration-200 group-hover:translate-x-0.5"
-                        aria-hidden="true"
-                      />
-                    </span>
-                    <span className="mt-0.5 block text-sm text-muted">{link.text}</span>
-                  </span>
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-
-      <section aria-labelledby="que-es" className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="card card-keylime">
-          <h2 id="que-es" className="text-[1.75rem]">
-            Qué es Ondara
-          </h2>
-          <ul className="mt-4 space-y-3">
-            {IS_ITEMS.map((item) => (
-              <li key={item} className="flex gap-3 leading-relaxed">
-                <Check className="mt-1 size-5 shrink-0 text-forest-ink" aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="card card-cream">
-          <h2 className="text-[1.75rem]">Qué no es</h2>
-          <ul className="mt-4 space-y-3">
-            {IS_NOT_ITEMS.map((item) => (
-              <li key={item} className="flex gap-3 leading-relaxed">
-                <X className="mt-1 size-5 shrink-0 text-ciudadano-700" aria-hidden="true" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
       <section aria-labelledby="resumen">
         <SectionHeading
           id="resumen"
-          eyebrow="Datos epidemiológicos ilustrativos"
+          eyebrow="Datos epidemiológicos"
           title="Enfermedades y señales monitoreadas"
           description="Registros agregados de toda la ciudad. La columna «Cambio» compara las últimas 4 semanas con las 4 previas; la regla de señal usa otra ventana (2 semanas frente a las 8 anteriores)."
           actions={
@@ -232,7 +134,7 @@ export function HomePage() {
               <div className="relative overflow-x-auto rounded-card border border-border-mist" tabIndex={0} aria-label="Tabla de resumen, desplazable">
                 <table className="table-base min-w-[40rem]">
                   <caption className="sr-only">
-                    Resumen ilustrativo de las {HOME_TABLE_ROWS} enfermedades o señales más relevantes, últimas 4 semanas, con estado de
+                    Resumen de las {HOME_TABLE_ROWS} enfermedades o señales más relevantes, últimas 4 semanas, con estado de
                     la regla de señal
                   </caption>
                   <thead>
@@ -269,7 +171,6 @@ export function HomePage() {
               </div>
               <div className="space-y-3">
                 <SourceMeta source={data.source} compact />
-                <Notice tone="info">{TEXTS.signalDisclaimer}</Notice>
               </div>
             </div>
           )}

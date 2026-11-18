@@ -43,7 +43,7 @@ export function DiseasesPage() {
       <PageHeader
         eyebrow="Catálogo epidemiológico"
         title="Enfermedades y señales"
-        description="Descripciones generales, tendencias ilustrativas y una regla de señal con criterios visibles. Nada de lo que aparece aquí es un diagnóstico."
+        description="Descripciones generales, tendencias y una regla de señal con criterios visibles. Nada de lo que aparece aquí es un diagnóstico."
       />
 
       <AsyncContent resource={resource} onRetry={reload} loading={<LoadingState lines={5} />}>
@@ -61,7 +61,7 @@ export function DiseasesPage() {
                   id="senales"
                   eyebrow="Regla estadística transparente"
                   title="Señales por incremento inusual"
-                  description={`Evaluadas sobre registros ilustrativos con corte al ${formatDate(data.cutoff)}.`}
+                  description={`Evaluadas sobre registros con corte al ${formatDate(data.cutoff)}.`}
                 />
                 <SignalCriteria />
                 <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -177,13 +177,13 @@ export function DiseasesPage() {
                             <p className="text-[1.5rem] font-semibold leading-tight text-charcoal">{formatInteger(item.last4)}</p>
                             <ChangeText current={item.last4} previous={item.previous4} />
                           </div>
-                          <Sparkline values={item.sparkline} label={`Tendencia de 8 semanas de ${item.disease.name}, ilustrativa`} />
+                          <Sparkline values={item.sparkline} label={`Tendencia de 8 semanas de ${item.disease.name}`} />
                         </div>
                         <div className="mt-3">
                           <SignalBadge status={item.signal.status} ratio={item.signal.ratio} />
                         </div>
                         <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-border-mist pt-3 text-sm">
-                          <span className="text-muted">Datos ilustrativos</span>
+                          <span className="text-muted">Registro semanal</span>
                           <Link
                             className="inline-flex min-h-10 items-center gap-1 font-semibold text-forest-ink hover:underline"
                             to={`/enfermedades/${item.disease.id}`}

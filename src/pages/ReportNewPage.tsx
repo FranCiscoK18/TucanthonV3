@@ -286,7 +286,7 @@ export function ReportNewPage() {
                       <Camera className="size-7 text-forest-ink" />
                     </div>
                     <div className="min-w-0">
-                      <p className="font-medium">Imagen de referencia agregada</p>
+                      <p className="font-medium">Imagen agregada</p>
                       <Button variant="ghost" size="sm" icon={Trash2} onClick={() => set('hasSimulatedPhoto', false)} className="-ml-3.5">
                         Quitar foto
                       </Button>
@@ -294,7 +294,7 @@ export function ReportNewPage() {
                   </div>
                 ) : (
                   <Button variant="secondary" icon={Camera} onClick={() => set('hasSimulatedPhoto', true)} className="mt-2">
-                    Mostrar imagen de referencia
+                    Mostrar imagen
                   </Button>
                 )}
                 <p className="mt-2 flex items-start gap-2 text-sm text-muted">

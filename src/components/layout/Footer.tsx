@@ -29,7 +29,7 @@ export function Footer() {
         </div>
 
         <p className="mt-8 text-xs leading-relaxed text-muted">
-          Tucanthon 2026 · Los indicadores utilizan datos ilustrativos, no información epidemiológica oficial.
+          Prototipo con datos de demostración.
           Mapa base: © colaboradores de OpenStreetMap, servido por OpenFreeMap cuando hay conexión.
         </p>
       </div>

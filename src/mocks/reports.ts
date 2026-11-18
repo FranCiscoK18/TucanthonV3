@@ -84,10 +84,10 @@ export const closureOutcomeLabels: Record<ClosureOutcome, string> = {
 
 /** Instancias responsables (áreas genéricas, nunca personas). */
 export const responsibleByCategory: Record<ReportCategory, string> = {
-  'posible-criadero': 'Canal de referencia para control de vectores',
-  'riesgo-ambiental': 'Canal de referencia de servicios municipales',
-  'sintomas-agregados': 'Canal de referencia epidemiológica',
-  otro: 'Canal de referencia para protección civil',
+  'posible-criadero': 'Programa de control de vectores',
+  'riesgo-ambiental': 'Servicios públicos municipales',
+  'sintomas-agregados': 'Área de epidemiología jurisdiccional',
+  otro: 'Protección civil municipal',
 };
 
 export const responsibleOptions = [...new Set(Object.values(responsibleByCategory))];

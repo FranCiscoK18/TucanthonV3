@@ -94,7 +94,7 @@ export interface DiseaseCatalog {
 
 function officialSource(): DataSource {
   const source = getDataSourcesMock().find((item) => item.id === 'fuente-registro-semanal');
-  if (!source) throw new NotFoundError('No se encontró la fuente de referencia.');
+  if (!source) throw new NotFoundError('No se encontró la fuente de datos.');
   return source;
 }
 
@@ -197,7 +197,7 @@ export async function getDiseaseDetail(id: string, scope: RegionId | 'ciudad'): 
       comparison: {
         current: { label: formatWeekRange(weeks.slice(-4)), total: currentTotal },
         previous: { label: formatWeekRange(weeks.slice(-8, -4)), total: sum(previous) },
-        lastYear: { label: 'Mismo periodo del año anterior (referencia ilustrativa)', total: lastYearTotal },
+        lastYear: { label: 'Mismo periodo del año anterior', total: lastYearTotal },
       },
       zones,
       vectorSeries,

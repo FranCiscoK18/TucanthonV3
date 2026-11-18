@@ -45,7 +45,7 @@ export function BrigadesPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Agenda de referencia"
+        eyebrow="Agenda"
         title="Brigadas y campañas sanitarias"
         description="Vacunación y prevención por zona, con ubicaciones aproximadas. Consulta con la autoridad sanitaria antes de acudir: estas actividades son referencias, no convocatorias confirmadas."
       />
