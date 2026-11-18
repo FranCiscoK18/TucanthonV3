@@ -66,7 +66,6 @@ public/brand/     Logotipo e isotipo de Ondara (PNG con fondo transparente)
 |---|---|---|
 | `/` | Landing inicial: presentación de Ondara, público objetivo, funciones y botones de acceso | Público |
 | `/inicio` | Resumen público de señales, accesos rápidos y avisos informativos | Público |
-| `/como-funciona` | Seis etapas con responsable, regla de integridad, canales, modelo de servicio y piloto | Público |
 | `/mapa` | Mapa con seis capas separadas, filtros, panel de zona y tabla | Público |
 | `/enfermedades` | Catálogo, criterios de señal y señales activas | Público |
 | `/enfermedades/:id` | Tendencia, señal, comparación de periodos, datos por semana y zona, vigilancia vectorial | Público |
