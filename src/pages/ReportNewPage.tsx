@@ -9,10 +9,10 @@ import { REPORT_COMMENT_MAX } from '../config/demo';
 import { TEXTS } from '../config/texts';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { regionName, regions } from '../mocks/regions';
-import { channelLabels, peopleRangeLabels, reportCategoryHints, reportCategoryLabels, symptomLabels } from '../mocks/reports';
+import { peopleRangeLabels, reportCategoryHints, reportCategoryLabels, symptomLabels } from '../mocks/reports';
 import { ValidationError } from '../services/client';
 import { submitReport, validateReportInput } from '../services/reportService';
-import type { CitizenReport, NewReportInput, PeopleRange, ReportCategory, ReportChannel, SymptomKey } from '../types';
+import type { CitizenReport, NewReportInput, PeopleRange, ReportCategory, SymptomKey } from '../types';
 import { formatDateTime } from '../utils/dates';
 import { detectPersonalData } from '../utils/privacy';
 
@@ -35,7 +35,6 @@ interface FormState {
   peopleRange: PeopleRange | '';
   comment: string;
   hasSimulatedPhoto: boolean;
-  channel: ReportChannel;
   acknowledged: boolean;
 }
 
@@ -46,7 +45,6 @@ const EMPTY: FormState = {
   peopleRange: '',
   comment: '',
   hasSimulatedPhoto: false,
-  channel: 'sitio-movil',
   acknowledged: false,
 };
 
@@ -57,7 +55,7 @@ function toInput(state: FormState): NewReportInput | null {
     approximateZone: state.approximateZone,
     comment: state.comment,
     hasSimulatedPhoto: state.hasSimulatedPhoto,
-    channel: state.channel,
+    channel: 'sitio-movil',
     ...(state.category === 'sintomas-agregados'
       ? { symptoms: { symptoms: state.symptoms, peopleRange: (state.peopleRange || '1-2') as PeopleRange } }
       : {}),
@@ -325,19 +323,6 @@ export function ReportNewPage() {
                 </ul>
               </Notice>
             )}
-
-            <SelectField
-              label="¿Por qué canal llegaste?"
-              hint="Sirve para medir la cobertura por canal; no te identifica."
-              value={form.channel}
-              onChange={(event) => set('channel', event.target.value as ReportChannel)}
-            >
-              {(Object.keys(channelLabels) as ReportChannel[]).map((channel) => (
-                <option key={channel} value={channel}>
-                  {channelLabels[channel]}
-                </option>
-              ))}
-            </SelectField>
 
             <div className="space-y-3 rounded-card bg-keylime-wash p-4 sm:p-5">
               <p className="font-semibold text-forest-ink">Antes de enviar</p>
