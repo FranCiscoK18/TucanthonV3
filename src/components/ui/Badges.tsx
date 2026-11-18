@@ -1,6 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { DATA_KIND_META } from '../../config/dataKinds';
 import type { DataKind } from '../../types';
 import { cx } from '../../utils/cx';
 
@@ -13,16 +12,9 @@ export function DemoTag(_props: { className?: string; label?: string }) {
   return null;
 }
 
-/** Insignia del tipo de dato: color + icono + texto. */
-export function DataKindBadge({ kind, compact = false, className }: { kind: DataKind; compact?: boolean; className?: string }) {
-  const meta = DATA_KIND_META[kind];
-  const Icon = meta.icon;
-  return (
-    <span className={cx('pill', meta.badgeClass, className)} title={meta.description}>
-      <Icon className="size-3.5 shrink-0" aria-hidden="true" />
-      {compact ? meta.short : meta.label}
-    </span>
-  );
+/** Etiquetas de clasificación retiradas de la presentación. */
+export function DataKindBadge(_props: { kind: DataKind; compact?: boolean; className?: string }) {
+  return null;
 }
 
 export type Tone = 'neutral' | 'forest' | 'blue' | 'terracotta' | 'plum' | 'aqua' | 'amber' | 'closed' | 'danger' | 'warning';
