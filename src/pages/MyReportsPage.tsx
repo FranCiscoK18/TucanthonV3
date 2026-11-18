@@ -1,7 +1,6 @@
 import { Camera, MessageSquarePlus, Send, Trash2 } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import { ReportStatusPill, StatusGuide, StatusTimeline } from '../components/reports/ReportStatus';
-import { DataKindBadge, DemoTag } from '../components/ui/Badges';
 import { Button, ButtonLink } from '../components/ui/Button';
 import { Dialog } from '../components/ui/Dialog';
 import { TextAreaField } from '../components/ui/Form';
@@ -166,12 +165,6 @@ export function MyReportsPage() {
         eyebrow="Seguimiento"
         title="Mis reportes"
         description="Reportes enviados desde este navegador. No están ligados a tu identidad: el folio es la única referencia."
-        meta={
-          <>
-            <DataKindBadge kind="reporte-ciudadano" compact />
-            <DemoTag />
-          </>
-        }
         actions={
           <ButtonLink to="/reportar" icon={MessageSquarePlus}>
             Enviar un reporte
