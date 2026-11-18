@@ -11,7 +11,6 @@ import {
 import { Link } from 'react-router';
 import { AlertCard } from '../components/AlertCard';
 import { Sparkline } from '../components/charts/Sparkline';
-import { DataKindBadge, DemoTag } from '../components/ui/Badges';
 import { ButtonLink } from '../components/ui/Button';
 import { Notice } from '../components/ui/Notice';
 import { SectionHeading } from '../components/ui/PageHeader';
@@ -80,8 +79,7 @@ function HeroPreview({ catalog, participation }: { catalog?: DiseaseCatalog; par
   return (
     <div className="grid gap-3" aria-label="Vista previa de indicadores ilustrativos">
       <div className="rounded-card bg-cream-paper p-5">
-        <div className="flex items-center justify-between gap-2">
-          <DataKindBadge kind="oficial-demo" compact />
+        <div className="flex items-center justify-end gap-2">
           <span className="text-xs text-muted">Corte {catalog ? formatDate(catalog.cutoff) : '…'}</span>
         </div>
         {signal ? (
@@ -99,13 +97,11 @@ function HeroPreview({ catalog, participation }: { catalog?: DiseaseCatalog; par
       </div>
       <div className="grid grid-cols-2 gap-3">
         <div className="rounded-card bg-cream-paper p-5">
-          <DataKindBadge kind="reporte-ciudadano" compact />
           <p className="mt-3 text-sm text-muted">Reportes esta semana</p>
           <p className="text-[1.75rem] font-semibold leading-tight text-charcoal">{participation?.thisWeek.display ?? '…'}</p>
           <p className="text-xs text-muted">Sin verificar: {participation?.unverified.display ?? '…'}</p>
         </div>
         <div className="rounded-card bg-cream-paper p-5">
-          <DataKindBadge kind="simulado" compact />
           <p className="mt-3 text-sm text-muted">Próxima brigada</p>
           {nextActivity ? (
             <>
@@ -136,7 +132,6 @@ export function HomePage() {
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <p className="eyebrow">Plataforma de Inteligencia Epidemiológica Participativa</p>
-              <DemoTag />
             </div>
             <h1 id="hero-titulo" className="mt-4 text-[2.5rem] sm:text-[3.5rem]">
               Información de salud por zonas y un canal ciudadano para Cancún
