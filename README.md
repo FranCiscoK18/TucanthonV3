@@ -69,9 +69,7 @@ src/
 | `/reportes` | Formulario de reporte anónimo | Público |
 | `/normativa` | Marcos a revisar, privacidad, fuentes DEMO | Público |
 | `/acceso` | Selector de rol mock | Público |
-| `/citas` | Flujo de cita y citas guardadas | `ciudadano`, `admin` |
 | `/reportes/mios` | Reportes propios con historial de estados | `ciudadano`, `admin` |
-| `/medico` | Perfil y agenda simulada | `medico`, `admin` |
 | `/institucion` | Métricas, zonas prioritarias, agregados, CSV, piloto de 90 días | `institucion`, `admin` |
 | `/administracion` | Fuentes, moderación, bitácora, configuración de módulos A/B | `admin` |
 | `/sin-permiso`, `*` | Sin permiso / no encontrada | Público |
@@ -81,8 +79,7 @@ src/
 | Rol | Acceso |
 |---|---|
 | invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades, brigadas y normativa. Puede enviar reportes. |
-| ciudadano | Lo anterior, más citas y seguimiento de reportes propios. |
-| medico | Lo público, más su perfil y agenda simulada. No ve reportes individuales. |
+| ciudadano | Lo anterior, más seguimiento de reportes propios. |
 | institucion | Lo público, más el panel institucional con datos agregados. |
 | admin | Todo, incluida administración y bitácora. |
 
@@ -98,7 +95,6 @@ src/
 | `diseases.ts` | 10 enfermedades en 5 clasificaciones; `AggregatedCase` (zona × semana × enfermedad, `source: "oficial-demo"`); `VectorRecord` |
 | `reports.ts` | `CitizenReport` de terceros (generados con semilla), etiquetas y significado de estados, derivación de `ReviewedObservation` |
 | `brigades.ts` | `VaccinationBrigade` y `Campaign` ficticias, ubicadas por zona |
-| `doctors.ts` | `Doctor` y `DoctorSchedule` con credenciales `DEMO-000X` |
 | `alerts.ts` | `Alert` informativos con fuente, fecha, criterio y limitación |
 | `institutional.ts` | `Indicator`, zonas prioritarias, `PilotStage`, preguntas de decisión, marcos normativos |
 | `sources.ts` | `DataSource` con tipo, responsable, periodo, corte, cobertura y limitaciones |
@@ -107,12 +103,11 @@ Los datos son deterministas (generador con semilla) y tienen fecha de corte fija
 
 ### Persistencia
 
-Solo cuatro claves de `localStorage` (`src/config/demo.ts`):
+Solo tres claves de `localStorage` (`src/config/demo.ts`):
 
 | Clave | Contenido |
 |---|---|
 | `ondara-demo:sesion` | Rol mock |
-| `ondara-demo:citas` | Citas creadas en este navegador |
 | `ondara-demo:reportes-propios` | Reportes creados en este navegador (solo el nombre de la foto, nunca la imagen) |
 | `ondara-demo:bitacora` | Bitácora de acciones simuladas (sin datos personales) |
 
@@ -127,10 +122,9 @@ Si `localStorage` no está disponible, la app sigue funcionando en memoria. La m
 5. **Indicador estimado:** tasa = registros DEMO del periodo ÷ población estimada de la zona × 10 000. Se explica en el panel de la zona y en la fuente.
 6. **Privacidad en capas ciudadanas:** conteos de 1–2 se muestran como «<3». El formulario de reporte rechaza texto que parezca correo, teléfono o dirección.
 7. **Señales:** suma de las últimas 2 semanas ≥ 1.5 × (promedio de las 8 semanas previas × 2) y al menos 10 registros (`src/utils/signals.ts`). Siempre con el texto: «Esta señal indica que un dato cambió respecto a su línea base; no es un diagnóstico ni la confirmación de un brote».
-8. **Rol `medico`** ve las vistas públicas además de su perfil y agenda (las funciones públicas no requieren cuenta). **Rol `admin`** puede usar citas y reportes propios («Todo»).
-9. **Estado «verificado»** = «revisado como observación útil». La moderación (admin) permite aprobar, pedir ampliación o descartar con motivo; en reportes verificados, canalizar o cerrar. Si moderas un reporte creado en este navegador, el cambio aparece en «Mis reportes».
-10. **Mapa base:** teselas raster públicas de OpenStreetMap (`https://tile.openstreetmap.org`, © colaboradores de OpenStreetMap, ODbL), desaturadas. Su política de uso admite tráfico moderado; para producción se recomienda un proveedor propio o con acuerdo de uso.
-11. **Diseño:** sigue `DESIGN.md` (crema, bosque, salvia, pizarra; serif ligera para títulos, sans para UI; superficies planas, radio 14 px) como referencia visual, sin adoptar la marca Ease Health. Los colores de tipo de dato son una extensión funcional necesaria para distinguir capas.
+8. **Estado «verificado»** = «revisado como observación útil». La moderación (admin) permite aprobar, pedir ampliación o descartar con motivo; en reportes verificados, canalizar o cerrar. Si moderas un reporte creado en este navegador, el cambio aparece en «Mis reportes».
+9. **Mapa base:** teselas raster públicas de OpenStreetMap (`https://tile.openstreetmap.org`, © colaboradores de OpenStreetMap, ODbL), desaturadas. Su política de uso admite tráfico moderado; para producción se recomienda un proveedor propio o con acuerdo de uso.
+10. **Diseño:** sigue `DESIGN.md` (crema, bosque, salvia, pizarra; serif ligera para títulos, sans para UI; superficies planas, radio 14 px) como referencia visual, sin adoptar la marca Ease Health. Los colores de tipo de dato son una extensión funcional necesaria para distinguir capas.
 
 ## Accesibilidad
 
@@ -139,7 +133,7 @@ Etiquetas visibles y errores asociados con `aria-describedby`, foco visible, enl
 ## Limitaciones
 
 - Sin backend, API, autenticación ni integración con sistemas oficiales. Las guardas de rol no son seguridad.
-- Datos, fuentes, credenciales, precios, horarios y brigadas inventados.
+- Datos, fuentes y brigadas inventados.
 - Polígonos de zona ilustrativos, no límites legales.
 - Las reglas de retención y eliminación de los módulos A/B están en texto; no hay servidor que las ejecute.
 - El mapa base requiere Internet; el resto de la app no.

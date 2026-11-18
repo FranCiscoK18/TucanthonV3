@@ -1,7 +1,5 @@
 import {
-
   Building2,
-  CalendarDays,
   ClipboardList,
   Home,
   Map,
@@ -11,7 +9,6 @@ import {
   Syringe,
   Activity,
   Workflow,
-  UserRound,
   type LucideIcon,
 } from 'lucide-react';
 import type { UserRole } from '../types';
@@ -35,9 +32,7 @@ export const NAV_ITEMS: NavItem[] = [
   { to: '/brigadas', label: 'Brigadas y campañas', icon: Syringe, access: 'publico', group: 'publico' },
   { to: '/reportes', label: 'Reportar', icon: Megaphone, access: 'publico', group: 'publico', mobilePriority: 3 },
   { to: '/normativa', label: 'Normativa y fuentes', icon: Scale, access: 'publico', group: 'publico' },
-  { to: '/citas', label: 'Mis citas', icon: CalendarDays, access: [...ROUTE_ACCESS.citas], group: 'personal', mobilePriority: 4 },
   { to: '/reportes/mios', label: 'Mis reportes', icon: ClipboardList, access: [...ROUTE_ACCESS.misReportes], group: 'personal' },
-  { to: '/medico', label: 'Mi perfil y agenda', icon: UserRound, access: [...ROUTE_ACCESS.medico], group: 'personal', mobilePriority: 4 },
   { to: '/institucion', label: 'Panel institucional', icon: Building2, access: [...ROUTE_ACCESS.institucion], group: 'gestion', mobilePriority: 4 },
   { to: '/administracion', label: 'Administración', icon: Settings2, access: [...ROUTE_ACCESS.admin], group: 'gestion' },
 ];

@@ -4,7 +4,6 @@ import { readJson, removeKey, writeJson } from './storage';
 
 const aliases: Record<Exclude<UserRole, 'invitado'>, string> = {
   ciudadano: 'Ciudadano/a DEMO',
-  medico: 'Dra. Ana Demo Pérez',
   institucion: 'Analista institucional DEMO',
   admin: 'Administración DEMO',
 };
@@ -21,7 +20,6 @@ export function startSession(role: Exclude<UserRole, 'invitado'>): MockSession {
   const session: MockSession = {
     role,
     alias: aliases[role],
-    doctorId: role === 'medico' ? 'doc-01' : undefined,
     startedAt: new Date().toISOString(),
     isDemo: true,
   };

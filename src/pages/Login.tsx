@@ -1,4 +1,4 @@
-import { ArrowRight, Building2, LogOut, Settings2, Stethoscope, UserRound, type LucideIcon } from 'lucide-react';
+import { ArrowRight, Building2, LogOut, Settings2, UserRound, type LucideIcon } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { roleDescriptions, roleLabels } from '../app/access';
 import { useSession } from '../app/SessionContext';
@@ -9,14 +9,12 @@ import type { UserRole } from '../types';
 
 const ROLE_ICONS: Record<Exclude<UserRole, 'invitado'>, LucideIcon> = {
   ciudadano: UserRound,
-  medico: Stethoscope,
   institucion: Building2,
   admin: Settings2,
 };
 
 const DEFAULT_LANDING: Record<Exclude<UserRole, 'invitado'>, string> = {
-  ciudadano: '/citas',
-  medico: '/medico',
+  ciudadano: '/reportes/mios',
   institucion: '/institucion',
   admin: '/administracion',
 };

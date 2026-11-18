@@ -12,10 +12,8 @@ const Diseases = lazy(() => import('../pages/Diseases'));
 const DiseaseDetail = lazy(() => import('../pages/DiseaseDetail'));
 const Brigades = lazy(() => import('../pages/Brigades'));
 const BrigadeDetail = lazy(() => import('../pages/BrigadeDetail'));
-const Appointments = lazy(() => import('../pages/Appointments'));
 const ReportNew = lazy(() => import('../pages/ReportNew'));
 const MyReports = lazy(() => import('../pages/MyReports'));
-const DoctorPanel = lazy(() => import('../pages/DoctorPanel'));
 const Institutional = lazy(() => import('../pages/Institutional'));
 const Admin = lazy(() => import('../pages/Admin'));
 const Regulations = lazy(() => import('../pages/Regulations'));
@@ -41,26 +39,10 @@ const router = createBrowserRouter([
       { path: '/sin-permiso', element: <NoPermission /> },
       // Con sesión mock
       {
-        path: '/citas',
-        element: (
-          <RequireRole roles={ROUTE_ACCESS.citas}>
-            <Appointments />
-          </RequireRole>
-        ),
-      },
-      {
         path: '/reportes/mios',
         element: (
           <RequireRole roles={ROUTE_ACCESS.misReportes}>
             <MyReports />
-          </RequireRole>
-        ),
-      },
-      {
-        path: '/medico',
-        element: (
-          <RequireRole roles={ROUTE_ACCESS.medico}>
-            <DoctorPanel />
           </RequireRole>
         ),
       },

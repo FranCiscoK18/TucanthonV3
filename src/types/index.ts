@@ -15,15 +15,13 @@ export interface DemoRecord {
 // Roles y sesión
 // ---------------------------------------------------------------------------
 
-export type UserRole = 'invitado' | 'ciudadano' | 'medico' | 'institucion' | 'admin';
+export type UserRole = 'invitado' | 'ciudadano' | 'institucion' | 'admin';
 
 /** Sesión mock. No representa autenticación real. */
 export interface MockSession extends DemoRecord {
   role: Exclude<UserRole, 'invitado'>;
   /** Alias genérico, nunca un nombre real. */
   alias: string;
-  /** Solo para el rol `medico`: perfil DEMO vinculado. */
-  doctorId?: string;
   startedAt: string;
 }
 
@@ -165,54 +163,6 @@ export interface Campaign extends DemoRecord {
   targetPopulation: TargetPopulation[];
   status: ActivityStatus;
   sourceId: string;
-}
-
-// ---------------------------------------------------------------------------
-// Servicios de salud y citas
-// ---------------------------------------------------------------------------
-
-export type Modality = 'presencial' | 'en_linea';
-export type ProviderType = 'medico' | 'consultorio' | 'clinica';
-
-export interface DoctorSchedule extends DemoRecord {
-  doctorId: string;
-  /** 0 = domingo … 6 = sábado */
-  weekday: number;
-  start: string;
-  end: string;
-  slotMinutes: number;
-  modality: Modality;
-}
-
-export interface Doctor extends DemoRecord {
-  id: string;
-  name: string;
-  providerType: ProviderType;
-  specialty: string;
-  healthProblems: string[];
-  /** Credencial simulada, nunca una cédula real. */
-  credential: string;
-  priceMxn: number;
-  modalities: Modality[];
-  regionId: string;
-  bio: string;
-  languages: string[];
-}
-
-export type AppointmentStatus = 'confirmada' | 'cancelada';
-
-export interface Appointment extends DemoRecord {
-  id: string;
-  folio: string;
-  doctorId: string;
-  modality: Modality;
-  /** YYYY-MM-DD */
-  date: string;
-  /** HH:mm */
-  time: string;
-  reason: string;
-  status: AppointmentStatus;
-  createdAt: string;
 }
 
 // ---------------------------------------------------------------------------

@@ -33,7 +33,7 @@ const IS = [
 const IS_NOT = [
   'No diagnostica ni confirma casos o brotes.',
   'No emite alertas oficiales ni sustituye la vigilancia epidemiológica.',
-  'No cobra a la ciudadanía ni recibe comisiones por pacientes o referencias.',
+  'No cobra a la ciudadanía por enviar reportes ni ofrece intermediación clínica.',
   'No publica domicilios ni ubicaciones de personas.',
 ];
 
