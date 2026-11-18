@@ -178,7 +178,7 @@ export function MapPage() {
 
       {data && (
         <p className="mb-4 text-sm text-muted" aria-live="polite">
-          <span className="font-semibold text-charcoal">{data.diseaseLabel}</span> · {data.periodLabel} · Registros ilustrativos
+          <span className="font-semibold text-charcoal">{data.diseaseLabel}</span> · {data.periodLabel} · Registros
           con corte al {data.officialCutoff}; reportes ciudadanos actualizados el {data.participationUpdatedAt}.
         </p>
       )}
@@ -226,7 +226,7 @@ export function MapPage() {
                   <div className="absolute inset-x-3 bottom-10 sm:inset-x-auto sm:left-3 sm:max-w-sm">
                     <EmptyState
                       headingLevel="h2"
-                      title="Sin registros ilustrativos"
+                      title="Sin registros"
                       description="No hay registros para esta combinación de enfermedad y periodo. Selecciona un periodo más amplio."
                       action={
                         <Button size="sm" variant="secondary" onClick={() => updateFilter('periodo', 'ultimas-12')}>
@@ -247,9 +247,8 @@ export function MapPage() {
           </div>
 
           {baseMode === 'local' && (
-            <Notice tone="info" title="Mapa base esquemático">
-              No se pudo cargar el mapa base de OpenFreeMap (sin conexión o red bloqueada). Se muestra una costa aproximada dibujada
-              como referencia visual; las capas y los datos no cambian.
+            <Notice tone="info">
+              No se pudo cargar el mapa base detallado. Se muestra una versión simplificada; las capas y los datos no cambian.
             </Notice>
           )}
 
@@ -339,8 +338,7 @@ export function MapPage() {
           )}
           {!selectedRegionId && (
             <p className="rounded-card bg-keylime-wash p-4 text-sm leading-relaxed">
-              Selecciona una zona en el mapa, en una ficha o en el filtro «Zona» para ver el detalle de cada capa con su fuente,
-              fecha de actualización, cobertura, periodo y advertencias.
+              Toca una zona del mapa para ver su detalle.
             </p>
           )}
           {isWide && <MapLegend dataset={data} visible={visible} onToggle={toggleLayer} />}

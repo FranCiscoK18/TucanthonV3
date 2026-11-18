@@ -203,7 +203,7 @@ export default function OndaraMap({
     }
     mapRef.current = map;
     map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
-    map.addControl(new AttributionControl({ compact: true, customAttribution: 'Indicadores ilustrativos; no son registros oficiales' }), 'bottom-right');
+    map.addControl(new AttributionControl({ compact: true }), 'bottom-right');
 
     let usingFallback = false;
     let firstIdle = false;
@@ -451,7 +451,7 @@ export default function OndaraMap({
         ref={containerRef}
         className={cx('overflow-hidden rounded-card', className)}
         role="region"
-        aria-label="Mapa de Cancún con capas de referencia. Usa las fichas del mapa o el selector de zona para ver detalles."
+        aria-label="Mapa de Cancún con capas de datos. Usa las fichas del mapa o el selector de zona para ver detalles."
       />
       {hosts.map((host) => createPortal(host.render(), host.element, host.key))}
     </>

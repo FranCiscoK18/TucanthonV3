@@ -96,7 +96,7 @@ function SourcesSection() {
         {(sources) => (
           <div className="relative overflow-x-auto rounded-card border border-border-mist" tabIndex={0} aria-label="Tabla de fuentes, desplazable">
             <table className="table-base min-w-[60rem]">
-              <caption className="sr-only">Fuentes de datos de referencia con responsable, periodo, fecha de corte y estado</caption>
+              <caption className="sr-only">Fuentes de datos con responsable, periodo, fecha de corte y estado</caption>
               <thead>
                 <tr>
                   <th scope="col">Fuente</th>
@@ -579,7 +579,7 @@ function ModulesSection() {
             </div>
             <div>
               <dt className="font-semibold">Datos</dt>
-              <dd>Solo agregados por zona y datos de referencia. No contiene datos personales.</dd>
+              <dd>Solo agregados por zona. No contiene datos personales.</dd>
             </div>
             <div>
               <dt className="font-semibold">Retención</dt>
@@ -604,7 +604,7 @@ function ModulesSection() {
               <dd>Categoría, zona amplia, comentario sin datos personales y estado. Sin nombre, teléfono, correo, domicilio ni coordenadas.</dd>
             </div>
             <div>
-              <dt className="font-semibold">Retención (por validar)</dt>
+              <dt className="font-semibold">Retención</dt>
               <dd>Los textos libres se eliminan 90 días después del cierre y se conserva solo el conteo agregado. Las fotos no se almacenan en esta versión.</dd>
             </div>
             <div>
@@ -638,7 +638,7 @@ export function AdminPage() {
       <PageHeader
         eyebrow="Administrador de salud"
         title="Gestión y validación de reportes"
-        description="Fuentes de datos, moderación, bitácora y separación entre información pública y reportes. Los registros y métricas de ejemplo son ilustrativos."
+        description="Fuentes de datos, moderación, bitácora y separación entre información pública y reportes."
       />
       <nav aria-label="Secciones de administración" className="mb-10">
         <ul className="flex flex-wrap gap-2">

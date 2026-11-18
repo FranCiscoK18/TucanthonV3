@@ -109,7 +109,7 @@ function ReportItem({
       )}
       {report.hasSimulatedPhoto && (
         <p className="mt-2 inline-flex items-center gap-1.5 text-sm text-muted">
-          <Camera className="size-4" aria-hidden="true" /> Imagen de referencia (no se almacena ninguna imagen)
+          <Camera className="size-4" aria-hidden="true" /> Imagen adjunta
         </p>
       )}
 

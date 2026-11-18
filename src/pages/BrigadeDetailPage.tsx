@@ -43,7 +43,7 @@ export function BrigadeDetailPage() {
               </h1>
               <p className="mt-3 max-w-3xl text-[1.0625rem] leading-relaxed text-muted">{activity.description}</p>
 
-              <p className="mt-3 text-sm text-muted">Actividad de referencia, no convocatoria oficial. Confirma fecha y sede con la autoridad sanitaria antes de acudir.</p>
+              <p className="mt-3 text-sm text-muted">Confirma fecha y sede con la autoridad sanitaria antes de acudir.</p>
 
               <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]">
                 <div className="space-y-4">

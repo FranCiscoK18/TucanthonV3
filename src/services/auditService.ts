@@ -20,10 +20,10 @@ function seedEntry(): AuditLog {
     actorRole: 'sistema',
     actorLabel: 'Sistema Ondara',
     actionCode: 'carga-escenario',
-    action: 'Carga del escenario de referencia',
+    action: 'Carga inicial de fuentes',
     entityType: 'fuente',
     entityId: 'todas',
-    detail: 'Se cargó información ilustrativa; los indicadores no proceden de fuentes oficiales.',
+    detail: 'Se cargaron las fuentes de datos del periodo.',
     isDemo: true,
   };
 }

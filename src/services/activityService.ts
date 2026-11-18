@@ -54,7 +54,7 @@ export async function getActivities(filters: ActivityFilters): Promise<HealthAct
 export async function getActivity(id: string): Promise<HealthActivity> {
   return simulateRequest(() => {
     const activity = getActivitiesMock().find((item) => item.id === id);
-    if (!activity) throw new NotFoundError('No encontramos esa brigada o campaña en la agenda de referencia.');
+    if (!activity) throw new NotFoundError('No encontramos esa brigada o campaña en la agenda.');
     return activity;
   });
 }

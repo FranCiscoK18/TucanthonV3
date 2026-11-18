@@ -39,12 +39,11 @@ export function LandingPage() {
               <span>Información abierta · Sin registro ciudadano · Seguimiento local</span>
             </div>
           </div>
-          <div className="relative" aria-label="Vista ilustrativa del funcionamiento de Ondara">
+          <div className="relative" aria-label="Panorama de vigilancia de Ondara">
             <div className="rounded-[20px] bg-slate-hush p-4 sm:p-6">
               <div className="rounded-[16px] bg-cream-paper p-5 sm:p-6">
                 <div className="flex items-center justify-between gap-3">
                   <span className="flex items-center gap-2 text-sm font-semibold text-forest-ink"><Activity className="size-4" /> Panorama de vigilancia</span>
-                  <span className="rounded-full bg-keylime-wash px-3 py-1 text-xs font-medium text-forest-ink">Vista conceptual</span>
                 </div>
                 <p className="mt-4 text-[1.4rem] font-medium text-forest-ink">Señales + territorio + comunidad</p>
                 <p className="mt-1 text-sm text-muted">Tres fuentes complementarias, claramente diferenciadas</p>
@@ -61,7 +60,6 @@ export function LandingPage() {
                   <span className="rounded-full border border-border-mist px-3 py-1 text-xs">Y más</span>
                 </div>
               </div>
-              <p className="mt-3 text-center text-xs text-charcoal">Vista ilustrativa; los indicadores no representan datos epidemiológicos reales.</p>
             </div>
           </div>
         </div>
@@ -112,9 +110,6 @@ export function LandingPage() {
           <ButtonLink to="/reportar" variant="secondary" icon={MessageSquarePlus}>Enviar reporte</ButtonLink>
         </div>
       </section>
-      <p className="text-sm leading-relaxed text-muted">
-        Las observaciones ciudadanas no confirman casos ni brotes. Los indicadores de esta presentación son ilustrativos y no representan cifras epidemiológicas oficiales.
-      </p>
     </div>
   );
 }

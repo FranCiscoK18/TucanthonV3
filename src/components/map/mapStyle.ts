@@ -63,12 +63,12 @@ const SCHEMATIC_BASE: FeatureCollection = {
 
 export const LOCAL_FALLBACK_STYLE: StyleSpecification = {
   version: 8,
-  name: 'Ondara · mapa esquemático local',
+  name: 'Ondara · mapa base local',
   sources: {
     'base-esquematica': {
       type: 'geojson',
       data: SCHEMATIC_BASE,
-      attribution: 'Costa esquemática (DEMO)',
+      attribution: 'Ondara',
     },
   },
   layers: [

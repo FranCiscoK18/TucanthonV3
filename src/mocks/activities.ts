@@ -150,7 +150,7 @@ const seeds: ActivitySeed[] = [
     venueHint: 'Espacio público de la zona Poniente (referencia general)',
     status: 'reprogramada',
     organizer: 'Jurisdicción sanitaria (referencia)',
-    description: 'Escenario ilustrativo de una jornada reprogramada por condiciones del clima.',
+    description: 'Jornada reprogramada por condiciones del clima.',
   },
   {
     id: 'brigada-influenza-zh',
@@ -167,7 +167,7 @@ const seeds: ActivitySeed[] = [
     venueHint: 'Espacio público de la Zona Hotelera (referencia general)',
     status: 'finalizada',
     organizer: 'Jurisdicción sanitaria (referencia)',
-    description: 'Escenario ilustrativo de una jornada finalizada.',
+    description: 'Jornada finalizada.',
   },
   {
     id: 'campana-criaderos-sur',
@@ -269,7 +269,7 @@ const seeds: ActivitySeed[] = [
     venueHint: 'Explanada pública de la zona Centro (referencia general)',
     status: 'finalizada',
     organizer: 'Gobierno municipal (referencia)',
-    description: 'Escenario ilustrativo de una jornada finalizada.',
+    description: 'Jornada finalizada.',
   },
 ];
 

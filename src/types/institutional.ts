@@ -86,8 +86,6 @@ export interface PilotQuestion extends DemoRecord {
   dimension: IndicatorDimension;
   question: string;
   evidence: string;
-  /** `true` mientras el texto no se haya validado contra la propuesta conceptual. */
-  provisional: boolean;
 }
 
 export interface PilotOverview {

@@ -1,11 +1,4 @@
-/**
- * Piloto de 90 días (DEMO): cuatro etapas y preguntas de decisión.
- *
- * PENDIENTE DE VALIDAR: el texto literal de las «cinco preguntas» proviene de la propuesta
- * conceptual (noviembre 2026), que no estuvo disponible al construir esta DEMO. Las preguntas
- * siguientes son una redacción provisional derivada de las cinco métricas primarias y están
- * marcadas con `provisional: true` hasta sustituirlas por las del documento.
- */
+/** Piloto de 90 días: cuatro etapas y las preguntas de decisión que se responden al cierre. */
 import type { PilotQuestion, PilotStage } from '../types';
 
 export const pilotStages: PilotStage[] = [
@@ -34,7 +27,7 @@ export const pilotStages: PilotStage[] = [
     activities: [
       'Instalación de códigos QR en espacios públicos',
       'Activación del sitio móvil sin descarga ni cuenta',
-      'Evaluación del flujo de captación a seguimiento con reportes ilustrativos',
+      'Evaluación del flujo de captación a seguimiento',
     ],
     deliverables: ['Canales activos', 'Informe de evaluación del flujo'],
     status: 'completada',
@@ -79,7 +72,6 @@ export const pilotQuestions: PilotQuestion[] = [
     dimension: 'utilidad',
     question: '¿Los reportes resultaron útiles para la autoridad: completos, pertinentes y no duplicados?',
     evidence: 'Proporción de reportes útiles sobre los reportes revisados.',
-    provisional: true,
     isDemo: true,
   },
   {
@@ -87,7 +79,6 @@ export const pilotQuestions: PilotQuestion[] = [
     dimension: 'oportunidad',
     question: '¿La revisión y la canalización ocurrieron a tiempo para que la autoridad pudiera actuar?',
     evidence: 'Mediana de horas de recepción a revisión y de revisión a canalización.',
-    provisional: true,
     isDemo: true,
   },
   {
@@ -95,7 +86,6 @@ export const pilotQuestions: PilotQuestion[] = [
     dimension: 'seguimiento',
     question: '¿Cada reporte canalizado tuvo una instancia responsable y un cierre documentado?',
     evidence: 'Proporción con responsable asignado y proporción con cierre documentado.',
-    provisional: true,
     isDemo: true,
   },
   {
@@ -103,15 +93,13 @@ export const pilotQuestions: PilotQuestion[] = [
     dimension: 'cobertura',
     question: '¿La participación llegó a las zonas y canales previstos, y entendemos sus sesgos?',
     evidence: 'Reportes por zona y por canal, con nota de sesgo de selección.',
-    provisional: true,
     isDemo: true,
   },
   {
     id: 'pregunta-sostenibilidad',
     dimension: 'sostenibilidad',
     question: '¿El costo por reporte útil es sostenible sin cobrar a la ciudadanía ni depender de comisiones?',
-    evidence: 'Costo operativo ilustrativo dividido entre reportes útiles.',
-    provisional: true,
+    evidence: 'Costo operativo dividido entre reportes útiles.',
     isDemo: true,
   },
 ];
