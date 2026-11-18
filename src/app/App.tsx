@@ -12,8 +12,6 @@ const Diseases = lazy(() => import('../pages/Diseases'));
 const DiseaseDetail = lazy(() => import('../pages/DiseaseDetail'));
 const Brigades = lazy(() => import('../pages/Brigades'));
 const BrigadeDetail = lazy(() => import('../pages/BrigadeDetail'));
-const Directory = lazy(() => import('../pages/Directory'));
-const DoctorProfile = lazy(() => import('../pages/DoctorProfile'));
 const Appointments = lazy(() => import('../pages/Appointments'));
 const ReportNew = lazy(() => import('../pages/ReportNew'));
 const MyReports = lazy(() => import('../pages/MyReports'));
@@ -37,8 +35,6 @@ const router = createBrowserRouter([
       { path: '/enfermedades/:id', element: <DiseaseDetail /> },
       { path: '/brigadas', element: <Brigades /> },
       { path: '/brigadas/:id', element: <BrigadeDetail /> },
-      { path: '/directorio', element: <Directory /> },
-      { path: '/directorio/:id', element: <DoctorProfile /> },
       { path: '/reportes', element: <ReportNew /> },
       { path: '/normativa', element: <Regulations /> },
       { path: '/acceso', element: <Login /> },

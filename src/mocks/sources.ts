@@ -70,18 +70,6 @@ export const dataSources: DataSource[] = [
     limitations: 'Fechas y sedes ficticias. No acudir: no son jornadas convocadas.',
     isDemo: true,
   },
-  {
-    id: 'src-directorio',
-    name: 'Directorio informativo de servicios (simulado)',
-    type: 'directorio-demo',
-    responsible: 'Equipo Ondara (DEMO)',
-    period: 'Vigente en la demo',
-    cutoffDate: DEMO_CUTOFF_DATE,
-    coverage: 'Perfiles de ejemplo',
-    status: 'activa',
-    limitations: 'Nombres, credenciales, precios y horarios inventados. Sin comisiones ni pagos por referencia.',
-    isDemo: true,
-  },
 ];
 
 export const sourceById = (id: string): DataSource | undefined => dataSources.find((s) => s.id === id);

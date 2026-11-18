@@ -66,7 +66,6 @@ src/
 | `/enfermedades` | Catálogo con clasificación y señales | Público |
 | `/enfermedades/:id` | Tendencia, criterios de señal, comparación de periodos, tabla | Público |
 | `/brigadas` · `/brigadas/:id` | Lista/mapa de brigadas, campañas, detalle | Público |
-| `/directorio` · `/directorio/:id` | Búsqueda y filtros, perfil con horarios y botón «Agendar» | Público |
 | `/reportes` | Formulario de reporte anónimo | Público |
 | `/normativa` | Marcos a revisar, privacidad, fuentes DEMO | Público |
 | `/acceso` | Selector de rol mock | Público |
@@ -81,7 +80,7 @@ src/
 
 | Rol | Acceso |
 |---|---|
-| invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades, brigadas, directorio, normativa. Puede enviar reportes. |
+| invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades, brigadas y normativa. Puede enviar reportes. |
 | ciudadano | Lo anterior, más citas y seguimiento de reportes propios. |
 | medico | Lo público, más su perfil y agenda simulada. No ve reportes individuales. |
 | institucion | Lo público, más el panel institucional con datos agregados. |
