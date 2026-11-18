@@ -1,20 +1,106 @@
-import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
-import { Shell } from '../components/layout/Shell';
-import { Dashboard } from '../pages/Dashboard';
-import { EpidemiologicalMap } from '../pages/EpidemiologicalMap';
-import { Diseases } from '../pages/Diseases';
-import { Brigades } from '../pages/Brigades';
-import { Directory } from '../pages/Directory';
-import { Appointments } from '../pages/Appointments';
-import { Reports } from '../pages/Reports';
-import { DoctorPanel } from '../pages/DoctorPanel';
-import { InstitutionalPanel } from '../pages/InstitutionalPanel';
-import { Administration } from '../pages/Administration';
-import { Login } from '../pages/Login';
-import { SessionProvider, homeForRole, useSession } from './SessionContext';
-import type { UserRole } from '../types/models';
-import { EmptyState } from '../components/ui/Elements';
-function PrivateShell(){const {role}=useSession();return role?<Shell/>:<Navigate to="/acceso" replace/>;}
-function RoleGuard({allowed}:{allowed:UserRole[]}){const {role}=useSession();if(!role)return <Navigate to="/acceso" replace/>;if(!allowed.includes(role))return <EmptyState title="Acceso restringido por rol DEMO" description="Este módulo no está habilitado para el rol seleccionado. El control es ilustrativo y no constituye seguridad real."/>;return <Outlet/>;}
-function Fallback(){const {role}=useSession();return <Navigate to={role?homeForRole[role]:'/acceso'} replace/>;}
-export function App(){return <SessionProvider><a href="#contenido" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-forest-ink focus:p-3 focus:text-white">Saltar al contenido</a><Routes><Route path="/acceso" element={<Login/>}/><Route element={<PrivateShell/>}><Route element={<RoleGuard allowed={['ciudadano']}/>}><Route index element={<Dashboard/>}/><Route path="/mapa" element={<EpidemiologicalMap/>}/><Route path="/enfermedades" element={<Diseases/>}/><Route path="/enfermedades/:id" element={<Diseases/>}/><Route path="/brigadas" element={<Brigades/>}/><Route path="/directorio" element={<Directory/>}/><Route path="/medicos/:id" element={<Directory/>}/><Route path="/citas" element={<Appointments/>}/><Route path="/reportes" element={<Reports/>}/></Route><Route element={<RoleGuard allowed={['medico']}/>}><Route path="/medico" element={<DoctorPanel/>}/></Route><Route element={<RoleGuard allowed={['institucion','admin']}/>}><Route path="/institucion" element={<InstitutionalPanel/>}/></Route><Route element={<RoleGuard allowed={['admin']}/>}><Route path="/administracion" element={<Administration/>}/></Route></Route><Route path="*" element={<Fallback/>}/></Routes></SessionProvider>;}
+import { lazy } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { AppLayout } from '../components/layout/AppLayout';
+import { ROUTE_ACCESS } from './access';
+import { RequireRole } from './RequireRole';
+import { SessionProvider } from './SessionContext';
+
+const Home = lazy(() => import('../pages/Home'));
+const HowItWorks = lazy(() => import('../pages/HowItWorks'));
+const MapPage = lazy(() => import('../pages/MapPage'));
+const Diseases = lazy(() => import('../pages/Diseases'));
+const DiseaseDetail = lazy(() => import('../pages/DiseaseDetail'));
+const Brigades = lazy(() => import('../pages/Brigades'));
+const BrigadeDetail = lazy(() => import('../pages/BrigadeDetail'));
+const Directory = lazy(() => import('../pages/Directory'));
+const DoctorProfile = lazy(() => import('../pages/DoctorProfile'));
+const Appointments = lazy(() => import('../pages/Appointments'));
+const ReportNew = lazy(() => import('../pages/ReportNew'));
+const MyReports = lazy(() => import('../pages/MyReports'));
+const DoctorPanel = lazy(() => import('../pages/DoctorPanel'));
+const Institutional = lazy(() => import('../pages/Institutional'));
+const Admin = lazy(() => import('../pages/Admin'));
+const Regulations = lazy(() => import('../pages/Regulations'));
+const Login = lazy(() => import('../pages/Login'));
+const NoPermission = lazy(() => import('../pages/NoPermission'));
+const NotFound = lazy(() => import('../pages/NotFound'));
+
+const router = createBrowserRouter([
+  {
+    element: <AppLayout />,
+    children: [
+      // Público (sin cuenta)
+      { path: '/', element: <Home /> },
+      { path: '/como-funciona', element: <HowItWorks /> },
+      { path: '/mapa', element: <MapPage /> },
+      { path: '/enfermedades', element: <Diseases /> },
+      { path: '/enfermedades/:id', element: <DiseaseDetail /> },
+      { path: '/brigadas', element: <Brigades /> },
+      { path: '/brigadas/:id', element: <BrigadeDetail /> },
+      { path: '/directorio', element: <Directory /> },
+      { path: '/directorio/:id', element: <DoctorProfile /> },
+      { path: '/reportes', element: <ReportNew /> },
+      { path: '/normativa', element: <Regulations /> },
+      { path: '/acceso', element: <Login /> },
+      { path: '/sin-permiso', element: <NoPermission /> },
+      // Con sesión mock
+      {
+        path: '/citas',
+        element: (
+          <RequireRole roles={ROUTE_ACCESS.citas}>
+            <Appointments />
+          </RequireRole>
+        ),
+      },
+      {
+        path: '/reportes/mios',
+        element: (
+          <RequireRole roles={ROUTE_ACCESS.misReportes}>
+            <MyReports />
+          </RequireRole>
+        ),
+      },
+      {
+        path: '/medico',
+        element: (
+          <RequireRole roles={ROUTE_ACCESS.medico}>
+            <DoctorPanel />
+          </RequireRole>
+        ),
+      },
+      {
+        path: '/institucion',
+        element: (
+          <RequireRole roles={ROUTE_ACCESS.institucion}>
+            <Institutional />
+          </RequireRole>
+        ),
+      },
+      {
+        path: '/administracion',
+        element: (
+          <RequireRole roles={ROUTE_ACCESS.admin}>
+            <Admin />
+          </RequireRole>
+        ),
+      },
+      { path: '*', element: <NotFound /> },
+    ],
+  },
+], {
+  future: {
+    v7_fetcherPersist: true,
+    v7_normalizeFormMethod: true,
+    v7_partialHydration: true,
+    v7_relativeSplatPath: true,
+    v7_skipActionErrorRevalidation: true,
+  },
+});
+
+export function App() {
+  return (
+    <SessionProvider>
+      <RouterProvider router={router} future={{ v7_startTransition: true }} />
+    </SessionProvider>
+  );
+}

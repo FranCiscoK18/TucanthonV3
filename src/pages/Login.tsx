@@ -1,14 +1,116 @@
-import { ArrowRight, HeartPulse, LockKeyhole, MapPinned, ShieldCheck, Stethoscope, UsersRound, UserRoundCog } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import { homeForRole, roleLabels, useSession } from '../app/SessionContext';
-import type { UserRole } from '../types/models';
-import { Notice } from '../components/ui/Elements';
-const roles:[UserRole,typeof Stethoscope,string][]=[
- ['ciudadano',MapPinned,'Mapa, tendencias, campañas, directorio, citas y reportes'],
- ['medico',Stethoscope,'Perfil profesional ficticio y agenda de ejemplo'],
- ['institucion',UsersRound,'Indicadores y exportación de escenarios ilustrativos'],
- ['admin',UserRoundCog,'Fuentes, moderación y bitácora en memoria'],
-];
-export function Login(){const {login}=useSession();const navigate=useNavigate();const enter=(role:UserRole)=>{login(role);navigate(homeForRole[role],{replace:true});};
- return <div className="min-h-screen bg-cream-paper"><header className="mx-auto flex max-w-[1200px] items-center gap-3 px-5 py-6 text-forest-ink"><span className="grid size-11 place-items-center rounded-[12px] bg-forest-ink text-white"><HeartPulse size={25}/></span><span><strong className="text-lg">EpiRadar Cancún</strong><span className="block text-[11px] font-semibold uppercase tracking-wider">Plataforma integral · DEMO</span></span></header><main className="mx-auto max-w-[1200px] px-5 pb-16"><div className="grid gap-5 lg:grid-cols-[1.07fr_.93fr]"><section className="flex flex-col justify-between rounded-[14px] bg-keylime-wash p-7 sm:p-11"><div><p className="eyebrow">Inteligencia epidemiológica · Prevención · Atención</p><h1 className="title-serif mt-5 max-w-lg text-5xl sm:text-7xl">Datos que orientan. Personas que importan.</h1><p className="mt-6 max-w-xl text-base leading-7">Prototipo interactivo para explorar cómo podría organizarse información sanitaria, recursos preventivos y servicios médicos en Cancún.</p></div><div className="mt-9 space-y-3"><div className="flex items-center gap-3 text-sm text-forest-ink"><ShieldCheck size={19}/> Indicadores y ubicaciones agregadas DEMO</div><div className="flex items-center gap-3 text-sm text-forest-ink"><LockKeyhole size={19}/> Sin autenticación, base de datos ni backend</div><span className="inline-flex rounded-full bg-cream-paper px-4 py-2 text-xs font-semibold text-forest-ink">ENTORNO 100 % DEMO · INFORMACIÓN FICTICIA</span></div></section><section className="rounded-[14px] bg-slate-hush p-7 sm:p-9"><p className="eyebrow">Elegir experiencia de prueba</p><h2 className="title-serif mt-3 text-4xl">Selecciona un rol DEMO</h2><p className="mt-2 text-sm leading-6">No se requieren cuentas ni contraseñas. Cada botón abre un módulo de prueba con navegación simulada.</p><div className="mt-6 space-y-3">{roles.map(([role,Icon,description])=><button key={role} className="group flex min-h-22 w-full items-center gap-4 rounded-[12px] bg-cream-paper p-4 text-left hover:bg-keylime-wash" onClick={()=>enter(role)}><span className="grid size-11 shrink-0 place-items-center rounded-[10px] bg-keylime-wash text-forest-ink"><Icon size={23}/></span><span className="min-w-0 flex-1"><strong className="text-sm text-forest-ink">{roleLabels[role]}</strong><span className="mt-1 block text-xs leading-5 text-charcoal/65">{description}</span></span><ArrowRight className="shrink-0 text-forest-ink group-hover:translate-x-1" size={20}/></button>)}</div></section></div><div className="mt-5"><Notice tone="warning" title="Prototipo de demostración">No interpretes estadísticas como datos sanitarios reales ni uses estas rutas para solicitar atención. La información no reemplaza a autoridades ni profesionales sanitarios.</Notice></div><p className="mt-6 text-center text-xs text-charcoal/55">EpiRadar Cancún · Escenario ficticio para Tucanthon 2026</p></main></div>;
+import { ArrowRight, Building2, LogOut, Settings2, Stethoscope, UserRound, type LucideIcon } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { roleDescriptions, roleLabels } from '../app/access';
+import { useSession } from '../app/SessionContext';
+import { Notice } from '../components/ui/Feedback';
+import { PageHeader } from '../components/ui/Layout';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import type { UserRole } from '../types';
+
+const ROLE_ICONS: Record<Exclude<UserRole, 'invitado'>, LucideIcon> = {
+  ciudadano: UserRound,
+  medico: Stethoscope,
+  institucion: Building2,
+  admin: Settings2,
+};
+
+const DEFAULT_LANDING: Record<Exclude<UserRole, 'invitado'>, string> = {
+  ciudadano: '/citas',
+  medico: '/medico',
+  institucion: '/institucion',
+  admin: '/administracion',
+};
+
+interface LocationState {
+  from?: string;
+  needed?: readonly UserRole[];
+}
+
+export default function Login() {
+  useDocumentTitle('Elegir rol DEMO');
+  const { role, login, logout } = useSession();
+  const navigate = useNavigate();
+  const state = (useLocation().state ?? {}) as LocationState;
+
+  const choose = (r: Exclude<UserRole, 'invitado'>) => {
+    login(r);
+    const allowed = !state.needed || state.needed.includes(r);
+    navigate(state.from && allowed ? state.from : DEFAULT_LANDING[r], { replace: true });
+  };
+
+  return (
+    <>
+      <PageHeader
+        eyebrow="Acceso simulado"
+        title="Elige un rol DEMO"
+        description="Selecciona un rol para explorar la plataforma. No hay contraseñas ni cuentas reales."
+      />
+      <Notice tone="caution" title="Esto no es autenticación real">
+        La sesión se guarda en este navegador (localStorage) y las restricciones de rol son solo de interfaz. No uses este mecanismo para
+        proteger datos reales.
+      </Notice>
+      {state.from && (
+        <Notice tone="info" className="mt-3" title="Se necesita una sesión para continuar">
+          La sección que intentaste abrir requiere el rol: {(state.needed ?? []).map((r) => roleLabels[r]).join(' o ')}.
+        </Notice>
+      )}
+
+      <ul className="mt-6 grid gap-4 md:grid-cols-2">
+        {(Object.keys(ROLE_ICONS) as Array<Exclude<UserRole, 'invitado'>>).map((r) => {
+          const Icon = ROLE_ICONS[r];
+          const highlighted = state.needed?.includes(r);
+          return (
+            <li key={r}>
+              <button
+                type="button"
+                onClick={() => choose(r)}
+                className={`group flex h-full w-full items-start gap-4 rounded-[14px] p-5 text-left transition-colors md:p-6 ${
+                  highlighted ? 'bg-sage hover:bg-mint' : 'bg-keylime hover:bg-mint'
+                }`}
+              >
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-cream text-forest">
+                  <Icon aria-hidden className="h-6 w-6" />
+                </span>
+                <span className="min-w-0">
+                  <span className="flex items-center gap-2 text-[19px] font-semibold text-forest">
+                    {roleLabels[r]}
+                    {role === r && <span className="pill bg-cream text-forest">Sesión actual</span>}
+                  </span>
+                  <span className="mt-1 block text-[14.5px] text-ink">{roleDescriptions[r]}</span>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-[14px] font-medium text-forest">
+                    Entrar como {roleLabels[r].toLowerCase()}
+                    <ArrowRight aria-hidden className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+
+      <div className="mt-6 card flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="font-semibold text-forest">{roleLabels.invitado}</p>
+          <p className="text-[14.5px] text-muted">{roleDescriptions.invitado}</p>
+        </div>
+        {role === 'invitado' ? (
+          <Link to="/" className="btn btn-ghost">
+            Seguir sin sesión
+          </Link>
+        ) : (
+          <button
+            type="button"
+            className="btn btn-ghost"
+            onClick={() => {
+              logout();
+              navigate('/');
+            }}
+          >
+            <LogOut aria-hidden className="h-4 w-4" />
+            Cerrar sesión y seguir como invitado
+          </button>
+        )}
+      </div>
+    </>
+  );
 }

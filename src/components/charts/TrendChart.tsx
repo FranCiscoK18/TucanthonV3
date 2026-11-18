@@ -1,12 +1,83 @@
-import { useId } from 'react';
-import { monthLabel } from '../../utils/format';
-export function TrendChart({points,label='Registros ilustrativos'}:{points:{period:string;value:number}[];label?:string}){
- const uid=useId().replace(/:/g,'');if(!points.length)return <p>No hay datos DEMO para graficar.</p>;
- const max=Math.max(5,...points.map(x=>x.value));const width=700,height=240,padding=45;
- const coords=points.map((p,i)=>({x:padding+(width-2*padding)*(points.length===1?.5:i/(points.length-1)),y:height-padding-(p.value/max)*(height-2*padding)}));
- const path=coords.map((c,i)=>`${i?'L':'M'}${c.x},${c.y}`).join(' ');
- return <div className="w-full"><svg viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby={`${uid}-title ${uid}-desc`} className="w-full overflow-visible"><title id={`${uid}-title`}>Tendencia de {label} · DEMO</title><desc id={`${uid}-desc`}>{points.map(p=>`${monthLabel(p.period)}: ${p.value}`).join('; ')}. Serie inventada.</desc>
- {[0,.5,1].map(f=><g key={f}><line x1={padding} y1={height-padding-f*(height-2*padding)} x2={width-padding} y2={height-padding-f*(height-2*padding)} stroke="#c2d3c4" strokeDasharray="4 5"/><text x={padding-10} y={height-padding-f*(height-2*padding)+5} textAnchor="end" fill="#395541" fontSize="12">{Math.round(f*max)}</text></g>)}
- <path d={path} fill="none" stroke="#0f3e17" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"/>{coords.map((c,i)=><g key={i}><circle cx={c.x} cy={c.y} r="5" fill="#fffefc" stroke="#0f3e17" strokeWidth="3"/><text x={c.x} y={height-12} textAnchor="middle" fill="#395541" fontSize="12">{monthLabel(points[i].period).split(' ')[0]}</text></g>)}
- </svg><p className="mt-1 text-center text-xs text-charcoal/70">Eje vertical: registros ficticios (conteo) · Eje horizontal: meses de 2026 · DEMO</p></div>;
+import { Area, CartesianGrid, ComposedChart, Line, ReferenceArea, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { formatDecimal, formatNumber } from '../../utils/format';
+import { weekLabel } from '../../utils/dates';
+
+export interface TrendPoint {
+  week: string;
+  value: number;
+  baseline?: number;
+}
+
+interface TooltipPayload {
+  payload: TrendPoint;
+}
+
+function ChartTooltip({ active, payload, unit }: { active?: boolean; payload?: TooltipPayload[]; unit: string }) {
+  const point = payload?.[0]?.payload;
+  if (!active || !point) return null;
+  return (
+    <div className="rounded-[10px] border border-hairline bg-cream px-3 py-2 text-[13px] text-ink">
+      <p className="font-semibold">Semana {weekLabel(point.week)}</p>
+      <p>
+        {formatNumber(point.value)} {unit}
+      </p>
+      {point.baseline !== undefined && <p className="text-muted">Línea base semanal: {formatDecimal(point.baseline)}</p>}
+    </div>
+  );
+}
+
+/**
+ * Tendencia semanal con línea base y ventana de señal sombreada.
+ * Una sola serie: el título de la tarjeta la nombra (sin leyenda).
+ */
+export function TrendChart({
+  data,
+  unit,
+  windowWeeks,
+  color = '#0f3e17',
+  ariaLabel,
+}: {
+  data: TrendPoint[];
+  unit: string;
+  windowWeeks?: number;
+  color?: string;
+  ariaLabel: string;
+}) {
+  const windowStart = windowWeeks ? data[data.length - windowWeeks]?.week : undefined;
+  const windowEnd = data[data.length - 1]?.week;
+  return (
+    <div role="img" aria-label={ariaLabel} className="h-[260px] w-full md:h-[300px]">
+      <ResponsiveContainer width="100%" height="100%">
+        <ComposedChart data={data} margin={{ top: 12, right: 12, bottom: 4, left: -12 }}>
+          <CartesianGrid vertical={false} stroke="#e1e0d9" />
+          {windowStart && windowEnd && (
+            <ReferenceArea x1={windowStart} x2={windowEnd} fill="#e1f4df" fillOpacity={0.9} ifOverflow="extendDomain" />
+          )}
+          <XAxis dataKey="week" tickFormatter={weekLabel} tick={{ fontSize: 12, fill: '#4d5a50' }} axisLine={{ stroke: '#c3c2b7' }} tickLine={false} />
+          <YAxis allowDecimals={false} tick={{ fontSize: 12, fill: '#4d5a50' }} axisLine={false} tickLine={false} width={44} />
+          <Tooltip content={<ChartTooltip unit={unit} />} cursor={{ stroke: '#9a9a92', strokeWidth: 1 }} />
+          <Area type="monotone" dataKey="value" stroke="none" fill={color} fillOpacity={0.08} isAnimationActive={false} />
+          <Line
+            type="monotone"
+            dataKey="baseline"
+            stroke="#6b6b64"
+            strokeWidth={1.5}
+            strokeDasharray="5 4"
+            dot={false}
+            isAnimationActive={false}
+            connectNulls
+          />
+          <Line
+            type="monotone"
+            dataKey="value"
+            stroke={color}
+            strokeWidth={2}
+            dot={{ r: 3, fill: color, stroke: '#fffefc', strokeWidth: 2 }}
+            activeDot={{ r: 5, fill: color, stroke: '#fffefc', strokeWidth: 2 }}
+            isAnimationActive={false}
+          />
+        </ComposedChart>
+      </ResponsiveContainer>
+    </div>
+  );
 }

@@ -1,23 +1,136 @@
-import { ArrowLeft, ArrowRight, TrendingUp } from 'lucide-react';
-import { Link, useParams } from 'react-router-dom';
-import { TrendChart } from '../components/charts/TrendChart';
-import { DataBadge, EmptyState, ErrorState, Field, LoadingState, Metric, Notice, PageHeader } from '../components/ui/Elements';
-import { useDemoData } from '../hooks/useDemoData';
-import { categoryNames, periods } from '../mocks/data';
-import { getDiseasesData } from '../services/demoService';
-import { monthLabel } from '../utils/format';
-import { useState } from 'react';
-import type { AggregatedCase } from '../types/models';
-const getSeries=(records:AggregatedCase[],id:string,classification:string)=>periods.map(period=>({period,value:records.filter(c=>c.diseaseId===id&&c.period===period&&(classification==='todas'||c.classification===classification)).reduce((sum,c)=>sum+c.count,0)}));
-export function Diseases(){const {id}=useParams();const {data,loading,error,retry}=useDemoData(getDiseasesData);const [category,setCategory]=useState('todas');const [classification,setClassification]=useState('todas');
- if(loading)return <LoadingState/>;if(error)return <ErrorState error={error} retry={retry}/>;if(!data)return <EmptyState title="Sin datos" description="No se cargó el escenario DEMO."/>;
- const selected=data.diseases.find(d=>d.id===id);
- if(id&&!selected)return <EmptyState title="Enfermedad no encontrada" description="No existe en el catálogo ficticio." action={<Link to="/enfermedades" className="btn-primary">Volver al catálogo</Link>}/>;
- if(!selected){const filtered=data.diseases.filter(d=>category==='todas'||d.category===category);return <><PageHeader eyebrow="Inteligencia epidemiológica DEMO" title="Enfermedades y tendencias" description="Catálogo educativo de enfermedades y series de datos inventados. Explora cómo se presentarían diferencias entre periodos."/><Notice title="Clasificación educativa">Los números y las alertas de esta sección son un escenario matemático totalmente ficticio. No representan epidemiología de Cancún.</Notice><div className="mt-6 max-w-sm"><Field label="Filtrar por categoría"><select className="input" value={category} onChange={e=>setCategory(e.target.value)}><option value="todas">Todas las categorías</option>{Object.entries(categoryNames).map(([value,name])=><option key={value} value={value}>{name}</option>)}</select></Field></div>{filtered.length===0?<div className="mt-6"><EmptyState title="Sin resultados" description="Cambia el filtro para ver más enfermedades."/></div>:<div className="mt-6 grid gap-4 md:grid-cols-2">{filtered.map(d=><Link to={`/enfermedades/${d.id}`} key={d.id} className="group rounded-[14px] bg-keylime-wash p-6 hover:bg-sage-mist"><span className="eyebrow">{categoryNames[d.category]}</span><div className="mt-3 flex items-start justify-between"><h2 className="title-serif text-3xl">{d.name}</h2><ArrowRight size={20} className="text-forest-ink group-hover:translate-x-1"/></div><p className="mt-3 text-sm leading-6">{d.description}</p><div className="mt-4"><DataBadge kind="institucional-demo" short/></div></Link>)}</div>}</>}
- const trend=getSeries(data.cases,selected.id,classification);const current=trend.at(-1)?.value??0;const previous=trend.at(-2)?.value??0;const baseline=trend.slice(-4,-1).reduce((s,p)=>s+p.value,0)/3;const increase=baseline>0&&current>=10&&current>1.35*baseline;const diff=previous>0?((current-previous)/previous)*100:null;
- return <><Link to="/enfermedades" className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-forest-ink hover:underline"><ArrowLeft size={16}/> Volver al catálogo</Link><PageHeader eyebrow={categoryNames[selected.category]} title={selected.name} description={selected.description}/><Notice tone="warning" title="Aviso interpretativo">No se afirma un brote ni se diagnostica. Las clases «confirmado DEMO» y «probable DEMO» son etiquetas para experimentar con filtros, sin registros clínicos reales.</Notice>
- <div className="mt-6 flex flex-wrap items-end gap-4"><div className="min-w-56"><Field label="Clasificación ficticia"><select className="input" value={classification} onChange={e=>setClassification(e.target.value)}><option value="todas">Todas</option><option value="confirmado-demo">Confirmado · DEMO</option><option value="probable-demo">Probable · DEMO</option></select></Field></div><DataBadge kind="institucional-demo"/></div>
- <div className="mt-6 grid gap-4 sm:grid-cols-3"><Metric label="Periodo actual ficticio" value={current} detail={`${monthLabel(periods.at(-1)!)} · registros DEMO`}/><Metric label="Periodo previo ficticio" value={previous} detail={`${monthLabel(periods.at(-2)!)} · registros DEMO`} tint="sage"/><Metric label="Cambio respecto al previo" value={diff===null?'N/D':`${diff>=0?'+':''}${diff.toFixed(1)} %`} detail="Comparación descriptiva, no riesgo sanitario" tint="slate"/></div>
- <section className="card-white mt-6"><div className="mb-6 flex flex-wrap justify-between gap-3"><div><p className="eyebrow">Serie temporal · datos inventados</p><h2 className="title-serif mt-1 text-3xl">Evolución ilustrativa</h2></div><TrendingUp className="text-forest-ink" size={26}/></div><TrendChart points={trend} label={selected.name}/></section>
- <section className="mt-6 grid gap-6 lg:grid-cols-[1.3fr_.7fr]"><div className="card-white"><h2 className="title-serif text-3xl">Tabla de datos · DEMO</h2><div className="table-wrapper mt-4"><table className="data-table"><thead><tr><th>Periodo</th><th>Registros ficticios</th><th>Clasificación</th></tr></thead><tbody>{trend.map(p=><tr key={p.period}><td>{monthLabel(p.period)}</td><td>{p.value}</td><td>{classification==='todas'?'Agregada DEMO':classification.replace('-demo',' DEMO')}</td></tr>)}</tbody></table></div></div><div className="card-slate"><p className="eyebrow">Regla estadística transparente</p><h2 className="title-serif mt-2 text-3xl">Observación automática</h2><p className="mt-4 text-sm leading-6">Se marca variación inusual únicamente cuando el valor ficticio del periodo actual es superior al <strong>135 % de la media de los tres periodos anteriores</strong> y registra al menos 10 entradas.</p><div className="mt-5"><span className="pill">{increase?'Incremento estadístico DEMO':'Sin incremento según esta regla DEMO'}</span></div><p className="mt-4 text-xs leading-5">Esta regla es ilustrativa; no corresponde a umbrales sanitarios oficiales ni es apta para alertas reales.</p><p className="mt-5 text-sm"><strong>Prevención general:</strong> {selected.prevention}</p></div></section></>;
+import { ArrowRight, Search } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Sparkline } from '../components/charts/Sparkline';
+import { DataKindBadge } from '../components/ui/Badges';
+import { EmptyState, ErrorState, LoadingState, Notice } from '../components/ui/Feedback';
+import { Field } from '../components/ui/Form';
+import { PageHeader, SourceNote } from '../components/ui/Layout';
+import { useAsync } from '../hooks/useAsync';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { diseaseCategoryLabels } from '../mocks/diseases';
+import { sourceById } from '../mocks/sources';
+import { getDiseases } from '../services/epidemiologyService';
+import type { DiseaseCategory } from '../types';
+import { DEMO_CUTOFF_DATE } from '../utils/dates';
+import { formatNumber } from '../utils/format';
+import { SIGNAL_DISCLAIMER } from '../utils/signals';
+
+export default function Diseases() {
+  useDocumentTitle('Enfermedades y señales');
+  const { data, loading, error, reload } = useAsync(getDiseases, []);
+  const [category, setCategory] = useState<DiseaseCategory | 'todas'>('todas');
+  const [query, setQuery] = useState('');
+  const [onlySignals, setOnlySignals] = useState(false);
+
+  const filtered = useMemo(
+    () =>
+      (data ?? []).filter(
+        (d) =>
+          (category === 'todas' || d.disease.category === category) &&
+          (!query.trim() || d.disease.name.toLowerCase().includes(query.trim().toLowerCase())) &&
+          (!onlySignals || d.signal.triggered),
+      ),
+    [data, category, query, onlySignals],
+  );
+
+  return (
+    <>
+      <PageHeader
+        eyebrow="Catálogo"
+        title="Enfermedades y señales"
+        description="Descripción general, tendencia de registros DEMO y señales por incremento inusual con criterios visibles. Ondara no diagnostica ni confirma brotes."
+      />
+      <Notice tone="info" title="Qué es una señal">
+        {SIGNAL_DISCLAIMER}
+      </Notice>
+
+      <section aria-label="Filtros del catálogo" className="mt-6 grid gap-4 rounded-[14px] bg-paper p-4 sm:grid-cols-[1fr_1fr_auto] sm:items-end md:p-5">
+        <Field id="buscar-enfermedad" label="Buscar">
+          <div className="relative">
+            <Search aria-hidden className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+            <input
+              id="buscar-enfermedad"
+              type="search"
+              className="input pl-9"
+              placeholder="Ej. dengue"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+        </Field>
+        <Field id="cat-enfermedad" label="Clasificación">
+          <select id="cat-enfermedad" className="input" value={category} onChange={(e) => setCategory(e.target.value as DiseaseCategory | 'todas')}>
+            <option value="todas">Todas</option>
+            {(Object.keys(diseaseCategoryLabels) as DiseaseCategory[]).map((c) => (
+              <option key={c} value={c}>
+                {diseaseCategoryLabels[c]}
+              </option>
+            ))}
+          </select>
+        </Field>
+        <label className="flex min-h-[44px] items-center gap-2 text-[15px]">
+          <input type="checkbox" className="h-4 w-4 accent-[#0f3e17]" checked={onlySignals} onChange={(e) => setOnlySignals(e.target.checked)} />
+          Solo con señal activa
+        </label>
+      </section>
+
+      <div className="mt-6">
+        {loading ? (
+          <LoadingState rows={6} />
+        ) : error ? (
+          <ErrorState error={error} onRetry={reload} />
+        ) : filtered.length === 0 ? (
+          <EmptyState
+            title="Sin resultados"
+            description="Ninguna enfermedad coincide con los filtros."
+            action={
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => {
+                  setCategory('todas');
+                  setQuery('');
+                  setOnlySignals(false);
+                }}
+              >
+                Limpiar filtros
+              </button>
+            }
+          />
+        ) : (
+          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map(({ disease, last4, signal, sparkline }) => (
+              <li key={disease.id} className="card flex flex-col">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="pill bg-keylime text-forest">{diseaseCategoryLabels[disease.category]}</span>
+                  {signal.triggered && <span className="pill bg-caution-bg text-caution">Cambio sobre línea base</span>}
+                </div>
+                <h2 className="title-display mt-3 text-[30px]">{disease.name}</h2>
+                <p className="mt-2 flex-1 text-[14.5px] text-ink">{disease.description}</p>
+                <div className="mt-4 flex items-end justify-between gap-3 border-t border-hairline pt-4">
+                  <div>
+                    <DataKindBadge kind="oficial" short />
+                    <p className="mt-2 text-[13px] text-muted">Últimas 4 semanas</p>
+                    <p className="text-[22px] font-semibold tabular-nums text-forest">{formatNumber(last4)}</p>
+                  </div>
+                  <Sparkline values={sparkline} label={`Tendencia de 12 semanas de ${disease.name} (DEMO)`} />
+                </div>
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 text-[13px]">
+                  <Link className="link" to={`/normativa#fuente-${disease.sourceId}`}>
+                    Fuente: {sourceById(disease.sourceId)?.name}
+                  </Link>
+                  <Link to={`/enfermedades/${disease.id}`} className="btn btn-secondary btn-sm">
+                    Ver detalle
+                    <ArrowRight aria-hidden className="h-4 w-4" />
+                  </Link>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+      <SourceNote source={sourceById('src-oficial')} cutoffDate={DEMO_CUTOFF_DATE} />
+    </>
+  );
 }

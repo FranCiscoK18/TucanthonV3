@@ -1,13 +1,35 @@
-import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
-import { storage } from '../services/demoService';
-import type { UserRole } from '../types/models';
-interface SessionValue {role:UserRole|null;login:(role:UserRole)=>void;logout:()=>void;}
-const SessionContext=createContext<SessionValue|null>(null);
-export function SessionProvider({children}:{children:ReactNode}){
- const [role,setRole]=useState<UserRole|null>(()=>storage.getSession());
- const value=useMemo<SessionValue>(()=>({role,login:(newRole)=>{storage.setSession(newRole);setRole(newRole);},logout:()=>{storage.setSession(null);setRole(null);}}),[role]);
- return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
+import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
+import { endSession, readSession, startSession } from '../services/sessionService';
+import type { MockSession, UserRole } from '../types';
+
+interface SessionContextValue {
+  session: MockSession | null;
+  role: UserRole;
+  login: (role: Exclude<UserRole, 'invitado'>) => void;
+  logout: () => void;
 }
-export function useSession(){const ctx=useContext(SessionContext);if(!ctx)throw new Error('SessionProvider es obligatorio');return ctx;}
-export const homeForRole:Record<UserRole,string>={ciudadano:'/',medico:'/medico',institucion:'/institucion',admin:'/administracion'};
-export const roleLabels:Record<UserRole,string>={ciudadano:'Ciudadanía',medico:'Personal médico',institucion:'Institución',admin:'Administración'};
+
+const SessionContext = createContext<SessionContextValue | null>(null);
+
+/** Sesión mock en localStorage. NO es autenticación real. */
+export function SessionProvider({ children }: { children: ReactNode }) {
+  const [session, setSession] = useState<MockSession | null>(() => readSession());
+
+  const login = useCallback((role: Exclude<UserRole, 'invitado'>) => setSession(startSession(role)), []);
+  const logout = useCallback(() => {
+    endSession();
+    setSession(null);
+  }, []);
+
+  const value = useMemo<SessionContextValue>(
+    () => ({ session, role: session?.role ?? 'invitado', login, logout }),
+    [session, login, logout],
+  );
+  return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
+}
+
+export function useSession(): SessionContextValue {
+  const ctx = useContext(SessionContext);
+  if (!ctx) throw new Error('useSession debe usarse dentro de SessionProvider');
+  return ctx;
+}
