@@ -18,8 +18,8 @@ export function LoginPage() {
   const { role, signIn } = useSession();
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const [user, setUser] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState(DEMO_USER);
+  const [password, setPassword] = useState(DEMO_PASSWORD);
   const [visible, setVisible] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState('');
