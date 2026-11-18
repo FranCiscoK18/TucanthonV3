@@ -24,7 +24,7 @@ export const SERIES_WEEKS = 16;
 
 /**
  * Supresión de conteos pequeños en vistas públicas: un conteo de reportes
- * menor a este valor se publica como «<3» para no facilitar la identificación.
+ * positivo menor a este valor se publica como «1–2» para no facilitar la identificación.
  */
 export const MIN_PUBLIC_COUNT = 3;
 
