@@ -20,10 +20,10 @@ function logSessionEvent(session: MockSession, kind: 'inicio-sesion' | 'cierre-s
     actorRole: session.role,
     actorLabel: session.alias,
     actionCode: kind,
-    action: kind === 'inicio-sesion' ? 'Inicio de sesión DEMO' : 'Cierre de sesión DEMO',
+    action: kind === 'inicio-sesion' ? 'Inicio de sesión' : 'Cierre de sesión',
     entityType: 'sesion',
     entityId: session.role,
-    detail: 'Selección de rol simulada; no es autenticación real.',
+    detail: 'Acceso institucional registrado localmente en este navegador.',
   });
 }
 
