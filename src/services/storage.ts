@@ -1,6 +1,6 @@
 /**
- * Acceso seguro a `localStorage`. Solo se usan las cuatro claves permitidas
- * (sesión mock, citas, reportes propios y bitácora). Todo lo leído se valida:
+ * Acceso seguro a `localStorage`. Solo se usan las tres claves permitidas
+ * (sesión mock, reportes propios y bitácora). Todo lo leído se valida:
  * si el contenido no tiene la forma esperada, se ignora.
  */
 import { STORAGE_KEYS } from '../config/demo';
@@ -46,7 +46,7 @@ export function removeStored(key: StorageKey): void {
   }
 }
 
-/** Borra todos los datos locales de la DEMO (las cuatro claves). */
+/** Borra todos los datos locales de la DEMO (las tres claves). */
 export function clearDemoStorage(): void {
   Object.values(STORAGE_KEYS).forEach(removeStored);
 }

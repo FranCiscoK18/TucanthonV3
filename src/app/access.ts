@@ -17,7 +17,7 @@ export type AreaId =
   | 'administracion';
 
 
-const EVERYONE: readonly UserRole[] = ['invitado', 'ciudadano', 'institucion', 'admin'];
+const EVERYONE: readonly UserRole[] = ['invitado', 'ciudadano', 'admin'];
 
 export const AREA_ROLES: Record<AreaId, readonly UserRole[]> = {
   inicio: EVERYONE,
@@ -28,7 +28,7 @@ export const AREA_ROLES: Record<AreaId, readonly UserRole[]> = {
   reportar: EVERYONE,
   normativa: EVERYONE,
   'mis-reportes': ['ciudadano', 'admin'],
-  institucion: ['institucion', 'admin'],
+  institucion: ['admin'],
   administracion: ['admin'],
 };
 

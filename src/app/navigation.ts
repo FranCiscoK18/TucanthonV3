@@ -33,8 +33,8 @@ export const NAV_ITEMS: NavItem[] = [
   { area: 'reportar', to: '/reportar', label: 'Enviar un reporte', shortLabel: 'Reportar', icon: MessageSquarePlus, group: 'publico' },
   { area: 'normativa', to: '/normativa', label: 'Normativa y fuentes', shortLabel: 'Normativa', icon: Scale, group: 'publico' },
   { area: 'mis-reportes', to: '/mis-reportes', label: 'Mis reportes', shortLabel: 'Mis reportes', icon: ClipboardList, group: 'cuenta' },
-  { area: 'institucion', to: '/institucion', label: 'Panel institucional', shortLabel: 'Panel', icon: Building2, group: 'gestion' },
-  { area: 'administracion', to: '/administracion', label: 'Administración', shortLabel: 'Admin', icon: Settings2, group: 'gestion' },
+  { area: 'institucion', to: '/institucion', label: 'Centro de vigilancia', shortLabel: 'Vigilancia', icon: Building2, group: 'gestion' },
+  { area: 'administracion', to: '/administracion', label: 'Gestión de reportes', shortLabel: 'Reportes', icon: Settings2, group: 'gestion' },
 ];
 
 export const NAV_GROUP_LABELS: Record<NavItem['group'], string> = {
@@ -51,7 +51,6 @@ export function navItemsFor(role: UserRole): NavItem[] {
 const TAB_PRIORITY: Record<UserRole, AreaId[]> = {
   invitado: ['inicio', 'mapa', 'reportar', 'brigadas'],
   ciudadano: ['inicio', 'mapa', 'reportar', 'mis-reportes'],
-  institucion: ['inicio', 'institucion', 'mapa', 'enfermedades'],
   admin: ['inicio', 'institucion', 'administracion', 'mapa'],
 };
 

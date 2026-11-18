@@ -5,7 +5,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-const SESSION_ROLES: readonly SessionRole[] = ['ciudadano', 'institucion', 'admin'];
+const SESSION_ROLES: readonly SessionRole[] = ['ciudadano', 'admin'];
 const REPORT_STATUSES: readonly ReportStatus[] = ['pendiente', 'en_revision', 'verificado', 'canalizado', 'cerrado'];
 
 export function isSessionRole(value: unknown): value is SessionRole {

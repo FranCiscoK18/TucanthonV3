@@ -199,7 +199,7 @@ export function HowItWorksPage() {
           <ul className="mt-4 list-disc space-y-2 pl-5 leading-relaxed">
             <li>No se cobra a la ciudadanía por reportar ni por consultar información.</li>
             <li>No hay comisiones por pacientes ni por referencias médicas.</li>
-            <li>El directorio es informativo: aparecer en él no depende de pagos.</li>
+            <li>Los aliados comunitarios utilizan el portal ciudadano para facilitar observaciones sin acceder a datos personales.</li>
             <li>Esta DEMO no presupone ningún subsidio ni adjudicación.</li>
           </ul>
         </div>
