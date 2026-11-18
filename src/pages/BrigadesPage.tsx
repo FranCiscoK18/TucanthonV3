@@ -3,7 +3,6 @@ import { useCallback, useMemo, useState } from 'react';
 import { ActivityCard } from '../components/ActivityCard';
 import { activitiesDataset, ONLY_BRIGADES } from '../components/map/activitiesDataset';
 import { LazyMap } from '../components/map/LazyMap';
-import { DataKindBadge, DemoTag } from '../components/ui/Badges';
 import { Button } from '../components/ui/Button';
 import { SelectField } from '../components/ui/Form';
 import { Notice } from '../components/ui/Notice';
@@ -50,12 +49,6 @@ export function BrigadesPage() {
         eyebrow="Agenda de referencia"
         title="Brigadas y campañas sanitarias"
         description="Vacunación y prevención por zona, con ubicación aproximada. Las sedes son referencias generales de espacios públicos."
-        meta={
-          <>
-            <DataKindBadge kind="simulado" compact />
-            <DemoTag />
-          </>
-        }
       />
 
       <Notice tone="caution" title="Agenda ilustrativa" className="mb-6">
