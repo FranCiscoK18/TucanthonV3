@@ -78,7 +78,7 @@ function HeroPreview({ catalog, participation }: { catalog?: DiseaseCatalog; par
   const signal = catalog?.items.find((item) => item.signal.status === 'senal');
 
   return (
-    <div className="grid gap-3" aria-label="Vista previa de datos DEMO">
+    <div className="grid gap-3" aria-label="Vista previa de indicadores ilustrativos">
       <div className="rounded-card bg-cream-paper p-5">
         <div className="flex items-center justify-between gap-2">
           <DataKindBadge kind="oficial-demo" compact />
@@ -91,7 +91,7 @@ function HeroPreview({ catalog, participation }: { catalog?: DiseaseCatalog; par
               <p className="font-serif text-[1.625rem] leading-tight text-forest-ink">{signal.disease.name}</p>
               <p className="mt-1 text-sm">{formatDecimal(signal.signal.ratio ?? 0)}× lo esperado según su línea base</p>
             </div>
-            <Sparkline values={signal.sparkline} label={`Tendencia de 8 semanas de ${signal.disease.name} (DEMO)`} />
+            <Sparkline values={signal.sparkline} label={`Tendencia de 8 semanas de ${signal.disease.name} (referencia)`} />
           </div>
         ) : (
           <Skeleton className="mt-3 h-16" />
@@ -222,7 +222,7 @@ export function HomePage() {
       <section aria-labelledby="resumen">
         <SectionHeading
           id="resumen"
-          eyebrow="Datos oficiales DEMO"
+          eyebrow="Datos epidemiológicos ilustrativos"
           title="Enfermedades y señales monitoreadas"
           description="Registros agregados de toda la ciudad. La columna «Cambio» compara las últimas 4 semanas con las 4 previas; la regla de señal usa otra ventana (2 semanas frente a las 8 anteriores)."
           actions={
@@ -237,7 +237,7 @@ export function HomePage() {
               <div className="relative overflow-x-auto rounded-card border border-border-mist" tabIndex={0} aria-label="Tabla de resumen, desplazable">
                 <table className="table-base min-w-[40rem]">
                   <caption className="sr-only">
-                    Resumen DEMO de las {HOME_TABLE_ROWS} enfermedades o señales más relevantes, últimas 4 semanas, con estado de
+                    Resumen ilustrativo de las {HOME_TABLE_ROWS} enfermedades o señales más relevantes, últimas 4 semanas, con estado de
                     la regla de señal
                   </caption>
                   <thead>
