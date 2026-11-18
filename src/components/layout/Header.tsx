@@ -24,7 +24,6 @@ export function Header() {
         </div>
         <nav aria-label="Accesos superiores" className="hidden items-center gap-5 text-sm font-medium text-forest-ink lg:flex">
           <Link to="/inicio" className="hover:underline">Explorar</Link>
-          <Link to="/como-funciona" className="hover:underline">Cómo funciona</Link>
           <Link to="/mapa" className="hover:underline">Mapa</Link>
           <Link to="/enfermedades" className="hover:underline">Enfermedades</Link>
         </nav>
