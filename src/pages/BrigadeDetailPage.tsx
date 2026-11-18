@@ -4,7 +4,6 @@ import { Link, useParams } from 'react-router';
 import { ActivityStatusPill, ActivityTypePill } from '../components/ActivityCard';
 import { activitiesDataset, ONLY_BRIGADES } from '../components/map/activitiesDataset';
 import { LazyMap } from '../components/map/LazyMap';
-import { DataKindBadge, DemoTag } from '../components/ui/Badges';
 import { MetaItem } from '../components/ui/MetaItem';
 import { Notice } from '../components/ui/Notice';
 import { SourceMeta } from '../components/ui/SourceMeta';
@@ -39,8 +38,6 @@ export function BrigadeDetailPage() {
               <div className="flex flex-wrap items-center gap-2">
                 <ActivityTypePill activity={activity} />
                 <ActivityStatusPill status={activity.status} />
-                <DataKindBadge kind="simulado" compact />
-                <DemoTag />
               </div>
               <h1 id="actividad-titulo" className="mt-4 text-[2.25rem] sm:text-[2.75rem]">
                 {activity.title}
