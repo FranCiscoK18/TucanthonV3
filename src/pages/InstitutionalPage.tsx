@@ -4,7 +4,7 @@ import { useSession } from '../app/session';
 import { BarList } from '../components/charts/BarList';
 import { Pill } from '../components/ui/Badges';
 import { Button } from '../components/ui/Button';
-import { CheckboxField, RadioCards, SelectField } from '../components/ui/Form';
+import { SelectField } from '../components/ui/Form';
 import { Notice } from '../components/ui/Notice';
 import { PageHeader, SectionHeading } from '../components/ui/PageHeader';
 import { AsyncContent, EmptyState, LoadingState } from '../components/ui/States';
@@ -20,12 +20,11 @@ import {
   exportAggregatedReportsCsv,
   getAggregatedReportTable,
   getInstitutionalSummary,
-  getPilotOverview,
   getPriorityZones,
   statusColumns,
   type InstitutionalFilters,
 } from '../services/indicatorService';
-import type { Indicator, IndicatorDimension, PeriodKey, PilotStage } from '../types';
+import type { Indicator, IndicatorDimension, PeriodKey } from '../types';
 import { downloadCsv } from '../utils/csv';
 import { formatDecimal, formatInteger, formatMXN, formatPercent, formatRatio } from '../utils/format';
 
@@ -118,125 +117,6 @@ function IndicatorCard({ indicator }: { indicator: Indicator }) {
         <p className="mt-1.5 text-muted">{indicator.caveat}</p>
       </details>
     </article>
-  );
-}
-
-const stageTone: Record<PilotStage['status'], 'forest' | 'blue' | 'neutral'> = {
-  completada: 'forest',
-  'en-curso': 'blue',
-  pendiente: 'neutral',
-};
-
-const stageLabel: Record<PilotStage['status'], string> = {
-  completada: 'Completada',
-  'en-curso': 'En curso',
-  pendiente: 'Pendiente',
-};
-
-function PilotSection() {
-  const { resource, reload } = useAsync(getPilotOverview, []);
-  const [checked, setChecked] = useState<Record<string, boolean>>({});
-  const [decision, setDecision] = useState<'continuar' | 'ajustar' | 'detener' | ''>('');
-
-  return (
-    <section aria-labelledby="piloto" className="card card-slate">
-      <SectionHeading
-        id="piloto"
-        eyebrow="Seguimiento"
-        title="Piloto de 90 días"
-        description="Cuatro etapas y las preguntas de decisión que se responden al cierre."
-      />
-      <AsyncContent resource={resource} onRetry={reload} loading={<LoadingState lines={2} />}>
-        {(pilot) => {
-          const progress = Math.round((pilot.currentDay / pilot.totalDays) * 100);
-          return (
-            <div className="space-y-6">
-              <div>
-                <div className="flex items-baseline justify-between gap-3">
-                  <p className="font-semibold text-charcoal">
-                    Día {pilot.currentDay} de {pilot.totalDays}
-                  </p>
-                  <p className="text-sm text-muted tabular-nums">{progress} %</p>
-                </div>
-                <div
-                  className="mt-2 h-3 overflow-hidden rounded-full bg-cream-paper"
-                  role="progressbar"
-                  aria-valuemin={0}
-                  aria-valuemax={pilot.totalDays}
-                  aria-valuenow={pilot.currentDay}
-                  aria-label="Avance del piloto"
-                >
-                  <div className="h-full rounded-full bg-forest-ink" style={{ width: `${progress}%` }} />
-                </div>
-              </div>
-              <ol className="grid grid-cols-1 gap-3 md:grid-cols-2 2xl:grid-cols-4">
-                {pilot.stages.map((stage) => (
-                  <li key={stage.id} className="rounded-[12px] bg-cream-paper p-4">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h3 className="text-[1.25rem]">{stage.name}</h3>
-                      <Pill tone={stageTone[stage.status]}>{stageLabel[stage.status]}</Pill>
-                    </div>
-                    <p className="text-sm text-muted">
-                      Días {stage.startDay}–{stage.endDay}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed">{stage.objective}</p>
-                    <details className="mt-2 text-sm">
-                      <summary className="cursor-pointer text-forest-ink underline-offset-2 hover:underline">Actividades y entregables</summary>
-                      <ul className="mt-1.5 list-disc space-y-1 pl-5">
-                        {stage.activities.map((activity) => (
-                          <li key={activity}>{activity}</li>
-                        ))}
-                      </ul>
-                      <p className="mt-1.5 text-muted">Entregables: {stage.deliverables.join(', ')}.</p>
-                    </details>
-                  </li>
-                ))}
-              </ol>
-
-              <div className="rounded-[12px] bg-cream-paper p-4 sm:p-5">
-                <h3 className="text-[1.375rem]">Las cinco preguntas de decisión</h3>
-                <ul className="mt-4 space-y-3">
-                  {pilot.questions.map((question) => (
-                    <li key={question.id}>
-                      <CheckboxField
-                        label={
-                          <>
-                            <span className="font-medium">{question.question}</span>{' '}
-                            <span className="text-sm text-muted">
-                              ({DIMENSION_LABELS[question.dimension]} · evidencia: {question.evidence})
-                            </span>
-                          </>
-                        }
-                        checked={checked[question.id] ?? false}
-                        onChange={(event) => setChecked((current) => ({ ...current, [question.id]: event.target.checked }))}
-                      />
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-5">
-                  <RadioCards
-                    name="decision-piloto"
-                    legend="Decisión al cierre"
-                    columns={3}
-                    value={decision}
-                    onChange={setDecision}
-                    options={[
-                      { value: 'continuar', label: 'Continuar', description: 'Las respuestas sostienen el servicio.' },
-                      { value: 'ajustar', label: 'Ajustar', description: 'Cambiar alcance, canales o reglas.' },
-                      { value: 'detener', label: 'Detener', description: 'El servicio no resultó útil o sostenible.' },
-                    ]}
-                  />
-                  <p className="mt-2 text-sm text-muted">
-                    Preguntas marcadas: {Object.values(checked).filter(Boolean).length} de {pilot.questions.length}. La decisión real
-                    corresponde a la autoridad y al equipo del piloto.
-                  </p>
-                </div>
-              </div>
-            </div>
-          );
-        }}
-      </AsyncContent>
-    </section>
   );
 }
 
@@ -473,9 +353,6 @@ export function InstitutionalPage() {
         </AsyncContent>
       </section>
 
-      <div className="mt-12">
-        <PilotSection />
-      </div>
     </>
   );
 }
