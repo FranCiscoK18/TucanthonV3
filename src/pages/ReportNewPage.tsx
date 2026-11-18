@@ -383,13 +383,6 @@ export function ReportNewPage() {
               </ul>
             </div>
             <Notice tone="integrity">{TEXTS.integrityRule}</Notice>
-            <p className="text-sm text-muted">
-              ¿Quieres saber qué pasa después?{' '}
-              <Link className="link" to="/como-funciona">
-                Consulta el flujo de seis etapas
-              </Link>
-              .
-            </p>
           </aside>
         </div>
       )}
