@@ -15,9 +15,9 @@ export interface DataKindMeta {
 
 export const DATA_KIND_META: Record<DataKind, DataKindMeta> = {
   'oficial-demo': {
-    label: 'Dato oficial DEMO',
-    short: 'Oficial DEMO',
-    description: 'Simula un registro agregado de una autoridad. No proviene de ninguna fuente oficial.',
+    label: 'Serie epidemiológica ilustrativa',
+    short: 'Ilustrativo',
+    description: 'Serie ilustrativa agregada por zona; no procede de registros oficiales.',
     icon: Landmark,
     badgeClass: 'bg-oficial-50 text-oficial-700 border border-oficial-500/40',
   },
@@ -36,9 +36,9 @@ export const DATA_KIND_META: Record<DataKind, DataKindMeta> = {
     badgeClass: 'bg-ciudadano-50 text-ciudadano-700 border border-ciudadano-500/40',
   },
   simulado: {
-    label: 'Dato simulado',
-    short: 'Simulado',
-    description: 'Escenario ficticio para la demostración (brigadas u operación).',
+    label: 'Escenario ilustrativo',
+    short: 'Ejemplo',
+    description: 'Actividad o escenario de referencia, no una convocatoria real.',
     icon: FlaskConical,
     badgeClass: 'bg-simulado-50 text-simulado-700 border border-dashed border-simulado-500/70',
   },
