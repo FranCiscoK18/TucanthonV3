@@ -2,7 +2,6 @@ import { Building2, LogOut, LockKeyhole } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useSession } from '../../app/session';
-import { DemoTag } from '../ui/Badges';
 import { ButtonLink } from '../ui/Button';
 
 export function Header() {
@@ -22,11 +21,9 @@ export function Header() {
             <img src="/brand/ondara-logo.png" alt="" width={720} height={189} className="h-8 w-auto sm:h-9" />
           </Link>
           <span className="hidden text-sm text-muted sm:inline">Cancún</span>
-          <DemoTag />
         </div>
         <nav aria-label="Accesos superiores" className="hidden items-center gap-5 text-sm font-medium text-forest-ink lg:flex">
           <Link to="/inicio" className="hover:underline">Explorar</Link>
-          <Link to="/como-funciona" className="hover:underline">Cómo funciona</Link>
           <Link to="/mapa" className="hover:underline">Mapa</Link>
           <Link to="/enfermedades" className="hover:underline">Enfermedades</Link>
         </nav>

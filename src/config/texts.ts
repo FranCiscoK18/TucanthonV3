@@ -4,7 +4,7 @@
  */
 export const TEXTS = {
   footerNotice:
-    'Ondara complementa, no sustituye, a las autoridades sanitarias. No diagnostica ni confirma casos. Información DEMO para validación.',
+    'Ondara complementa, no sustituye, a las autoridades sanitarias. No diagnostica ni confirma casos.',
   integrityRule: 'Un reporte ciudadano es una observación, no un caso clínico confirmado.',
   signalDisclaimer:
     'Esta señal indica que un dato cambió respecto a su línea base; no es un diagnóstico ni la confirmación de un brote.',

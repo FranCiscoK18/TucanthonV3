@@ -8,7 +8,6 @@ import {
   MessageSquarePlus,
   Settings2,
   Syringe,
-  Workflow,
   type LucideIcon,
 } from 'lucide-react';
 import type { UserRole } from '../types';
@@ -25,7 +24,6 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   { area: 'inicio', to: '/inicio', label: 'Inicio', shortLabel: 'Inicio', icon: House, group: 'publico' },
-  { area: 'como-funciona', to: '/como-funciona', label: 'Cómo funciona', shortLabel: 'Cómo funciona', icon: Workflow, group: 'publico' },
   { area: 'mapa', to: '/mapa', label: 'Mapa epidemiológico', shortLabel: 'Mapa', icon: MapIcon, group: 'publico' },
   { area: 'enfermedades', to: '/enfermedades', label: 'Enfermedades y señales', shortLabel: 'Señales', icon: BookOpenText, group: 'publico' },
   { area: 'brigadas', to: '/brigadas', label: 'Brigadas y campañas', shortLabel: 'Brigadas', icon: Syringe, group: 'publico' },

@@ -6,7 +6,6 @@ import type { UserRole } from '../types';
 
 export type AreaId =
   | 'inicio'
-  | 'como-funciona'
   | 'mapa'
   | 'enfermedades'
   | 'brigadas'
@@ -20,7 +19,6 @@ const EVERYONE: readonly UserRole[] = ['invitado', 'admin'];
 
 export const AREA_ROLES: Record<AreaId, readonly UserRole[]> = {
   inicio: EVERYONE,
-  'como-funciona': EVERYONE,
   mapa: EVERYONE,
   enfermedades: EVERYONE,
   brigadas: EVERYONE,

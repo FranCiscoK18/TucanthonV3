@@ -5,7 +5,6 @@ import {
   Map as MapIcon,
   MessageSquarePlus,
   Syringe,
-  Workflow,
   X,
   type LucideIcon,
 } from 'lucide-react';
@@ -301,22 +300,6 @@ export function HomePage() {
         </AsyncContent>
       </section>
 
-      <section aria-labelledby="flujo" className="card card-slate">
-        <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-          <div className="max-w-2xl">
-            <h2 id="flujo" className="text-[1.75rem]">
-              De la observación a la actuación, en seis etapas
-            </h2>
-            <p className="mt-2 leading-relaxed">
-              Captación, clasificación, validación, canalización, actuación y seguimiento. Cada etapa dice quién la realiza y
-              qué no se promete.
-            </p>
-          </div>
-          <ButtonLink to="/como-funciona" icon={Workflow} variant="primary">
-            Cómo funciona
-          </ButtonLink>
-        </div>
-      </section>
     </div>
   );
 }
