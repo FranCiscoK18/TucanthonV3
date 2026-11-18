@@ -1,6 +1,5 @@
 import { CalendarClock, Database, MapPinned, TriangleAlert } from 'lucide-react';
 import type { ReactNode } from 'react';
-import { Link } from 'react-router';
 import type { DataSource } from '../../types';
 import { cx } from '../../utils/cx';
 import { formatDate } from '../../utils/dates';
@@ -27,9 +26,7 @@ export function SourceMeta({
         <DataKindBadge kind={source.kind} compact />
         <span className="inline-flex items-center gap-1.5 font-semibold text-charcoal">
           <Database className="size-4 text-muted" aria-hidden="true" />
-          <Link className="link font-semibold" to={`/normativa#${source.id}`}>
-            {source.name}
-          </Link>
+          {source.name}
         </span>
       </div>
       <dl className={cx('mt-3 grid grid-cols-1 gap-x-6 gap-y-2.5', !compact && 'sm:grid-cols-2')}>

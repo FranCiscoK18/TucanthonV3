@@ -1,19 +1,21 @@
-import { FlaskConical, type LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { DATA_KIND_META } from '../../config/dataKinds';
 import type { DataKind } from '../../types';
 import { cx } from '../../utils/cx';
 
-/** Etiqueta obligatoria en todo dato simulado. */
+/**
+ * Etiqueta obligatoria en todo dato simulado. Va sin icono y con borde sólido para
+ * no confundirse con la insignia de tipo «Simulado» (matraz y borde punteado).
+ */
 export function DemoTag({ className, label = 'DEMO' }: { className?: string; label?: string }) {
   return (
     <span
       className={cx(
-        'inline-flex items-center gap-1 rounded-full border border-dashed border-simulado-500/70 bg-simulado-50 px-2 py-0.5 text-xs font-semibold tracking-wide text-simulado-700',
+        'inline-flex items-center rounded-[6px] border border-simulado-500/50 px-1.5 py-px text-[0.6875rem] font-semibold tracking-wider text-simulado-700',
         className,
       )}
     >
-      <FlaskConical className="size-3.5" aria-hidden="true" />
       {label}
     </span>
   );

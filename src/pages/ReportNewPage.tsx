@@ -377,7 +377,6 @@ export function ReportNewPage() {
                 <li>No pedimos nombre, teléfono, correo ni domicilio.</li>
                 <li>Solo registramos la zona amplia, nunca coordenadas.</li>
                 <li>En vistas públicas, los conteos menores a 3 se muestran como «&lt;3».</li>
-                <li>WhatsApp no se ofrece como canal anónimo.</li>
                 <li>En la DEMO, el reporte se guarda solo en este navegador.</li>
               </ul>
             </div>

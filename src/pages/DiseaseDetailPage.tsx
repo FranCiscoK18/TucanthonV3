@@ -270,7 +270,7 @@ export function DiseaseDetailPage() {
                 <section aria-labelledby="vectorial">
                   <SectionHeading
                     id="vectorial"
-                    eyebrow="Gráfica aparte: otra medida, otra escala"
+                    eyebrow="Vigilancia del mosquito"
                     title="Vigilancia entomológica DEMO"
                     description={`Porcentaje de ovitrampas con huevos de mosquito en ${scopeLabel}. Umbral DEMO de referencia: ${VECTOR_THRESHOLD_PCT} %.`}
                   />

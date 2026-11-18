@@ -45,7 +45,7 @@ export function LoginPage() {
           <div className="inline-flex size-14 items-center justify-center rounded-[18px] bg-cream-paper text-forest-ink"><Building2 className="size-7" /></div>
           <p className="eyebrow mt-8">Portal institucional</p>
           <h1 id="admin-presentacion" className="mt-3 text-[2.3rem] sm:text-[3rem]">Centro de vigilancia epidemiológica</h1>
-          <p className="mt-5 leading-relaxed">Un espacio de trabajo para que el administrador del sector salud explore tendencias, observe zonas prioritarias, revise reportes ciudadanos y documente su seguimiento.</p>
+          <p className="mt-5 leading-relaxed">Un espacio de trabajo para que el administrador de salud explore tendencias, observe zonas prioritarias, revise reportes ciudadanos y documente su seguimiento.</p>
           <Link to="/" className="link mt-8 inline-block text-sm">Volver a la portada pública</Link>
         </section>
         <section className="bg-cream-paper p-7 sm:p-10 lg:p-12" aria-labelledby="admin-login-titulo">

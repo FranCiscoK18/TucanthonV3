@@ -30,7 +30,7 @@ export function SignalBadge({ status, ratio }: { status: SignalStatus; ratio?: n
 export function ChangeText({ current, previous }: { current: number; previous: number }) {
   const Icon = current > previous ? TrendingUp : current < previous ? TrendingDown : Minus;
   return (
-    <span className="inline-flex items-center gap-1 text-sm text-muted tabular-nums">
+    <span className="inline-flex items-center gap-1 whitespace-nowrap text-sm text-muted tabular-nums">
       <Icon className="size-4" aria-hidden="true" />
       {formatSignedPercentChange(current, previous)}
       <span className="sr-only"> respecto a las 4 semanas previas</span>

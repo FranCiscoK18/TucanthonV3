@@ -62,6 +62,16 @@ export function TrendChart({
   const last = points[points.length - 1];
   const lastIndex = points.length - 1;
   const activePoint = active !== null ? points[active] : undefined;
+  // La etiqueta del umbral y la del último valor comparten columna: si quedan a menos
+  // de 14 px, la del umbral se aparta hacia el lado contrario para que ambas se lean.
+  const lastY = last ? y(last.value) : 0;
+  const thresholdY = threshold ? y(threshold.value) : 0;
+  const thresholdLabelY =
+    threshold && last && Math.abs(thresholdY - lastY) < 14
+      ? thresholdY <= lastY
+        ? lastY - 14
+        : lastY + 18
+      : thresholdY + 4;
 
   const handlePointer = (event: PointerEvent<SVGRectElement>) => {
     const box = event.currentTarget.getBoundingClientRect();
@@ -166,7 +176,7 @@ export function TrendChart({
                 strokeWidth={1.5}
                 strokeDasharray="5 4"
               />
-              <text x={margin.left + innerWidth + 8} y={y(threshold.value) + 4} fontSize={11} fill={AXIS_TEXT}>
+              <text x={margin.left + innerWidth + 8} y={thresholdLabelY} fontSize={11} fill={AXIS_TEXT}>
                 {threshold.label}
               </text>
             </g>
