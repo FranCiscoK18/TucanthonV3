@@ -2,7 +2,7 @@ import { CircleAlert, CircleCheck, CircleDashed, Download, FileSpreadsheet, MapP
 import { useState } from 'react';
 import { useSession } from '../app/session';
 import { BarList } from '../components/charts/BarList';
-import { DataKindBadge, DemoTag, Pill } from '../components/ui/Badges';
+import { Pill } from '../components/ui/Badges';
 import { Button } from '../components/ui/Button';
 import { CheckboxField, RadioCards, SelectField } from '../components/ui/Form';
 import { Notice } from '../components/ui/Notice';
@@ -280,13 +280,6 @@ export function InstitutionalPage() {
         eyebrow="Datos agregados"
         title="Centro de vigilancia epidemiológica"
         description="Herramientas para que el sector salud explore señales, zonas prioritarias, reportes revisados y seguimiento institucional. Las métricas operativas se muestran más abajo."
-        meta={
-          <>
-            <DataKindBadge kind="estimado" compact />
-            <DataKindBadge kind="reporte-ciudadano" compact />
-            <DemoTag />
-          </>
-        }
       />
 
       <form

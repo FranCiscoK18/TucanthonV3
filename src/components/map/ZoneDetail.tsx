@@ -10,7 +10,6 @@ import { getDataSourcesSnapshot } from '../../services/sourceService';
 import type { MapDataset, MapLayerId, ZoneLayerValues } from '../../types';
 import { formatDateLong } from '../../utils/dates';
 import { formatDecimal, formatInteger } from '../../utils/format';
-import { DataKindBadge, DemoTag } from '../ui/Badges';
 import { MetaItem } from '../ui/MetaItem';
 
 const LAYER_SOURCE: Record<MapLayerId, string> = {
@@ -72,9 +71,6 @@ function LayerBlock({
             {!visible && <span className="font-normal text-muted">(capa oculta)</span>}
           </p>
           <p className="mt-0.5 text-[1.0625rem] font-semibold text-forest-ink">{value}</p>
-          <div className="mt-1.5">
-            <DataKindBadge kind={layer.dataKind} compact />
-          </div>
           <details className="mt-2 text-sm">
             <summary className="cursor-pointer text-forest-ink underline-offset-2 hover:underline">Fuente y advertencia</summary>
             <dl className="mt-2 space-y-2">
@@ -136,7 +132,7 @@ export function ZoneDetail({
       </div>
       <p className="mt-1 text-sm leading-relaxed">{region.description}</p>
       <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-muted">
-        Población estimada: {formatInteger(region.populationEstimate)} <DemoTag />
+        Población estimada: {formatInteger(region.populationEstimate)}
       </p>
 
       <ul className="mt-4 space-y-2.5">

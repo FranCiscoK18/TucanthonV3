@@ -1,7 +1,6 @@
 import { Camera, CheckCircle2, ClipboardList, ImageOff, MessageSquarePlus, ShieldCheck, Trash2 } from 'lucide-react';
 import { useMemo, useRef, useState, type FormEvent } from 'react';
 import { ReportStatusPill, StatusGuide } from '../components/reports/ReportStatus';
-import { DataKindBadge, DemoTag } from '../components/ui/Badges';
 import { Button, ButtonLink } from '../components/ui/Button';
 import { CheckboxField, FormErrorSummary, RadioCards, SelectField, TextAreaField } from '../components/ui/Form';
 import { Notice } from '../components/ui/Notice';
@@ -185,12 +184,6 @@ export function ReportNewPage() {
         eyebrow="Participación ciudadana"
         title="Enviar un reporte"
         description="Cuéntanos qué observaste en tu zona. Sin cuenta, sin descarga y sin datos personales."
-        meta={
-          <>
-            <DataKindBadge kind="reporte-ciudadano" compact />
-            <DemoTag />
-          </>
-        }
       />
 
       {created ? (

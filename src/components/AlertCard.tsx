@@ -2,7 +2,6 @@ import { CalendarDays, Database, Filter, Info, TrendingUp, TriangleAlert } from 
 import { Link } from 'react-router';
 import type { Alert } from '../types';
 import { formatDate } from '../utils/dates';
-import { DemoTag } from './ui/Badges';
 import { MetaItem } from './ui/MetaItem';
 
 /**
@@ -34,7 +33,6 @@ export function AlertCard({ alert, compact = false }: { alert: Alert; compact?: 
           <Icon className="size-3.5" aria-hidden="true" />
           {alert.level === 'seguimiento' ? 'Aviso de seguimiento' : 'Aviso informativo'}
         </span>
-        <DemoTag />
       </div>
       <h3 id={`aviso-${alert.id}`} className="mt-3 text-[1.25rem]">
         {alert.title}

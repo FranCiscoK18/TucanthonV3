@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router';
 import { Sparkline } from '../components/charts/Sparkline';
 import { SignalCriteria } from '../components/SignalCriteria';
-import { DataKindBadge, DemoTag, Pill } from '../components/ui/Badges';
+import { Pill } from '../components/ui/Badges';
 import { Button } from '../components/ui/Button';
 import { InputField } from '../components/ui/Form';
 import { PageHeader, SectionHeading } from '../components/ui/PageHeader';
@@ -44,12 +44,6 @@ export function DiseasesPage() {
         eyebrow="Catálogo epidemiológico"
         title="Enfermedades y señales"
         description="Descripciones generales, tendencias ilustrativas y una regla de señal con criterios visibles. Nada de lo que aparece aquí es un diagnóstico."
-        meta={
-          <>
-            <DataKindBadge kind="oficial-demo" compact />
-            <DemoTag />
-          </>
-        }
       />
 
       <AsyncContent resource={resource} onRetry={reload} loading={<LoadingState lines={5} />}>
