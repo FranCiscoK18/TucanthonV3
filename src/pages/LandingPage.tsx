@@ -1,6 +1,5 @@
-import { Activity, ArrowRight, BookOpenText, Building2, Check, ClipboardCheck, LockKeyhole, MapPinned, MessageSquarePlus, ShieldCheck, Syringe, TrendingUp, Users } from 'lucide-react';
+import { Activity, ArrowRight, BookOpenText, Building2, Check, ClipboardCheck, MapPinned, MessageSquarePlus, ShieldCheck, Syringe, TrendingUp, Users } from 'lucide-react';
 import { Link } from 'react-router';
-import { DemoTag } from '../components/ui/Badges';
 import { ButtonLink } from '../components/ui/Button';
 import { Notice } from '../components/ui/Notice';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
@@ -8,15 +7,15 @@ import { useDocumentTitle } from '../hooks/useDocumentTitle';
 const FEATURES = [
   { title: 'Mapa epidemiológico', text: 'Explora indicadores por zonas amplias de Cancún, con periodos y fuentes identificadas.', to: '/mapa', icon: MapPinned, tone: 'bg-estimado-50' },
   { title: 'Enfermedades y señales', text: 'Consulta tendencias, información preventiva y criterios de vigilancia.', to: '/enfermedades', icon: BookOpenText, tone: 'bg-keylime-wash' },
-  { title: 'Brigadas y campañas', text: 'Descubre jornadas preventivas ficticias para comprender cómo se verían las próximas actividades.', to: '/brigadas', icon: Syringe, tone: 'bg-brigada-50' },
+  { title: 'Brigadas y campañas', text: 'Conoce cómo se presentan las jornadas preventivas y las próximas actividades en el mapa.', to: '/brigadas', icon: Syringe, tone: 'bg-brigada-50' },
   { title: 'Participación ciudadana', text: 'Comparte una observación de tu entorno sin registrarte y sigue su estado en este navegador.', to: '/reportar', icon: MessageSquarePlus, tone: 'bg-ciudadano-50' },
 ] as const;
 
 const STEPS = [
   { title: 'Observamos', text: 'La ciudadanía y los aliados comunitarios aportan observaciones por zona, sin identidades.' },
-  { title: 'Organizamos', text: 'Ondara distingue observaciones, estimaciones y registros epidemiológicos simulados.' },
+  { title: 'Organizamos', text: 'Ondara diferencia las observaciones, las estimaciones y las fuentes epidemiológicas.' },
   { title: 'Revisamos', text: 'El personal administrador valida y canaliza lo relevante; no confirma diagnósticos.' },
-  { title: 'Prevenimos', text: 'El sector salud visualiza tendencias y puede documentar acciones de seguimiento DEMO.' },
+  { title: 'Prevenimos', text: 'El sector salud visualiza tendencias y puede documentar acciones de seguimiento.' },
 ] as const;
 
 export function LandingPage() {
@@ -29,7 +28,6 @@ export function LandingPage() {
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span className="eyebrow">ONDARA · CANCÚN</span>
-              <DemoTag />
             </div>
             <h1 className="mt-5 max-w-[14ch] text-[clamp(2.75rem,5.1vw,5rem)] leading-[1.06]">
               La prevención empieza con información.
@@ -38,7 +36,7 @@ export function LandingPage() {
               Una plataforma de inteligencia epidemiológica participativa que reúne datos, observaciones ciudadanas y contexto territorial para apoyar la vigilancia y la prevención en Cancún.
             </p>
             <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted">
-              Todos los datos, mapas y actividades de esta versión son simulados. Ondara no diagnostica ni sustituye a las autoridades sanitarias.
+              Ondara no diagnostica ni sustituye a las autoridades sanitarias.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink to="/inicio" icon={ArrowRight} iconPosition="end">Explorar la plataforma</ButtonLink>
@@ -54,7 +52,7 @@ export function LandingPage() {
               <div className="rounded-[16px] bg-cream-paper p-5 sm:p-6">
                 <div className="flex items-center justify-between gap-3">
                   <span className="flex items-center gap-2 text-sm font-semibold text-forest-ink"><Activity className="size-4" /> Panorama de vigilancia</span>
-                  <span className="rounded-full bg-keylime-wash px-3 py-1 text-xs font-medium text-forest-ink">EJEMPLO DEMO</span>
+                  <span className="rounded-full bg-keylime-wash px-3 py-1 text-xs font-medium text-forest-ink">Vista conceptual</span>
                 </div>
                 <p className="mt-4 text-[1.4rem] font-medium text-forest-ink">Señales + territorio + comunidad</p>
                 <p className="mt-1 text-sm text-muted">Tres fuentes complementarias, claramente diferenciadas</p>
@@ -71,7 +69,7 @@ export function LandingPage() {
                   <span className="rounded-full border border-border-mist px-3 py-1 text-xs">Y más</span>
                 </div>
               </div>
-              <p className="mt-3 text-center text-xs text-charcoal">Representación conceptual; no es información epidemiológica real.</p>
+              <p className="mt-3 text-center text-xs text-charcoal">Vista ilustrativa; los indicadores no representan datos epidemiológicos reales.</p>
             </div>
           </div>
         </div>
@@ -107,8 +105,7 @@ export function LandingPage() {
           <Building2 className="size-8 text-forest-ink" />
           <p className="eyebrow mt-5">Para el sector salud</p>
           <h2 className="mt-2 text-[2rem]">Analiza información para orientar decisiones</h2>
-          <p className="mt-3 leading-relaxed">El personal administrador cuenta con una entrada exclusiva a las vistas de vigilancia, zonas prioritarias, moderación de reportes y seguimiento de acciones simuladas.</p>
-          <ButtonLink to="/acceso" variant="secondary" icon={LockKeyhole} className="mt-6">Acceso administrativo</ButtonLink>
+          <p className="mt-3 leading-relaxed">El personal administrador cuenta con vistas de vigilancia, zonas prioritarias, revisión de reportes y seguimiento de acciones.</p>
         </div>
       </section>
 
@@ -132,7 +129,7 @@ export function LandingPage() {
         <div className="max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-widest text-sage-mist">Participación abierta</p>
           <h2 className="mt-3 text-[2rem] text-cream-paper sm:text-[2.7rem]">Tu entorno también cuenta.</h2>
-          <p className="mt-3 text-cream-paper/85">Consulta la información pública o comparte una observación sin registrarte. En esta versión todo es una simulación educativa.</p>
+          <p className="mt-3 text-cream-paper/85">Conoce cómo la participación comunitaria puede apoyar la vigilancia y la prevención.</p>
         </div>
         <div className="mt-6 flex shrink-0 flex-wrap gap-3 lg:mt-0">
           <ButtonLink to="/mapa" variant="secondary" icon={MapPinned}>Ver mapa</ButtonLink>
@@ -141,7 +138,7 @@ export function LandingPage() {
       </section>
       <Notice tone="integrity" title="Integridad de la información">
         <ShieldCheck className="mr-1 inline size-4" aria-hidden="true" />
-        Las observaciones ciudadanas no confirman casos ni brotes. Los resultados de la DEMO no provienen de fuentes oficiales ni representan condiciones reales de salud.
+        Las observaciones ciudadanas no confirman casos ni brotes. Los indicadores mostrados utilizan datos ilustrativos y no representan condiciones reales de salud.
       </Notice>
     </div>
   );
