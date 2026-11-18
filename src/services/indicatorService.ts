@@ -186,7 +186,7 @@ function buildSummary(filters: InstitutionalFilters): InstitutionalSummary {
       id: 'cobertura-participacion',
       dimension: 'cobertura',
       name: 'Participación',
-      definition: 'Reportes recibidos por cada 100 mil habitantes (población estimada DEMO).',
+      definition: 'Reportes recibidos por cada 100 mil habitantes (población de referencia).',
       formula: 'reportes ÷ población estimada × 100 000',
       value: Math.round((reports.length / population) * 1_000_000) / 10,
       unit: 'por 100 mil hab.',
@@ -212,7 +212,7 @@ function buildSummary(filters: InstitutionalFilters): InstitutionalSummary {
       id: 'sostenibilidad-costo',
       dimension: 'sostenibilidad',
       name: 'Costo por reporte útil',
-      definition: 'Costo operativo simulado del periodo dividido entre los reportes útiles.',
+      definition: 'Costo operativo ilustrativo del periodo dividido entre los reportes útiles.',
       formula: 'costo operativo del periodo ÷ reportes útiles',
       value: costPerUseful,
       unit: 'MXN',
@@ -220,7 +220,7 @@ function buildSummary(filters: InstitutionalFilters): InstitutionalSummary {
       denominator: useful.length,
       target: 2_500,
       targetDirection: 'menor-o-igual',
-      caveat: 'Costo simulado. El modelo no contempla cobros a la ciudadanía, comisiones ni subsidios.',
+      caveat: 'Costo de referencia. El modelo no contempla cobros a la ciudadanía, comisiones ni subsidios.',
       isDemo: true,
     },
   ];
@@ -266,10 +266,10 @@ export async function getPriorityZones(): Promise<PriorityZone[]> {
         const reasons: string[] = [];
         if (signals.length > 0) {
           reasons.push(
-            `Señal estadística en datos oficiales DEMO: ${signals.map((signal) => diseases.find((d) => d.id === signal.diseaseId)?.shortName).join(', ')}.`,
+            `Señal estadística en registros ilustrativos: ${signals.map((signal) => diseases.find((d) => d.id === signal.diseaseId)?.shortName).join(', ')}.`,
           );
         }
-        if (vectorAboveThreshold) reasons.push(`Ovitrampas positivas en ${vector?.positivityPct ?? 0} % (umbral DEMO ${VECTOR_THRESHOLD_PCT} %).`);
+        if (vectorAboveThreshold) reasons.push(`Ovitrampas positivas en ${vector?.positivityPct ?? 0} % (umbral de referencia ${VECTOR_THRESHOLD_PCT} %).`);
         if (reviewedBreeding >= MIN_PUBLIC_COUNT) {
           reasons.push(`${reviewedBreeding} observaciones revisadas de posibles criaderos en las últimas 4 semanas.`);
         }
@@ -376,7 +376,7 @@ export async function exportAggregatedReportsCsv(
       entityId: `reportes-agregados-${scope}`,
       detail: `${rows.length} filas agregadas (${periodLabels[filters.period].toLowerCase()}). Sin datos personales.`,
     });
-    return { filename: `ondara-demo-reportes-agregados-${scope}-${today}.csv`, content, rows: rows.length };
+    return { filename: `ondara-reportes-agregados-${scope}-${today}.csv`, content, rows: rows.length };
   });
 }
 

@@ -188,7 +188,7 @@ export function MapPage() {
 
       {data && (
         <p className="mb-4 text-sm text-muted" aria-live="polite">
-          <span className="font-semibold text-charcoal">{data.diseaseLabel}</span> · {data.periodLabel} · Datos oficiales DEMO
+          <span className="font-semibold text-charcoal">{data.diseaseLabel}</span> · {data.periodLabel} · Registros ilustrativos
           con corte al {data.officialCutoff}; reportes ciudadanos actualizados el {data.participationUpdatedAt}.
         </p>
       )}
@@ -236,8 +236,8 @@ export function MapPage() {
                   <div className="absolute inset-x-3 bottom-10 sm:inset-x-auto sm:left-3 sm:max-w-sm">
                     <EmptyState
                       headingLevel="h2"
-                      title="Sin registros oficiales DEMO"
-                      description="No hay registros para esta combinación de enfermedad y periodo. Prueba con un periodo más amplio."
+                      title="Sin registros ilustrativos"
+                      description="No hay registros para esta combinación de enfermedad y periodo. Selecciona un periodo más amplio."
                       action={
                         <Button size="sm" variant="secondary" onClick={() => updateFilter('periodo', 'ultimas-12')}>
                           Ver últimas 12 semanas
@@ -259,7 +259,7 @@ export function MapPage() {
           {baseMode === 'local' && (
             <Notice tone="info" title="Mapa base esquemático">
               No se pudo cargar el mapa base de OpenFreeMap (sin conexión o red bloqueada). Se muestra una costa aproximada dibujada
-              para la DEMO; las capas y los datos no cambian.
+              como referencia visual; las capas y los datos no cambian.
             </Notice>
           )}
 
@@ -299,7 +299,7 @@ export function MapPage() {
                     <tr>
                       <th scope="col">Zona</th>
                       <th scope="col" className="text-right">
-                        Oficial DEMO (registros)
+                        Ilustrativos (registros)
                       </th>
                       <th scope="col" className="text-right">
                         Estimado (por 10 mil hab.)

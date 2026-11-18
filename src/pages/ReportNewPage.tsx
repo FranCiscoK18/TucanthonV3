@@ -76,7 +76,7 @@ function Confirmation({ report, onAnother }: { report: CitizenReport; onAnother:
         <p className="mt-2 leading-relaxed">Guarda tu folio. Es la única referencia del reporte: no está ligado a tu identidad.</p>
         <dl className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
           <div className="rounded-[12px] bg-cream-paper p-4">
-            <dt className="text-sm text-muted">Folio (simulado)</dt>
+            <dt className="text-sm text-muted">Folio local</dt>
             <dd className="mt-1 font-mono text-[1.25rem] font-semibold tracking-wide text-forest-ink">{report.folio}</dd>
           </div>
           <div className="rounded-[12px] bg-cream-paper p-4">
@@ -286,14 +286,14 @@ export function ReportNewPage() {
             {form.category && form.category !== 'sintomas-agregados' && (
               <div>
                 <p className="field-label">Foto</p>
-                <p className="field-hint">En la DEMO la foto es simulada: no se sube ni se guarda ninguna imagen.</p>
+                <p className="field-hint">La imagen es una referencia visual; no se sube ni se almacena ningún archivo.</p>
                 {form.hasSimulatedPhoto ? (
                   <div className="mt-2 flex items-center gap-4 rounded-[12px] border border-border-mist p-3">
                     <div className="flex size-20 shrink-0 items-center justify-center rounded-[10px] bg-sage-mist" aria-hidden="true">
                       <Camera className="size-7 text-forest-ink" />
                     </div>
                     <div className="min-w-0">
-                      <p className="font-medium">Foto simulada adjunta</p>
+                      <p className="font-medium">Imagen de referencia agregada</p>
                       <Button variant="ghost" size="sm" icon={Trash2} onClick={() => set('hasSimulatedPhoto', false)} className="-ml-3.5">
                         Quitar foto
                       </Button>
@@ -301,7 +301,7 @@ export function ReportNewPage() {
                   </div>
                 ) : (
                   <Button variant="secondary" icon={Camera} onClick={() => set('hasSimulatedPhoto', true)} className="mt-2">
-                    Adjuntar foto simulada
+                    Mostrar imagen de referencia
                   </Button>
                 )}
                 <p className="mt-2 flex items-start gap-2 text-sm text-muted">
@@ -377,7 +377,7 @@ export function ReportNewPage() {
                 <li>No pedimos nombre, teléfono, correo ni domicilio.</li>
                 <li>Solo registramos la zona amplia, nunca coordenadas.</li>
                 <li>En vistas públicas, los conteos menores a 3 se muestran como «&lt;3».</li>
-                <li>En la DEMO, el reporte se guarda solo en este navegador.</li>
+                <li>El reporte se guarda únicamente en este navegador.</li>
               </ul>
             </div>
             <Notice tone="integrity">{TEXTS.integrityRule}</Notice>

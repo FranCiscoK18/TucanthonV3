@@ -94,7 +94,7 @@ export interface DiseaseCatalog {
 
 function officialSource(): DataSource {
   const source = getDataSourcesMock().find((item) => item.id === 'fuente-registro-semanal');
-  if (!source) throw new NotFoundError('Fuente DEMO no encontrada.');
+  if (!source) throw new NotFoundError('No se encontró la fuente de referencia.');
   return source;
 }
 
@@ -150,7 +150,7 @@ export interface DiseaseDetail {
 export async function getDiseaseDetail(id: string, scope: RegionId | 'ciudad'): Promise<DiseaseDetail> {
   return simulateRequest(() => {
     const disease = diseaseById.get(id);
-    if (!disease) throw new NotFoundError('No encontramos esa enfermedad o señal en el catálogo DEMO.');
+    if (!disease) throw new NotFoundError('No encontramos esa enfermedad o señal en el catálogo.');
     const clock = getDemoClock();
     const series = weeklySeries([id], scope);
     const current = series.slice(-4);
@@ -197,7 +197,7 @@ export async function getDiseaseDetail(id: string, scope: RegionId | 'ciudad'): 
       comparison: {
         current: { label: formatWeekRange(weeks.slice(-4)), total: currentTotal },
         previous: { label: formatWeekRange(weeks.slice(-8, -4)), total: sum(previous) },
-        lastYear: { label: 'Mismo periodo del año anterior (referencia DEMO)', total: lastYearTotal },
+        lastYear: { label: 'Mismo periodo del año anterior (referencia ilustrativa)', total: lastYearTotal },
       },
       zones,
       vectorSeries,

@@ -9,7 +9,7 @@ export function Skeleton({ className }: { className?: string }) {
 }
 
 /** Estado de carga con esqueletos; anuncia «Cargando…» a lectores de pantalla. */
-export function LoadingState({ label = 'Cargando datos DEMO…', lines = 3, className }: { label?: string; lines?: number; className?: string }) {
+export function LoadingState({ label = 'Cargando información…', lines = 3, className }: { label?: string; lines?: number; className?: string }) {
   return (
     <div className={cx('space-y-3', className)} role="status" aria-live="polite">
       <span className="sr-only">{label}</span>

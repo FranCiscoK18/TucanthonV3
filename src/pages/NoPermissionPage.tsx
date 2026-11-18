@@ -18,7 +18,7 @@ export function NoPermissionPage({ area }: { area: AreaId }) {
         Sin permiso
       </h1>
       <p className="mt-3 leading-relaxed">
-        Tu rol DEMO actual (<strong>{roleLabels[role]}</strong>) no tiene acceso a «{label}». Pueden entrar:{' '}
+        Tu perfil actual (<strong>{roleLabels[role]}</strong>) no tiene acceso a «{label}». Pueden entrar:{' '}
         {allowed.join(', ')}.
       </p>
       <div className="mt-6 flex flex-wrap justify-center gap-3">

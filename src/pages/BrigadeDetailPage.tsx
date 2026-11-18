@@ -47,8 +47,8 @@ export function BrigadeDetailPage() {
               </h1>
               <p className="mt-3 max-w-3xl text-[1.0625rem] leading-relaxed text-muted">{activity.description}</p>
 
-              <Notice tone="caution" title="Evento ficticio" className="mt-6">
-                No acudas a esta sede: la actividad forma parte del escenario DEMO.
+              <Notice tone="caution" title="Actividad ilustrativa" className="mt-6">
+                Esta actividad no es una convocatoria real. No acudas a la sede sin consultar primero una fuente oficial.
               </Notice>
 
               <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]">

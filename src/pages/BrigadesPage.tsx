@@ -47,7 +47,7 @@ export function BrigadesPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Agenda DEMO"
+        eyebrow="Agenda de referencia"
         title="Brigadas y campañas sanitarias"
         description="Vacunación y prevención por zona, con ubicación aproximada. Las sedes son referencias generales de espacios públicos."
         meta={
@@ -58,9 +58,9 @@ export function BrigadesPage() {
         }
       />
 
-      <Notice tone="caution" title="Eventos ficticios" className="mb-6">
-        Esta agenda es una simulación para validar la plataforma: no acudas a las sedes señaladas. Consulta las campañas reales
-        con la autoridad sanitaria.
+      <Notice tone="caution" title="Agenda ilustrativa" className="mb-6">
+        Las actividades y sedes de esta agenda son ilustrativas, no convocatorias reales. Consulta las campañas confirmadas
+        con la autoridad sanitaria antes de acudir.
       </Notice>
 
       <form
@@ -153,7 +153,7 @@ export function BrigadesPage() {
           activities.length === 0 ? (
             <EmptyState
               title="No hay actividades con estos filtros"
-              description="Prueba con otra fecha, horario o población objetivo, o incluye las actividades pasadas."
+              description="Selecciona otra fecha, horario o población objetivo, o incluye las actividades pasadas."
               action={
                 <Button variant="secondary" onClick={() => setFilters(defaultActivityFilters)}>
                   Restablecer filtros

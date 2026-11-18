@@ -64,7 +64,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Cartilla de vacunación, si la tienes', 'Si tienes síntomas respiratorios, usa cubrebocas'],
     venueHint: 'Explanada pública de la zona Centro (referencia general)',
     status: 'programada',
-    organizer: 'Jurisdicción sanitaria (DEMO)',
+    organizer: 'Jurisdicción sanitaria (referencia)',
     description: 'Aplicación de la vacuna estacional para grupos prioritarios y población general.',
   },
   {
@@ -81,7 +81,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Identificación o cartilla de vacunación, si la tienes'],
     venueHint: 'Parque público de la zona Sur (referencia general)',
     status: 'programada',
-    organizer: 'Jurisdicción sanitaria (DEMO)',
+    organizer: 'Jurisdicción sanitaria (referencia)',
     description: 'Dosis de refuerzo para personas que cumplen los criterios del esquema vigente.',
   },
   {
@@ -98,7 +98,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Cartilla de vacunación, si la tienes'],
     venueHint: 'Módulo itinerante en un espacio público de la zona (referencia general)',
     status: 'en-curso',
-    organizer: 'Jurisdicción sanitaria (DEMO)',
+    organizer: 'Jurisdicción sanitaria (referencia)',
     description: 'Módulo móvil de vacunación durante la jornada.',
   },
   {
@@ -115,7 +115,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Cartilla de vacunación', 'Las personas menores de edad deben ir acompañadas por una persona adulta'],
     venueHint: 'Módulo itinerante en un espacio público de la zona (referencia general)',
     status: 'programada',
-    organizer: 'Jurisdicción sanitaria (DEMO)',
+    organizer: 'Jurisdicción sanitaria (referencia)',
     description: 'Revisión de cartillas y aplicación de dosis pendientes de SRP.',
   },
   {
@@ -132,7 +132,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Cartilla de vacunación o carnet perinatal, si lo tienes'],
     venueHint: 'Centro de salud público de la zona (referencia general)',
     status: 'programada',
-    organizer: 'Jurisdicción sanitaria (DEMO)',
+    organizer: 'Jurisdicción sanitaria (referencia)',
     description: 'Vacuna recomendada durante el embarazo para proteger a recién nacidos.',
   },
   {
@@ -149,8 +149,8 @@ const seeds: ActivitySeed[] = [
     requirements: ['Cartilla de vacunación', 'Acompañamiento de una persona adulta'],
     venueHint: 'Espacio público de la zona Poniente (referencia general)',
     status: 'reprogramada',
-    organizer: 'Jurisdicción sanitaria (DEMO)',
-    description: 'Jornada reprogramada por condiciones del clima en el escenario DEMO.',
+    organizer: 'Jurisdicción sanitaria (referencia)',
+    description: 'Escenario ilustrativo de una jornada reprogramada por condiciones del clima.',
   },
   {
     id: 'brigada-influenza-zh',
@@ -166,8 +166,8 @@ const seeds: ActivitySeed[] = [
     requirements: ['Identificación laboral o cartilla, si la tienes'],
     venueHint: 'Espacio público de la Zona Hotelera (referencia general)',
     status: 'finalizada',
-    organizer: 'Jurisdicción sanitaria (DEMO)',
-    description: 'Jornada concluida en el escenario DEMO.',
+    organizer: 'Jurisdicción sanitaria (referencia)',
+    description: 'Escenario ilustrativo de una jornada finalizada.',
   },
   {
     id: 'campana-criaderos-sur',
@@ -183,7 +183,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Ropa cómoda y calzado cerrado', 'Guantes, si los tienes'],
     venueHint: 'Punto de reunión en un parque público de la zona (referencia general)',
     status: 'programada',
-    organizer: 'Gobierno municipal y aliados comunitarios (DEMO)',
+    organizer: 'Gobierno municipal y aliados comunitarios (referencia)',
     description: 'Recorrido vecinal para retirar llantas, cubetas y otros recipientes que acumulan agua.',
   },
   {
@@ -200,7 +200,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Sin requisitos'],
     venueHint: 'Explanada pública de la zona Poniente (referencia general)',
     status: 'programada',
-    organizer: 'Gobierno municipal (DEMO)',
+    organizer: 'Gobierno municipal (referencia)',
     description: 'Taller breve con una lista de verificación para el hogar.',
   },
   {
@@ -217,7 +217,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Sin requisitos'],
     venueHint: 'Espacio público de la zona Bonfil (referencia general)',
     status: 'programada',
-    organizer: 'Jurisdicción sanitaria y aliados comunitarios (DEMO)',
+    organizer: 'Jurisdicción sanitaria y aliados comunitarios (referencia)',
     description: 'Demostraciones sobre desinfección de agua y manejo de alimentos.',
   },
   {
@@ -234,7 +234,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Sin requisitos'],
     venueHint: 'Espacio comunitario público de la zona (referencia general)',
     status: 'programada',
-    organizer: 'Aliados comunitarios (DEMO)',
+    organizer: 'Aliados comunitarios (referencia)',
     description: 'Orientación general sobre medidas de prevención y cuándo buscar atención médica.',
   },
   {
@@ -251,7 +251,7 @@ const seeds: ActivitySeed[] = [
     requirements: ['Sin requisitos'],
     venueHint: 'Espacio público de la Zona Hotelera (referencia general)',
     status: 'programada',
-    organizer: 'Gobierno municipal (DEMO)',
+    organizer: 'Gobierno municipal (referencia)',
     description: 'Información para personas trabajadoras que pasan muchas horas al aire libre.',
   },
   {
@@ -268,8 +268,8 @@ const seeds: ActivitySeed[] = [
     requirements: ['Sin requisitos'],
     venueHint: 'Explanada pública de la zona Centro (referencia general)',
     status: 'finalizada',
-    organizer: 'Gobierno municipal (DEMO)',
-    description: 'Jornada concluida en el escenario DEMO.',
+    organizer: 'Gobierno municipal (referencia)',
+    description: 'Escenario ilustrativo de una jornada finalizada.',
   },
 ];
 

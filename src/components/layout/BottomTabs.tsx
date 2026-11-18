@@ -85,7 +85,7 @@ function MoreSheet({ open, onClose }: { open: boolean; onClose: () => void }) {
           </nav>
           <div className="mt-2 flex items-center justify-between gap-3 rounded-[12px] bg-keylime-wash px-3 py-2.5">
             <p className="text-sm">
-              <span className="text-muted">Rol DEMO: </span>
+              <span className="text-muted">Perfil: </span>
               <span className="font-semibold text-forest-ink">{roleLabels[role]}</span>
             </p>
             {session ? (

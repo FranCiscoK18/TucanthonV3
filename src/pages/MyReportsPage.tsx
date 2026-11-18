@@ -110,7 +110,7 @@ function ReportItem({
       )}
       {report.hasSimulatedPhoto && (
         <p className="mt-2 inline-flex items-center gap-1.5 text-sm text-muted">
-          <Camera className="size-4" aria-hidden="true" /> Foto simulada (no se almacena ninguna imagen)
+          <Camera className="size-4" aria-hidden="true" /> Imagen de referencia (no se almacena ninguna imagen)
         </p>
       )}
 
@@ -223,7 +223,7 @@ export function MyReportsPage() {
         open={toDelete !== null}
         onClose={() => setToDelete(null)}
         title="¿Eliminar este reporte de tu navegador?"
-        description={`El folio ${toDelete?.folio ?? ''} dejará de aparecer aquí. En la DEMO, los reportes solo existen en este navegador.`}
+        description={`El folio ${toDelete?.folio ?? ''} dejará de aparecer aquí. Los reportes locales solo existen en este navegador.`}
         footer={
           <>
             <Button variant="secondary" onClick={() => setToDelete(null)}>

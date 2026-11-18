@@ -59,7 +59,7 @@ export function DiseaseDetailPage() {
           <p className="mt-3 text-sm text-muted">Información general: no sustituye la orientación del personal de salud.</p>
         </div>
         <div className="card card-cream">
-          <h2 className="text-[1.25rem]">Cómo se representa en esta DEMO</h2>
+          <h2 className="text-[1.25rem]">Cómo se representa la vigilancia</h2>
           <p className="mt-2 leading-relaxed">{disease.monitoring}</p>
         </div>
       </div>
@@ -97,12 +97,12 @@ export function DiseaseDetailPage() {
                 <SectionHeading
                   id="tendencia"
                   title={`Tendencia semanal en ${scopeLabel}`}
-                  description={`Registros oficiales DEMO por semana epidemiológica · ${seriesRange}. Corte: ${formatDate(data.cutoff)}.`}
+                  description={`Registros ilustrativos por semana epidemiológica · ${seriesRange}. Corte: ${formatDate(data.cutoff)}.`}
                 />
                 <div className="grid grid-cols-1 gap-5 xl:grid-cols-[minmax(0,1fr)_20rem]">
                   <div className="min-w-0 rounded-card border border-border-mist p-3 sm:p-4">
                     <TrendChart
-                      title={`Registros oficiales DEMO de ${disease.name} en ${scopeLabel}`}
+                      title={`Registros ilustrativos de ${disease.name} en ${scopeLabel}`}
                       description={`Serie semanal de ${n} semanas. Último valor: ${data.series[n - 1]?.value ?? 0} registros.`}
                       points={data.series}
                       unitLabel="registros"
@@ -193,7 +193,7 @@ export function DiseaseDetailPage() {
                   <div className="relative max-h-96 overflow-auto rounded-card border border-border-mist" tabIndex={0} aria-label="Tabla de datos semanales, desplazable">
                     <table className="table-base">
                       <caption className="sr-only">
-                        Registros oficiales DEMO por semana de {disease.name} en {scopeLabel}
+                        Registros ilustrativos por semana de {disease.name} en {scopeLabel}
                       </caption>
                       <thead className="sticky top-0 bg-cream-paper">
                         <tr>
@@ -232,7 +232,7 @@ export function DiseaseDetailPage() {
                   />
                   <div className="relative overflow-x-auto rounded-card border border-border-mist" tabIndex={0} aria-label="Tabla por zona, desplazable">
                     <table className="table-base min-w-[40rem]">
-                      <caption className="sr-only">Registros oficiales DEMO de {disease.name} por zona, últimas 4 semanas</caption>
+                      <caption className="sr-only">Registros ilustrativos de {disease.name} por zona, últimas 4 semanas</caption>
                       <thead>
                         <tr>
                           <th scope="col">Zona</th>
@@ -271,12 +271,12 @@ export function DiseaseDetailPage() {
                   <SectionHeading
                     id="vectorial"
                     eyebrow="Vigilancia del mosquito"
-                    title="Vigilancia entomológica DEMO"
-                    description={`Porcentaje de ovitrampas con huevos de mosquito en ${scopeLabel}. Umbral DEMO de referencia: ${VECTOR_THRESHOLD_PCT} %.`}
+                    title="Vigilancia entomológica ilustrativa"
+                    description={`Porcentaje de ovitrampas con huevos de mosquito en ${scopeLabel}. Umbral de referencia: ${VECTOR_THRESHOLD_PCT} %.`}
                   />
                   <div className="rounded-card border border-border-mist p-3 sm:p-4">
                     <TrendChart
-                      title={`Ovitrampas positivas en ${scopeLabel} (DEMO)`}
+                      title={`Ovitrampas positivas en ${scopeLabel} (referencia)`}
                       description="Porcentaje semanal de ovitrampas con huevos de mosquito."
                       points={data.vectorSeries}
                       unitLabel="% de ovitrampas positivas"

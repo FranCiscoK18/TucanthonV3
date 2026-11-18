@@ -85,7 +85,7 @@ function SourcesSection() {
       <SectionHeading
         id="fuentes-titulo"
         title="Fuentes de datos"
-        description="Gestión simulada: cambiar el estado se registra en la bitácora."
+        description="Gestión de fuentes y seguimiento: cada cambio de estado se registra en la bitácora."
       />
       {message && (
         <Notice tone="tip" className="mb-4" role="status">
@@ -96,7 +96,7 @@ function SourcesSection() {
         {(sources) => (
           <div className="relative overflow-x-auto rounded-card border border-border-mist" tabIndex={0} aria-label="Tabla de fuentes, desplazable">
             <table className="table-base min-w-[60rem]">
-              <caption className="sr-only">Fuentes de datos DEMO con tipo, responsable, periodo, fecha de corte y estado</caption>
+              <caption className="sr-only">Fuentes de datos de referencia con tipo, responsable, periodo, fecha de corte y estado</caption>
               <thead>
                 <tr>
                   <th scope="col">Fuente</th>
@@ -329,7 +329,7 @@ function ModerationSection({ onModerated }: { onModerated: () => void }) {
       <SectionHeading
         id="moderacion-titulo"
         title="Moderación de reportes"
-        description="Cada decisión exige un motivo y queda en la bitácora. En la DEMO, los reportes propios de este navegador también aparecen aquí."
+        description="Cada decisión exige un motivo y queda en la bitácora. Los reportes guardados en este navegador también aparecen aquí."
       />
       <form className="mb-4 grid grid-cols-1 gap-3 rounded-card bg-border-mist/60 p-4 sm:grid-cols-2 xl:grid-cols-4" aria-label="Filtros de moderación" onSubmit={(event) => event.preventDefault()}>
         <InputField
@@ -397,7 +397,7 @@ function ModerationSection({ onModerated }: { onModerated: () => void }) {
       <AsyncContent resource={resource} onRetry={reload} loading={<LoadingState lines={3} />}>
         {(reports) =>
           reports.length === 0 ? (
-            <EmptyState title="Sin reportes en esta vista" description="No hay reportes con estos filtros. Prueba con «Todos»." />
+            <EmptyState title="Sin reportes en esta vista" description="No hay reportes con estos filtros. Selecciona «Todos»." />
           ) : (
             <>
               <p className="mb-3 text-sm text-muted" aria-live="polite">
@@ -520,7 +520,7 @@ function AuditSection({ refreshKey }: { refreshKey: number }) {
           <>
             <div className="relative overflow-x-auto rounded-card border border-border-mist" tabIndex={0} aria-label="Tabla de bitácora, desplazable">
               <table className="table-base min-w-[52rem]">
-                <caption className="sr-only">Bitácora de acciones simuladas, de la más reciente a la más antigua</caption>
+                <caption className="sr-only">Bitácora de acciones, de la más reciente a la más antigua</caption>
                 <thead>
                   <tr>
                     <th scope="col">Cuándo</th>
@@ -570,7 +570,7 @@ function ModulesSection() {
       <SectionHeading
         id="modulos-titulo"
         title="Separación de datos"
-        description="Configuración visible (solo lectura en la DEMO). Las reglas de retención están pendientes de validar con la autoridad."
+        description="Configuración visible (solo lectura). Las reglas de retención están pendientes de validar con la autoridad."
       />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="card card-keylime">
@@ -583,7 +583,7 @@ function ModulesSection() {
             </div>
             <div>
               <dt className="font-semibold">Datos</dt>
-              <dd>Solo agregados por zona y datos simulados. No contiene datos personales.</dd>
+              <dd>Solo agregados por zona y datos de referencia. No contiene datos personales.</dd>
             </div>
             <div>
               <dt className="font-semibold">Retención</dt>
@@ -609,7 +609,7 @@ function ModulesSection() {
             </div>
             <div>
               <dt className="font-semibold">Retención (por validar)</dt>
-              <dd>Los textos libres se eliminan 90 días después del cierre y se conserva solo el conteo agregado. Las fotos no se almacenan en la DEMO.</dd>
+              <dd>Los textos libres se eliminan 90 días después del cierre y se conserva solo el conteo agregado. Las fotos no se almacenan en esta versión.</dd>
             </div>
             <div>
               <dt className="font-semibold">Eliminación</dt>
@@ -642,7 +642,7 @@ export function AdminPage() {
       <PageHeader
         eyebrow="Administrador de salud"
         title="Gestión y validación de reportes"
-        description="Fuentes de datos, moderación, bitácora y separación entre información pública y reportes. Todas las acciones son simuladas."
+        description="Fuentes de datos, moderación, bitácora y separación entre información pública y reportes. Los registros y métricas de ejemplo son ilustrativos."
         meta={<DemoTag />}
       />
       <nav aria-label="Secciones de administración" className="mb-10">

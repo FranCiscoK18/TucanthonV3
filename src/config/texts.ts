@@ -18,5 +18,5 @@ export const TEXTS = {
     'Ninguna métrica de este panel demuestra que la plataforma haya causado cambios en la salud de la población, ni equivale a incidencia clínica.',
   emergency: 'Si alguien presenta signos de alarma, busca atención médica de inmediato o llama al 911.',
   noPersonalData: 'No incluyas nombres, teléfonos, correos, domicilios ni datos que identifiquen a alguna persona.',
-  demoData: 'Datos simulados (DEMO). No provienen de ninguna autoridad ni sistema oficial.',
+  demoData: 'Datos ilustrativos para presentar el funcionamiento. No proceden de autoridades ni sistemas oficiales.',
 } as const;

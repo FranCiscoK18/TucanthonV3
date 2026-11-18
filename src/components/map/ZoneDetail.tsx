@@ -79,13 +79,13 @@ function LayerBlock({
             <summary className="cursor-pointer text-forest-ink underline-offset-2 hover:underline">Fuente y advertencia</summary>
             <dl className="mt-2 space-y-2">
               <MetaItem icon={Database} term="Fuente">
-                {source ? source.name : 'Fuente DEMO'}
+                {source ? source.name : 'Fuente de referencia'}
               </MetaItem>
               <MetaItem icon={CalendarClock} term="Actualización y periodo">
                 {updated} · {period}
               </MetaItem>
               <MetaItem icon={MapPinned} term="Cobertura">
-                {source?.coverage ?? 'Zonas DEMO'}
+                {source?.coverage ?? 'Zonas de referencia'}
               </MetaItem>
               <MetaItem icon={TriangleAlert} term="Advertencia">
                 {layer.limitation}
