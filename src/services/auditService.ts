@@ -18,12 +18,12 @@ function seedEntry(): AuditLog {
     id: 'bitacora-escenario',
     at: cancunLocalToIso(getDemoClock().cutoff, '09:00'),
     actorRole: 'sistema',
-    actorLabel: 'Sistema DEMO',
+    actorLabel: 'Sistema Ondara',
     actionCode: 'carga-escenario',
-    action: 'Carga del escenario DEMO',
+    action: 'Carga del escenario de referencia',
     entityType: 'fuente',
     entityId: 'todas',
-    detail: 'Se cargaron datos simulados para la validación. Ningún dato proviene de fuentes oficiales.',
+    detail: 'Se cargó información ilustrativa; los indicadores no proceden de fuentes oficiales.',
     isDemo: true,
   };
 }
