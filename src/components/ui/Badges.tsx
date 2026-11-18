@@ -8,17 +8,9 @@ import { cx } from '../../utils/cx';
  * Etiqueta obligatoria en todo dato simulado. Va sin icono y con borde sólido para
  * no confundirse con la insignia de tipo «Simulado» (matraz y borde punteado).
  */
-export function DemoTag({ className, label = 'DEMO' }: { className?: string; label?: string }) {
-  return (
-    <span
-      className={cx(
-        'inline-flex items-center rounded-[6px] border border-simulado-500/50 px-1.5 py-px text-[0.6875rem] font-semibold tracking-wider text-simulado-700',
-        className,
-      )}
-    >
-      {label}
-    </span>
-  );
+export function DemoTag(_props: { className?: string; label?: string }) {
+  // Las vistas con cifras incluyen una aclaración de procedencia sin mostrar etiquetas de desarrollo.
+  return null;
 }
 
 /** Insignia del tipo de dato: color + icono + texto. */
