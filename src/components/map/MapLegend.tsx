@@ -38,7 +38,7 @@ function OfficialScale({ breaks }: { breaks: number[] }) {
   ];
   return (
     <div className="mt-2">
-      <p className="text-xs text-muted">Registros oficiales DEMO en el periodo, por zona</p>
+      <p className="text-xs text-muted">Registros ilustrativos en el periodo, por zona</p>
       <ul className="mt-1.5 grid grid-cols-3 gap-x-3 gap-y-1 text-xs tabular-nums">
         {classes.map((item) => (
           <li key={item.label} className="flex items-center gap-1.5 whitespace-nowrap">
