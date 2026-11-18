@@ -286,7 +286,7 @@ export function ReportNewPage() {
             {form.category && form.category !== 'sintomas-agregados' && (
               <div>
                 <p className="field-label">Foto</p>
-                <p className="field-hint">La imagen de referencia no se sube ni se guarda en el servidor.</p>
+                <p className="field-hint">La imagen es una referencia visual; no se sube ni se almacena ningún archivo.</p>
                 {form.hasSimulatedPhoto ? (
                   <div className="mt-2 flex items-center gap-4 rounded-[12px] border border-border-mist p-3">
                     <div className="flex size-20 shrink-0 items-center justify-center rounded-[10px] bg-sage-mist" aria-hidden="true">
