@@ -5,7 +5,6 @@ import { ActivityStatusPill, ActivityTypePill } from '../components/ActivityCard
 import { activitiesDataset, ONLY_BRIGADES } from '../components/map/activitiesDataset';
 import { LazyMap } from '../components/map/LazyMap';
 import { MetaItem } from '../components/ui/MetaItem';
-import { Notice } from '../components/ui/Notice';
 import { SourceMeta } from '../components/ui/SourceMeta';
 import { AsyncContent, LoadingState } from '../components/ui/States';
 import { useAsync } from '../hooks/useAsync';
@@ -44,9 +43,7 @@ export function BrigadeDetailPage() {
               </h1>
               <p className="mt-3 max-w-3xl text-[1.0625rem] leading-relaxed text-muted">{activity.description}</p>
 
-              <Notice tone="caution" title="Actividad ilustrativa" className="mt-6">
-                Esta actividad no es una convocatoria real. No acudas a la sede sin consultar primero una fuente oficial.
-              </Notice>
+              <p className="mt-3 text-sm text-muted">Actividad de referencia, no convocatoria oficial. Confirma fecha y sede con la autoridad sanitaria antes de acudir.</p>
 
               <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]">
                 <div className="space-y-4">
