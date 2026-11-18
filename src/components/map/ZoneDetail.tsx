@@ -79,13 +79,7 @@ function LayerBlock({
             <summary className="cursor-pointer text-forest-ink underline-offset-2 hover:underline">Fuente y advertencia</summary>
             <dl className="mt-2 space-y-2">
               <MetaItem icon={Database} term="Fuente">
-                {source ? (
-                  <Link className="link font-normal" to={`/normativa#${source.id}`}>
-                    {source.name}
-                  </Link>
-                ) : (
-                  'Fuente DEMO'
-                )}
+                {source ? source.name : 'Fuente DEMO'}
               </MetaItem>
               <MetaItem icon={CalendarClock} term="Actualización y periodo">
                 {updated} · {period}

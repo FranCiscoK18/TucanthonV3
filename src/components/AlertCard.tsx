@@ -14,9 +14,7 @@ export function AlertCard({ alert, compact = false }: { alert: Alert; compact?: 
   const meta = (
     <dl className="mt-3 space-y-2.5 text-sm">
       <MetaItem icon={Database} term="Fuente">
-        <Link className="link font-normal" to={`/normativa#${alert.sourceId}`}>
-          {alert.source}
-        </Link>
+        {alert.source}
       </MetaItem>
       <MetaItem icon={CalendarDays} term="Fecha">
         {formatDate(alert.date)}

@@ -189,9 +189,7 @@ export function DiseasesPage() {
                           <SignalBadge status={item.signal.status} ratio={item.signal.ratio} />
                         </div>
                         <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-border-mist pt-3 text-sm">
-                          <Link className="link" to={`/normativa#${item.disease.sourceId}`}>
-                            Fuente DEMO
-                          </Link>
+                          <span className="text-muted">Fuente DEMO</span>
                           <Link
                             className="inline-flex min-h-10 items-center gap-1 font-semibold text-forest-ink hover:underline"
                             to={`/enfermedades/${item.disease.id}`}

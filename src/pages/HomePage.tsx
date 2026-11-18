@@ -4,7 +4,6 @@ import {
   Check,
   Map as MapIcon,
   MessageSquarePlus,
-  Scale,
   Syringe,
   Workflow,
   X,
@@ -61,7 +60,6 @@ const QUICK_LINKS: QuickLink[] = [
   { to: '/mapa', title: 'Mapa epidemiológico', text: 'Registros, reportes y brigadas por zona.', icon: MapIcon },
   { to: '/enfermedades', title: 'Enfermedades y señales', text: 'Tendencias y cómo se detecta una señal.', icon: BookOpenText },
   { to: '/brigadas', title: 'Brigadas y campañas', text: 'Vacunación y prevención cerca de ti.', icon: Syringe },
-  { to: '/normativa', title: 'Normativa y fuentes', text: 'De dónde sale cada dato.', icon: Scale },
 ];
 
 /** Filas de la tabla de Inicio: primero las señales activas y luego las de más registros. */
@@ -166,7 +164,7 @@ export function HomePage() {
 
       <section aria-labelledby="accesos">
         <SectionHeading id="accesos" title="Accesos rápidos" description="Las funciones públicas no requieren descarga ni cuenta." />
-        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <ul className="grid grid-cols-1 gap-3 md:grid-cols-3">
           {QUICK_LINKS.map((link) => {
             const Icon = link.icon;
             return (

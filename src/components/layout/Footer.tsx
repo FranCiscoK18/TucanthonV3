@@ -43,11 +43,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link className="link" to="/normativa">
-                  Normativa y fuentes de datos DEMO
-                </Link>
-              </li>
-              <li>
                 <Link className="link" to="/acceso">
                   Roles de la demostración
                 </Link>

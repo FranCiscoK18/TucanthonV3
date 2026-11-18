@@ -11,7 +11,6 @@ export type AreaId =
   | 'enfermedades'
   | 'brigadas'
   | 'reportar'
-  | 'normativa'
   | 'mis-reportes'
   | 'institucion'
   | 'administracion';
@@ -26,7 +25,6 @@ export const AREA_ROLES: Record<AreaId, readonly UserRole[]> = {
   enfermedades: EVERYONE,
   brigadas: EVERYONE,
   reportar: EVERYONE,
-  normativa: EVERYONE,
   'mis-reportes': ['ciudadano', 'admin'],
   institucion: ['admin'],
   administracion: ['admin'],

@@ -1,6 +1,5 @@
 import {
   ArrowDown,
-  ArrowRight,
   Building2,
   ClipboardCheck,
   Handshake,
@@ -234,9 +233,6 @@ export function HowItWorksPage() {
         <div className="mt-6 flex flex-wrap gap-3">
           <ButtonLink to="/reportar" icon={ShieldCheck}>
             Enviar un reporte
-          </ButtonLink>
-          <ButtonLink to="/normativa" variant="secondary" icon={ArrowRight} iconPosition="end">
-            Normativa y fuentes
           </ButtonLink>
         </div>
       </section>

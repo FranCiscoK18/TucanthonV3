@@ -71,7 +71,6 @@ public/brand/     Logotipo e isotipo de Ondara (PNG con fondo transparente)
 | `/enfermedades/:id` | Tendencia, señal, comparación de periodos, datos por semana y zona, vigilancia vectorial | Público |
 | `/brigadas` y `/brigadas/:id` | Brigadas y campañas en lista y mapa, con detalle | Público |
 | `/reportar` | Formulario de reporte sin datos personales; folio al enviar | Público |
-| `/normativa` | Marcos a revisar y fuentes de datos DEMO | Público |
 | `/acceso` | Selector de rol (login mock) | Público |
 | `/mis-reportes` | Seguimiento de reportes propios (el admin puede abrirla, pero no aparece en su menú) | `ciudadano`, `admin` |
 | `/institucion` | Centro de vigilancia epidemiológica (señales, zonas y métricas) | `admin` |
@@ -83,7 +82,7 @@ Sin sesión, una ruta protegida redirige a `/acceso?siguiente=…` y vuelve a la
 
 | Rol | Acceso | Alias en pantalla |
 |---|---|---|
-| invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades, brigadas, normativa. Puede enviar reportes. | — |
+| invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades y brigadas. Puede enviar reportes. | — |
 | ciudadano | Todo lo anterior, más seguimiento de reportes propios | Ciudadanía DEMO |
 | admin | Centro de vigilancia, reportes, moderación, fuentes y bitácora | Administrador de salud (DEMO) |
 

@@ -85,7 +85,7 @@ function SourcesSection() {
       <SectionHeading
         id="fuentes-titulo"
         title="Fuentes de datos"
-        description="Gestión simulada: cambiar el estado se registra en la bitácora y se refleja en «Normativa y fuentes»."
+        description="Gestión simulada: cambiar el estado se registra en la bitácora."
       />
       {message && (
         <Notice tone="tip" className="mb-4" role="status">
@@ -579,7 +579,7 @@ function ModulesSection() {
           <dl className="mt-4 space-y-3 text-[0.9375rem]">
             <div>
               <dt className="font-semibold">Contenido</dt>
-              <dd>Mapa, enfermedades y señales, brigadas y normativa.</dd>
+              <dd>Mapa, enfermedades y señales, y brigadas.</dd>
             </div>
             <div>
               <dt className="font-semibold">Datos</dt>

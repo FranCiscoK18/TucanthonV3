@@ -10,7 +10,6 @@ export const TEXTS = {
     'Esta señal indica que un dato cambió respecto a su línea base; no es un diagnóstico ni la confirmación de un brote.',
   reportNotice:
     'Un reporte ciudadano no es un diagnóstico ni un caso confirmado. Su envío no garantiza una acción de la autoridad.',
-  regulationsNotice: 'Este apartado no sustituye un dictamen jurídico ni autoriza recopilar datos sensibles.',
   participationCaveat:
     'Una mayor cantidad de reportes puede reflejar más participación, no necesariamente más riesgo sanitario.',
   priorityCaveat:
