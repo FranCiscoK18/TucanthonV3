@@ -1,10 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import { App } from './app/App';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { RouterProvider } from 'react-router/dom';
+import { router } from './app/router';
+import { SessionProvider } from './app/session';
+import { initServiceConfigFromUrl } from './services/config';
 import './index.css';
-import 'maplibre-gl/dist/maplibre-gl.css';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode><BrowserRouter><App /></BrowserRouter></React.StrictMode>,
+initServiceConfigFromUrl(window.location.search);
+
+const container = document.getElementById('root');
+if (!container) throw new Error('No se encontró el contenedor #root.');
+
+createRoot(container).render(
+  <StrictMode>
+    <SessionProvider>
+      <RouterProvider router={router} />
+    </SessionProvider>
+  </StrictMode>,
 );

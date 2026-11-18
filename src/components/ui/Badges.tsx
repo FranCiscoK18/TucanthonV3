@@ -1,0 +1,66 @@
+import { FlaskConical, type LucideIcon } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { DATA_KIND_META } from '../../config/dataKinds';
+import type { DataKind } from '../../types';
+import { cx } from '../../utils/cx';
+
+/** Etiqueta obligatoria en todo dato simulado. */
+export function DemoTag({ className, label = 'DEMO' }: { className?: string; label?: string }) {
+  return (
+    <span
+      className={cx(
+        'inline-flex items-center gap-1 rounded-full border border-dashed border-simulado-500/70 bg-simulado-50 px-2 py-0.5 text-xs font-semibold tracking-wide text-simulado-700',
+        className,
+      )}
+    >
+      <FlaskConical className="size-3.5" aria-hidden="true" />
+      {label}
+    </span>
+  );
+}
+
+/** Insignia del tipo de dato: color + icono + texto. */
+export function DataKindBadge({ kind, compact = false, className }: { kind: DataKind; compact?: boolean; className?: string }) {
+  const meta = DATA_KIND_META[kind];
+  const Icon = meta.icon;
+  return (
+    <span className={cx('pill', meta.badgeClass, className)} title={meta.description}>
+      <Icon className="size-3.5 shrink-0" aria-hidden="true" />
+      {compact ? meta.short : meta.label}
+    </span>
+  );
+}
+
+export type Tone = 'neutral' | 'forest' | 'blue' | 'terracotta' | 'plum' | 'aqua' | 'amber' | 'closed' | 'danger' | 'warning';
+
+const toneClass: Record<Tone, string> = {
+  neutral: 'bg-simulado-50 text-simulado-700',
+  forest: 'bg-oficial-50 text-oficial-700',
+  blue: 'bg-estimado-50 text-estimado-700',
+  terracotta: 'bg-ciudadano-50 text-ciudadano-700',
+  plum: 'bg-revisado-50 text-revisado-700',
+  aqua: 'bg-brigada-50 text-brigada-700',
+  amber: 'bg-vector-50 text-vector-700',
+  closed: 'bg-cerrado-50 text-cerrado-700',
+  danger: 'bg-danger-50 text-danger-700',
+  warning: 'bg-warning-50 text-warning-700',
+};
+
+export function Pill({
+  tone = 'neutral',
+  icon: Icon,
+  children,
+  className,
+}: {
+  tone?: Tone;
+  icon?: LucideIcon;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <span className={cx('pill', toneClass[tone], className)}>
+      {Icon && <Icon className="size-3.5 shrink-0" aria-hidden="true" />}
+      {children}
+    </span>
+  );
+}
