@@ -1,11 +1,11 @@
 /** Validadores de forma para los datos leídos de `localStorage`. */
-import type { Appointment, AuditLog, CitizenReport, MockSession, ReportStatus, SessionRole } from '../types';
+import type { AuditLog, CitizenReport, MockSession, ReportStatus, SessionRole } from '../types';
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
-const SESSION_ROLES: readonly SessionRole[] = ['ciudadano', 'medico', 'institucion', 'admin'];
+const SESSION_ROLES: readonly SessionRole[] = ['ciudadano', 'institucion', 'admin'];
 const REPORT_STATUSES: readonly ReportStatus[] = ['pendiente', 'en_revision', 'verificado', 'canalizado', 'cerrado'];
 
 export function isSessionRole(value: unknown): value is SessionRole {
@@ -19,21 +19,6 @@ export function isMockSession(value: unknown): value is MockSession {
     isSessionRole(value.role) &&
     typeof value.alias === 'string' &&
     typeof value.startedAt === 'string'
-  );
-}
-
-export function isAppointment(value: unknown): value is Appointment {
-  return (
-    isRecord(value) &&
-    value.isDemo === true &&
-    typeof value.id === 'string' &&
-    typeof value.folio === 'string' &&
-    typeof value.doctorId === 'string' &&
-    (value.modality === 'presencial' || value.modality === 'en-linea') &&
-    typeof value.date === 'string' &&
-    typeof value.time === 'string' &&
-    (value.status === 'confirmada' || value.status === 'cancelada') &&
-    typeof value.createdAt === 'string'
   );
 }
 

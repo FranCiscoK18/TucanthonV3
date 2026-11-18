@@ -1,4 +1,4 @@
-import { Building2, CircleUserRound, Settings2, ShieldAlert, Stethoscope, type LucideIcon } from 'lucide-react';
+import { Building2, CircleUserRound, Settings2, ShieldAlert, type LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import { AREA_ROLES, type AreaId } from '../app/access';
@@ -14,7 +14,6 @@ import { cx } from '../utils/cx';
 
 const roleIcons: Record<SessionRole, LucideIcon> = {
   ciudadano: CircleUserRound,
-  medico: Stethoscope,
   institucion: Building2,
   admin: Settings2,
 };

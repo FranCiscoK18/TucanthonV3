@@ -38,7 +38,7 @@ export const DATA_KIND_META: Record<DataKind, DataKindMeta> = {
   simulado: {
     label: 'Dato simulado',
     short: 'Simulado',
-    description: 'Escenario ficticio para la demostración (agenda, directorio u operación).',
+    description: 'Escenario ficticio para la demostración (brigadas u operación).',
     icon: FlaskConical,
     badgeClass: 'bg-simulado-50 text-simulado-700 border border-dashed border-simulado-500/70',
   },

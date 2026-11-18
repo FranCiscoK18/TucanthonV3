@@ -1,7 +1,7 @@
 import type { DataKind, DemoRecord, ISODate, ISODateTime } from './common';
 import type { ModerationDecision, ReportStatus } from './participation';
 
-export type UserRole = 'invitado' | 'ciudadano' | 'medico' | 'institucion' | 'admin';
+export type UserRole = 'invitado' | 'ciudadano' | 'institucion' | 'admin';
 
 export type SessionRole = Exclude<UserRole, 'invitado'>;
 
@@ -11,8 +11,6 @@ export interface MockSession extends DemoRecord {
   /** Alias genérico del rol; nunca un nombre real de la persona usuaria. */
   alias: string;
   startedAt: ISODateTime;
-  /** Solo para el rol `medico`: perfil del directorio que administra. */
-  linkedDoctorId?: string;
 }
 
 export type AlertLevel = 'informativo' | 'seguimiento';

@@ -2,15 +2,12 @@
 import {
   BookOpenText,
   Building2,
-  CalendarCheck,
-  CalendarDays,
   ClipboardList,
   House,
   Map as MapIcon,
   MessageSquarePlus,
   Scale,
   Settings2,
-  Stethoscope,
   Syringe,
   Workflow,
   type LucideIcon,
@@ -33,12 +30,9 @@ export const NAV_ITEMS: NavItem[] = [
   { area: 'mapa', to: '/mapa', label: 'Mapa epidemiológico', shortLabel: 'Mapa', icon: MapIcon, group: 'publico' },
   { area: 'enfermedades', to: '/enfermedades', label: 'Enfermedades y señales', shortLabel: 'Señales', icon: BookOpenText, group: 'publico' },
   { area: 'brigadas', to: '/brigadas', label: 'Brigadas y campañas', shortLabel: 'Brigadas', icon: Syringe, group: 'publico' },
-  { area: 'directorio', to: '/directorio', label: 'Directorio de salud', shortLabel: 'Directorio', icon: Stethoscope, group: 'publico' },
   { area: 'reportar', to: '/reportar', label: 'Enviar un reporte', shortLabel: 'Reportar', icon: MessageSquarePlus, group: 'publico' },
   { area: 'normativa', to: '/normativa', label: 'Normativa y fuentes', shortLabel: 'Normativa', icon: Scale, group: 'publico' },
-  { area: 'citas', to: '/citas', label: 'Mis citas', shortLabel: 'Citas', icon: CalendarCheck, group: 'cuenta' },
   { area: 'mis-reportes', to: '/mis-reportes', label: 'Mis reportes', shortLabel: 'Mis reportes', icon: ClipboardList, group: 'cuenta' },
-  { area: 'medico', to: '/medico', label: 'Mi perfil y agenda', shortLabel: 'Mi agenda', icon: CalendarDays, group: 'gestion' },
   { area: 'institucion', to: '/institucion', label: 'Panel institucional', shortLabel: 'Panel', icon: Building2, group: 'gestion' },
   { area: 'administracion', to: '/administracion', label: 'Administración', shortLabel: 'Admin', icon: Settings2, group: 'gestion' },
 ];
@@ -55,9 +49,8 @@ export function navItemsFor(role: UserRole): NavItem[] {
 
 /** Pestañas inferiores en móvil (máximo 4 + «Más»), priorizadas por rol. */
 const TAB_PRIORITY: Record<UserRole, AreaId[]> = {
-  invitado: ['inicio', 'mapa', 'reportar', 'directorio'],
-  ciudadano: ['inicio', 'mapa', 'reportar', 'citas'],
-  medico: ['inicio', 'medico', 'mapa', 'directorio'],
+  invitado: ['inicio', 'mapa', 'reportar', 'brigadas'],
+  ciudadano: ['inicio', 'mapa', 'reportar', 'mis-reportes'],
   institucion: ['inicio', 'institucion', 'mapa', 'enfermedades'],
   admin: ['inicio', 'institucion', 'administracion', 'mapa'],
 };

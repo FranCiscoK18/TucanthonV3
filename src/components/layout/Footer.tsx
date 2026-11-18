@@ -92,7 +92,7 @@ export function Footer() {
         open={confirmOpen}
         onClose={() => setConfirmOpen(false)}
         title="¿Borrar los datos locales de la DEMO?"
-        description="Se eliminarán de este navegador la sesión mock, tus citas, tus reportes y la bitácora simulada. No afecta a nadie más."
+        description="Se eliminarán de este navegador la sesión mock, tus reportes y la bitácora simulada. No afecta a nadie más."
         footer={
           <>
             <Button variant="secondary" onClick={() => setConfirmOpen(false)}>

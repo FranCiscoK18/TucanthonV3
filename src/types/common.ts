@@ -22,7 +22,7 @@ export interface DemoRecord {
  * - `oficial-demo`: simula un registro de una autoridad; NO proviene de ninguna fuente oficial.
  * - `estimado`: indicador calculado a partir de otros datos, con método explicado.
  * - `reporte-ciudadano`: observación enviada por la ciudadanía; no es un caso clínico.
- * - `simulado`: escenario ficticio (agenda, directorio, operación del piloto).
+ * - `simulado`: escenario ficticio (brigadas, datos de participación u operación del piloto).
  */
 export type DataKind = 'oficial-demo' | 'estimado' | 'reporte-ciudadano' | 'simulado';
 

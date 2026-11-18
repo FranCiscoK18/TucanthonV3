@@ -101,22 +101,6 @@ export function getDataSourcesMock(): DataSource[] {
       isDemo: true,
     },
     {
-      id: 'fuente-directorio',
-      name: 'Directorio de servicios de salud (simulado)',
-      kind: 'simulado',
-      type: 'Directorio informativo',
-      responsible: 'Equipo Ondara (DEMO)',
-      period: 'Vigente',
-      cutoffDate: clock.today,
-      updateFrequency: 'Mensual',
-      coverage: '10 perfiles ficticios',
-      limitations:
-        'Nombres, cédulas, precios y horarios ficticios. Ondara no cobra comisiones ni recibe pagos por referencias.',
-      status: 'activa',
-      module: 'A',
-      isDemo: true,
-    },
-    {
       id: 'fuente-indicadores',
       name: 'Indicadores del piloto (calculados sobre datos simulados)',
       kind: 'estimado',

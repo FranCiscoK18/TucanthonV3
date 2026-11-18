@@ -10,16 +10,14 @@ export type AreaId =
   | 'mapa'
   | 'enfermedades'
   | 'brigadas'
-  | 'directorio'
   | 'reportar'
   | 'normativa'
   | 'mis-reportes'
-  | 'citas'
-  | 'medico'
   | 'institucion'
   | 'administracion';
 
-const EVERYONE: readonly UserRole[] = ['invitado', 'ciudadano', 'medico', 'institucion', 'admin'];
+
+const EVERYONE: readonly UserRole[] = ['invitado', 'ciudadano', 'institucion', 'admin'];
 
 export const AREA_ROLES: Record<AreaId, readonly UserRole[]> = {
   inicio: EVERYONE,
@@ -27,12 +25,9 @@ export const AREA_ROLES: Record<AreaId, readonly UserRole[]> = {
   mapa: EVERYONE,
   enfermedades: EVERYONE,
   brigadas: EVERYONE,
-  directorio: EVERYONE,
   reportar: EVERYONE,
   normativa: EVERYONE,
   'mis-reportes': ['ciudadano', 'admin'],
-  citas: ['ciudadano', 'admin'],
-  medico: ['medico', 'admin'],
   institucion: ['institucion', 'admin'],
   administracion: ['admin'],
 };

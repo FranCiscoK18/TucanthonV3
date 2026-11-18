@@ -42,7 +42,6 @@ export const PILOT = {
 /** Únicas claves de `localStorage` permitidas por el alcance de la DEMO. */
 export const STORAGE_KEYS = {
   session: 'ondara.demo.sesion',
-  appointments: 'ondara.demo.citas',
   reports: 'ondara.demo.reportes',
   audit: 'ondara.demo.bitacora',
 } as const;

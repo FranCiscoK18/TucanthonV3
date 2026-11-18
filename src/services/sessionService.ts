@@ -4,7 +4,6 @@
  */
 import { STORAGE_KEYS } from '../config/demo';
 import { roleAliases } from '../config/roles';
-import { LINKED_DOCTOR_ID } from '../mocks/doctors';
 import type { MockSession, SessionRole } from '../types';
 import { appendAudit } from './auditService';
 import { simulateRequest } from './client';
@@ -36,7 +35,6 @@ export async function signIn(role: SessionRole): Promise<MockSession> {
         role,
         alias: roleAliases[role],
         startedAt: new Date().toISOString(),
-        ...(role === 'medico' ? { linkedDoctorId: LINKED_DOCTOR_ID } : {}),
         isDemo: true,
       };
       writeStored(STORAGE_KEYS.session, session);

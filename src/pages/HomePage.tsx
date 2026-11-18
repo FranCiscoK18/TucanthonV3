@@ -5,7 +5,6 @@ import {
   Map as MapIcon,
   MessageSquarePlus,
   Scale,
-  Stethoscope,
   Syringe,
   Workflow,
   X,
@@ -61,7 +60,6 @@ interface QuickLink {
 const QUICK_LINKS: QuickLink[] = [
   { to: '/mapa', title: 'Mapa epidemiológico', text: 'Seis capas separadas por tipo de dato.', icon: MapIcon, tone: 'bg-keylime-wash' },
   { to: '/brigadas', title: 'Brigadas y campañas', text: 'Vacunación y prevención por zona.', icon: Syringe, tone: 'bg-mint-veil' },
-  { to: '/directorio', title: 'Directorio de salud', text: 'Sin comisiones ni pagos por referencia.', icon: Stethoscope, tone: 'bg-mint-veil' },
   { to: '/reportar', title: 'Enviar un reporte', text: 'Sin cuenta y sin datos personales.', icon: MessageSquarePlus, tone: 'bg-sage-mist' },
   { to: '/enfermedades', title: 'Enfermedades y señales', text: 'Tendencias con criterios visibles.', icon: BookOpenText, tone: 'bg-keylime-wash' },
   { to: '/normativa', title: 'Normativa y fuentes', text: 'Marcos a revisar y fuentes DEMO.', icon: Scale, tone: 'bg-slate-hush' },

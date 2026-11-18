@@ -2,21 +2,16 @@
 import { createBrowserRouter } from 'react-router';
 import { AppLayout } from '../components/layout/AppLayout';
 import { AdminPage } from '../pages/AdminPage';
-import { AppointmentsPage } from '../pages/AppointmentsPage';
 import { BrigadeDetailPage } from '../pages/BrigadeDetailPage';
 import { BrigadesPage } from '../pages/BrigadesPage';
-import { DirectoryPage } from '../pages/DirectoryPage';
 import { DiseaseDetailPage } from '../pages/DiseaseDetailPage';
 import { DiseasesPage } from '../pages/DiseasesPage';
-import { DoctorPanelPage } from '../pages/DoctorPanelPage';
-import { DoctorProfilePage } from '../pages/DoctorProfilePage';
 import { HomePage } from '../pages/HomePage';
 import { HowItWorksPage } from '../pages/HowItWorksPage';
 import { InstitutionalPage } from '../pages/InstitutionalPage';
 import { LoginPage } from '../pages/LoginPage';
 import { MapPage } from '../pages/MapPage';
 import { MyReportsPage } from '../pages/MyReportsPage';
-import { NewAppointmentPage } from '../pages/NewAppointmentPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { RegulationsPage } from '../pages/RegulationsPage';
 import { ReportNewPage } from '../pages/ReportNewPage';
@@ -36,8 +31,6 @@ export const router = createBrowserRouter([
       { path: 'enfermedades/:diseaseId', element: <DiseaseDetailPage /> },
       { path: 'brigadas', element: <BrigadesPage /> },
       { path: 'brigadas/:activityId', element: <BrigadeDetailPage /> },
-      { path: 'directorio', element: <DirectoryPage /> },
-      { path: 'directorio/:doctorId', element: <DoctorProfilePage /> },
       { path: 'reportar', element: <ReportNewPage /> },
       { path: 'normativa', element: <RegulationsPage /> },
       { path: 'acceso', element: <LoginPage /> },
@@ -46,30 +39,6 @@ export const router = createBrowserRouter([
         element: (
           <RequireArea area="mis-reportes">
             <MyReportsPage />
-          </RequireArea>
-        ),
-      },
-      {
-        path: 'citas',
-        element: (
-          <RequireArea area="citas">
-            <AppointmentsPage />
-          </RequireArea>
-        ),
-      },
-      {
-        path: 'citas/nueva',
-        element: (
-          <RequireArea area="citas">
-            <NewAppointmentPage />
-          </RequireArea>
-        ),
-      },
-      {
-        path: 'medico',
-        element: (
-          <RequireArea area="medico">
-            <DoctorPanelPage />
           </RequireArea>
         ),
       },

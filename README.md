@@ -4,7 +4,7 @@
 
 > **Ondara complementa, no sustituye, a las autoridades sanitarias. No diagnostica ni confirma casos. Información DEMO para validación.**
 >
-> Todo el contenido es ficticio y lleva la etiqueta **DEMO**: series epidemiológicas, zonas, reportes, brigadas, directorio, credenciales y operación del piloto. No hay backend, base de datos, autenticación real ni integración con sistemas oficiales.
+> Todo el contenido es ficticio y lleva la etiqueta **DEMO**: series epidemiológicas, zonas, reportes, brigadas y operación del piloto. No hay backend, base de datos, autenticación real ni integración con sistemas oficiales.
 
 Stack: React 19 · TypeScript 5.9 (estricto, sin `any`) · Vite 7 · Tailwind CSS 4 · React Router 7 · MapLibre GL JS 6 · gráficas SVG propias.
 
@@ -33,7 +33,7 @@ No se necesitan variables de entorno. **El mapa base requiere internet** (OpenFr
 Parámetros útiles:
 
 - `?modo-prueba=1` activa el **modo prueba de fallos**: alrededor del 35 % de las llamadas simuladas fallan, para revisar los estados de error. También se activa desde el pie de página.
-- **Borrar datos locales de la DEMO** (pie de página) elimina la sesión, las citas, los reportes y la bitácora guardados en el navegador.
+- **Borrar datos locales de la DEMO** (pie de página) elimina la sesión, los reportes y la bitácora guardados en el navegador.
 
 ## 2. Estructura
 
@@ -70,13 +70,10 @@ public/brand/     Logotipo e isotipo de Ondara (PNG con fondo transparente)
 | `/enfermedades` | Catálogo, criterios de señal y señales activas | Público |
 | `/enfermedades/:id` | Tendencia, señal, comparación de periodos, datos por semana y zona, vigilancia vectorial | Público |
 | `/brigadas` y `/brigadas/:id` | Brigadas y campañas en lista y mapa, con detalle | Público |
-| `/directorio` y `/directorio/:id` | Directorio con filtros y perfil con horarios | Público |
 | `/reportar` | Formulario de reporte sin datos personales; folio al enviar | Público |
 | `/normativa` | Marcos a revisar y fuentes de datos DEMO | Público |
 | `/acceso` | Selector de rol (login mock) | Público |
-| `/citas` y `/citas/nueva` | Mis citas y flujo para agendar | `ciudadano`, `admin` |
 | `/mis-reportes` | Seguimiento de reportes propios | `ciudadano`, `admin` |
-| `/medico` | Perfil y agenda simulada | `medico`, `admin` |
 | `/institucion` | Panel institucional (métricas, zonas prioritarias, agregados, CSV, piloto) | `institucion`, `admin` |
 | `/administracion` | Fuentes, moderación, bitácora y separación de módulos | `admin` |
 
@@ -86,9 +83,8 @@ Sin sesión, una ruta protegida redirige a `/acceso?siguiente=…` y vuelve a la
 
 | Rol | Acceso | Alias en pantalla |
 |---|---|---|
-| invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades, brigadas, directorio, normativa. Puede enviar reportes. | — |
-| ciudadano | Todo lo anterior, más citas y seguimiento de reportes propios | Ciudadanía DEMO |
-| medico | Lo público, más su perfil y su agenda simulada. No ve reportes individuales. | Dra. Itzel Ejemplo (perfil DEMO) |
+| invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades, brigadas, normativa. Puede enviar reportes. | — |
+| ciudadano | Todo lo anterior, más seguimiento de reportes propios | Ciudadanía DEMO |
 | institucion | Lo público, más el panel institucional con datos agregados | Jurisdicción sanitaria (DEMO) |
 | admin | Todo, incluida la administración y la bitácora | Administración Ondara (DEMO) |
 
@@ -97,7 +93,7 @@ Sin sesión, una ruta protegida redirige a `/acceso?siguiente=…` y vuelve a la
 ## 5. Datos mock y servicios simulados
 
 - **Deterministas.** Un generador con semilla (mulberry32) produce los mismos datos en cada carga. Cada registro lleva `isDemo: true`.
-- **Reloj DEMO.** La fecha de corte es el último sábado de la última semana epidemiológica completa antes de hoy, con 16 semanas de historia. Los valores se indexan por posición, así que la demostración siempre luce vigente sin depender de fechas fijas. Brigadas y horarios del directorio se calculan desde hoy. Las horas se muestran en hora de Cancún (UTC−5).
+- **Reloj DEMO.** La fecha de corte es el último sábado de la última semana epidemiológica completa antes de hoy, con 16 semanas de historia. Los valores se indexan por posición, así que la demostración siempre luce vigente sin depender de fechas fijas. Las brigadas se calculan desde hoy. Las horas se muestran en hora de Cancún (UTC−5).
 - **Series diseñadas a mano** para ilustrar casos distintos: dengue con señal en la ciudad y en dos zonas, conteos estables, descensos y enfermedades con datos insuficientes.
 - **Señal por incremento inusual (criterios visibles en la UI).** Compara las 2 semanas más recientes con el promedio de las 8 anteriores. Hay señal si la ventana suma al menos 1.5 veces lo esperado y tiene al menos 10 registros; con menos, «datos insuficientes».
 - **Zonas** amplias (7) con polígonos ilustrativos hechos a mano. No son límites oficiales ni corresponden a domicilios. La población por zona es una estimación DEMO.
@@ -110,7 +106,6 @@ Sin sesión, una ruta protegida redirige a `/acceso?siguiente=…` y vuelve a la
 | Clave | Contenido |
 |---|---|
 | `ondara.demo.sesion` | Rol de la sesión mock |
-| `ondara.demo.citas` | Citas simuladas (sin nombre, contacto ni motivo de consulta) |
 | `ondara.demo.reportes` | Reportes propios enviados desde este navegador |
 | `ondara.demo.bitacora` | Bitácora de acciones institucionales (sin datos personales) |
 
@@ -143,12 +138,13 @@ La moderación de los reportes de ejemplo y el estado de las fuentes se **recons
 
 ## 8. Decisiones tomadas
 
+0. **Sin directorio, citas ni perfil médico:** `main` retiró estas funciones (PR #3 y #4); esta versión tampoco las incluye.
+
 1. **Se reemplazó el prototipo anterior** («EpiRadar Cancún», commit `74478ef`): no tenía acceso público ni las seis capas, y sus roles y estados no coincidían con el nuevo alcance.
 2. **Versiones estables** de cada librería. MapLibre se usa en la línea 6 porque las versiones 6.4 y anteriores tienen un aviso crítico de seguridad (XSS en `DOM.sanitize`).
 3. **Gráficas SVG propias** en lugar de Recharts, para no sumar peso.
 4. **Paleta extendida:** `DESIGN.md` pide no añadir colores, pero distinguir tipos de dato es un requisito del producto. Se añadieron tonos validados solo para tipos de dato y capas.
 5. **Sin mayúsculas sostenidas:** las etiquetas superiores van en tipo oración, en lugar de las mayúsculas que sugiere `DESIGN.md`.
-6. **Citas sin datos personales:** no se pide nombre ni motivo de consulta, porque el motivo es un dato de salud sensible.
 7. **Reportes sin datos personales:** no se piden nombre, teléfono, correo ni domicilio, y se detectan teléfonos, correos, direcciones y CURP en el texto libre. La foto es simulada (no se sube ninguna imagen) y WhatsApp no se ofrece como canal.
 8. **«Avisos informativos»** en lugar de «alertas», para evitar lenguaje de alarma. El tipo de datos sigue siendo `Alert`.
 9. **Regla operativa DEMO:** sin ampliación en 15 días, el reporte se cierra por información insuficiente. La cola de moderación muestra primero los pendientes y permite buscar por folio.
@@ -169,7 +165,6 @@ La moderación de los reportes de ejemplo y el estado de las fuentes se **recons
 - `npm run dev` y `vite preview` recorridos con Playwright (Chromium headless) a 390 px y 1440 px: todas las rutas públicas, rutas protegidas como invitado (redirección) y cada rol (acceso y «Sin permiso»). Sin errores de consola ni desbordes horizontales. Los únicos avisos fueron del controlador WebGL por software del navegador headless («GPU stall due to ReadPixels») y las peticiones bloqueadas al mapa base.
 - Flujos de punta a punta:
   - reporte como invitado (con validación de teléfono) → «Mis reportes» → ampliación pedida y respondida → aprobación, canalización y cierre, con bitácora;
-  - cita creada y cancelada, visible en la agenda médica;
   - exportación CSV solo con agregados;
   - modo prueba con «Reintentar».
 - Mapa: las seis capas se activan y desactivan por separado, y la selección de zona funciona desde el filtro y desde las fichas.

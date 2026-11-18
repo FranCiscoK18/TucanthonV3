@@ -1,4 +1,4 @@
-import { Building2, CircleUserRound, LogIn, LogOut, Settings2, Stethoscope, type LucideIcon } from 'lucide-react';
+import { Building2, CircleUserRound, LogIn, LogOut, Settings2, type LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { useSession } from '../../app/session';
@@ -10,7 +10,6 @@ import { ButtonLink } from '../ui/Button';
 const roleIcons: Record<UserRole, LucideIcon> = {
   invitado: CircleUserRound,
   ciudadano: CircleUserRound,
-  medico: Stethoscope,
   institucion: Building2,
   admin: Settings2,
 };
