@@ -164,8 +164,8 @@ export function RegulationsPage() {
                       <dd>{source.updateFrequency}</dd>
                     </div>
                     <div>
-                      <dt className="text-muted">Módulo</dt>
-                      <dd>{source.module === 'A' ? 'A · Información pública' : 'B · Participación y reportes'}</dd>
+                      <dt className="text-muted">Área</dt>
+                      <dd>{source.module === 'A' ? 'Información pública' : 'Participación ciudadana'}</dd>
                     </div>
                     <div className="sm:col-span-2">
                       <dt className="text-muted">Cobertura</dt>

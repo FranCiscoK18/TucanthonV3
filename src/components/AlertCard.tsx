@@ -5,9 +5,30 @@ import { formatDate } from '../utils/dates';
 import { DemoTag } from './ui/Badges';
 import { MetaItem } from './ui/MetaItem';
 
-/** Aviso informativo: fuente, fecha, criterio y limitación siempre visibles. */
-export function AlertCard({ alert }: { alert: Alert }) {
+/**
+ * Aviso informativo: fuente, fecha, criterio y limitación siempre disponibles.
+ * En modo compacto (listados) esos datos quedan plegados bajo «Fuente y criterio».
+ */
+export function AlertCard({ alert, compact = false }: { alert: Alert; compact?: boolean }) {
   const Icon = alert.level === 'seguimiento' ? TrendingUp : Info;
+  const meta = (
+    <dl className="mt-3 space-y-2.5 text-sm">
+      <MetaItem icon={Database} term="Fuente">
+        <Link className="link font-normal" to={`/normativa#${alert.sourceId}`}>
+          {alert.source}
+        </Link>
+      </MetaItem>
+      <MetaItem icon={CalendarDays} term="Fecha">
+        {formatDate(alert.date)}
+      </MetaItem>
+      <MetaItem icon={Filter} term="Criterio">
+        {alert.criteria}
+      </MetaItem>
+      <MetaItem icon={TriangleAlert} term="Limitación">
+        {alert.limitations}
+      </MetaItem>
+    </dl>
+  );
   return (
     <article className="card card-cream flex h-full flex-col" aria-labelledby={`aviso-${alert.id}`}>
       <div className="flex flex-wrap items-center gap-2">
@@ -21,22 +42,16 @@ export function AlertCard({ alert }: { alert: Alert }) {
         {alert.title}
       </h3>
       <p className="mt-2 leading-relaxed">{alert.message}</p>
-      <dl className="mt-4 space-y-2.5 text-sm">
-        <MetaItem icon={Database} term="Fuente">
-          <Link className="link font-normal" to={`/normativa#${alert.sourceId}`}>
-            {alert.source}
-          </Link>
-        </MetaItem>
-        <MetaItem icon={CalendarDays} term="Fecha">
-          {formatDate(alert.date)}
-        </MetaItem>
-        <MetaItem icon={Filter} term="Criterio">
-          {alert.criteria}
-        </MetaItem>
-        <MetaItem icon={TriangleAlert} term="Limitación">
-          {alert.limitations}
-        </MetaItem>
-      </dl>
+      {compact ? (
+        <details className="mt-4 text-sm">
+          <summary className="cursor-pointer font-medium text-forest-ink">
+            Fuente y criterio · {formatDate(alert.date)}
+          </summary>
+          {meta}
+        </details>
+      ) : (
+        <div className="mt-1">{meta}</div>
+      )}
       {alert.relatedDiseaseId && (
         <Link className="link mt-4 self-start text-sm" to={`/enfermedades/${alert.relatedDiseaseId}`}>
           Ver la serie y los criterios

@@ -1,5 +1,5 @@
 /**
- * Sistema visual de tipos de dato (regla 8): cada tipo combina color, icono y
+ * Sistema visual de tipos de dato: cada tipo combina color, icono y
  * etiqueta textual, para que nunca dependa solo del color.
  */
 import { FlaskConical, Landmark, MessageSquareText, Sigma, type LucideIcon } from 'lucide-react';

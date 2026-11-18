@@ -37,7 +37,7 @@ const SECTIONS = [
   { id: 'fuentes', label: 'Fuentes de datos', icon: Database },
   { id: 'moderacion', label: 'Moderación', icon: ClipboardCheck },
   { id: 'bitacora', label: 'Bitácora', icon: History },
-  { id: 'modulos', label: 'Separación de módulos', icon: SplitSquareHorizontal },
+  { id: 'modulos', label: 'Separación de datos', icon: SplitSquareHorizontal },
 ] as const;
 
 function useActor() {
@@ -115,7 +115,9 @@ function SourcesSection() {
                   <tr key={source.id}>
                     <th scope="row" className="font-medium">
                       {source.name}
-                      <span className="block text-xs font-normal text-muted">Módulo {source.module}</span>
+                      <span className="block text-xs font-normal text-muted">
+                        {source.module === 'A' ? 'Información pública' : 'Participación ciudadana'}
+                      </span>
                     </th>
                     <td>
                       <DataKindBadge kind={source.kind} compact />
@@ -567,17 +569,17 @@ function ModulesSection() {
     <section id="modulos" aria-labelledby="modulos-titulo" className="scroll-mt-24">
       <SectionHeading
         id="modulos-titulo"
-        title="Separación de módulos"
+        title="Separación de datos"
         description="Configuración visible (solo lectura en la DEMO). Las reglas de retención están pendientes de validar con la autoridad."
       />
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <div className="card card-keylime">
-          <p className="eyebrow">Módulo A</p>
+          <p className="eyebrow">Consulta</p>
           <h3 className="mt-1 text-[1.5rem]">Información pública</h3>
           <dl className="mt-4 space-y-3 text-[0.9375rem]">
             <div>
               <dt className="font-semibold">Contenido</dt>
-              <dd>Mapa, enfermedades y señales, brigadas, directorio y normativa.</dd>
+              <dd>Mapa, enfermedades y señales, brigadas y normativa.</dd>
             </div>
             <div>
               <dt className="font-semibold">Datos</dt>
@@ -588,14 +590,14 @@ function ModulesSection() {
               <dd>Las series se conservan durante el piloto y siempre se publican con fecha de corte.</dd>
             </div>
             <div>
-              <dt className="font-semibold">Entrada desde el módulo B</dt>
+              <dt className="font-semibold">Lo que recibe de la participación</dt>
               <dd>Solo conteos agregados, con supresión de valores menores a {MIN_PUBLIC_COUNT}.</dd>
             </div>
           </dl>
         </div>
         <div className="card card-slate">
-          <p className="eyebrow">Módulo B</p>
-          <h3 className="mt-1 text-[1.5rem]">Participación y reportes</h3>
+          <p className="eyebrow">Reportes</p>
+          <h3 className="mt-1 text-[1.5rem]">Participación ciudadana</h3>
           <dl className="mt-4 space-y-3 text-[0.9375rem]">
             <div>
               <dt className="font-semibold">Contenido</dt>
@@ -618,7 +620,7 @@ function ModulesSection() {
       </div>
       <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
         {[
-          { icon: Lock, text: 'Los módulos no comparten identificadores.' },
+          { icon: Lock, text: 'Las dos áreas no comparten identificadores.' },
           { icon: ShieldCheck, text: 'Los reportes no se vinculan con la identidad de quien los envía.' },
           { icon: History, text: 'La bitácora registra acciones institucionales, nunca a la ciudadanía.' },
         ].map(({ icon: Icon, text }) => (
@@ -638,9 +640,9 @@ export function AdminPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Administrador del sector salud · DEMO"
+        eyebrow="Administrador de salud"
         title="Gestión y validación de reportes"
-        description="Fuentes de datos, moderación, bitácora y separación de módulos. Todas las acciones son simuladas."
+        description="Fuentes de datos, moderación, bitácora y separación entre información pública y reportes. Todas las acciones son simuladas."
         meta={<DemoTag />}
       />
       <nav aria-label="Secciones de administración" className="mb-10">

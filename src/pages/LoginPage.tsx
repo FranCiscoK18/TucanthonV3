@@ -33,7 +33,7 @@ export function LoginPage() {
   };
   return (
     <>
-      <PageHeader eyebrow="Dos experiencias · Tucanthon" title="¿Cómo quieres entrar a Ondara?"
+      <PageHeader eyebrow="Acceso DEMO" title="¿Cómo quieres entrar a Ondara?"
         description="La ciudadanía aporta observaciones; el personal del sector salud analiza y administra. Los accesos son completamente simulados." />
       <Notice tone="caution" title="Sesiones de demostración" icon={ShieldAlert} className="mb-7">
         No hay cuentas ni contraseñas reales. Los controles de acceso son únicamente visuales y no deben utilizarse con datos reales.
@@ -55,14 +55,14 @@ export function LoginPage() {
           <div className="mt-5 border-t border-forest-ink/15 pt-4">
             <p className="mb-3 text-sm">Opcional: activar una sesión ficticia para consultar «Mis reportes».</p>
             <Button variant="secondary" icon={ClipboardCheck} loading={pending === 'ciudadano'} disabled={pending === 'admin'} onClick={() => choose('ciudadano')}>
-              {currentRole === 'ciudadano' ? 'Continuar como ciudadano DEMO' : 'Activar sesión de usuario DEMO'}
+              {currentRole === 'ciudadano' ? 'Continuar como ciudadanía DEMO' : 'Activar sesión de ciudadanía DEMO'}
             </Button>
           </div>
         </section>
         <section className="rounded-[20px] bg-slate-hush p-6 sm:p-8" aria-labelledby="acceso-salud">
           <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-cream-paper text-forest-ink"><Building2 className="size-7" /></span>
           <p className="eyebrow mt-5">Portal institucional</p>
-          <h2 id="acceso-salud" className="mt-2 text-[2rem]">Administrador del sector salud</h2>
+          <h2 id="acceso-salud" className="mt-2 text-[2rem]">Administrador de salud</h2>
           <p className="mt-3 leading-relaxed">Accede a la vigilancia epidemiológica, los datos agregados, zonas prioritarias, revisión de reportes, decisiones e intervenciones simuladas.</p>
           <div className="mt-6 space-y-3 rounded-xl bg-cream-paper p-5">
             <p className="font-semibold text-forest-ink">Herramientas del administrador</p>
@@ -72,12 +72,11 @@ export function LoginPage() {
               <li>Revisar fuentes, indicadores y la bitácora DEMO.</li>
             </ul>
             <Button className="mt-3 w-full" loading={pending === 'admin'} disabled={pending === 'ciudadano'} onClick={() => choose('admin')}>
-              {currentRole === 'admin' ? 'Continuar como administrador DEMO' : 'Entrar como administrador del sector salud'}
+              {currentRole === 'admin' ? 'Continuar como administrador DEMO' : 'Entrar como administrador de salud'}
             </Button>
           </div>
         </section>
       </div>
-      <p className="mt-6 text-sm text-muted">La plataforma funciona con dos perfiles simulados. La moderación forma parte del portal institucional, sin una tercera sesión de operador Ondara.</p>
     </>
   );
 }

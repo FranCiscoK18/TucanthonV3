@@ -43,8 +43,17 @@ export const NAV_GROUP_LABELS: Record<NavItem['group'], string> = {
   gestion: 'Gestión',
 };
 
+/**
+ * Áreas accesibles que no se anuncian en el menú de un rol. El administrador puede
+ * abrir «Mis reportes» para probar el ciclo completo, pero no es parte de su trabajo.
+ */
+const HIDDEN_IN_NAV: Partial<Record<UserRole, AreaId[]>> = {
+  admin: ['mis-reportes'],
+};
+
 export function navItemsFor(role: UserRole): NavItem[] {
-  return NAV_ITEMS.filter((item) => canAccess(role, item.area));
+  const hidden = HIDDEN_IN_NAV[role] ?? [];
+  return NAV_ITEMS.filter((item) => canAccess(role, item.area) && !hidden.includes(item.area));
 }
 
 /** Pestañas inferiores en móvil (máximo 4 + «Más»), priorizadas por rol. */
