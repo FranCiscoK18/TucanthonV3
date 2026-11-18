@@ -247,7 +247,7 @@ function PilotSection() {
 }
 
 export function InstitutionalPage() {
-  useDocumentTitle('Panel institucional');
+  useDocumentTitle('Centro de vigilancia');
   const { session } = useSession();
   const [filters, setFilters] = useState<InstitutionalFilters>({ regionId: 'todas', period: 'ultimas-4' });
   const summary = useAsync(() => getInstitutionalSummary(filters), [filters]);
@@ -260,8 +260,8 @@ export function InstitutionalPage() {
     setExporting(true);
     setExportMessage(null);
     try {
-      const role = session?.role ?? 'institucion';
-      const result = await exportAggregatedReportsCsv(filters, { role, label: session?.alias ?? roleAliases.institucion });
+      const role = session?.role ?? 'admin';
+      const result = await exportAggregatedReportsCsv(filters, { role, label: session?.alias ?? roleAliases.admin });
       downloadCsv(result.filename, result.content);
       setExportMessage({
         tone: 'tip',
@@ -278,8 +278,8 @@ export function InstitutionalPage() {
     <>
       <PageHeader
         eyebrow="Datos agregados"
-        title="Panel institucional"
-        description="Métricas primarias del piloto: utilidad, oportunidad, seguimiento, cobertura y sostenibilidad del servicio."
+        title="Centro de vigilancia epidemiológica"
+        description="Herramientas simuladas para que el sector salud explore señales, zonas prioritarias, reportes revisados y seguimiento institucional. Las métricas operativas se muestran más abajo."
         meta={
           <>
             <DataKindBadge kind="estimado" compact />

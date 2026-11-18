@@ -633,13 +633,13 @@ function ModulesSection() {
 }
 
 export function AdminPage() {
-  useDocumentTitle('Administración');
+  useDocumentTitle('Gestión de reportes');
   const [auditKey, setAuditKey] = useState(0);
   return (
     <>
       <PageHeader
-        eyebrow="Rol administración DEMO"
-        title="Administración"
+        eyebrow="Administrador del sector salud · DEMO"
+        title="Gestión y validación de reportes"
         description="Fuentes de datos, moderación, bitácora y separación de módulos. Todas las acciones son simuladas."
         meta={<DemoTag />}
       />

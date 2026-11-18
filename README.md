@@ -74,7 +74,7 @@ public/brand/     Logotipo e isotipo de Ondara (PNG con fondo transparente)
 | `/normativa` | Marcos a revisar y fuentes de datos DEMO | Público |
 | `/acceso` | Selector de rol (login mock) | Público |
 | `/mis-reportes` | Seguimiento de reportes propios | `ciudadano`, `admin` |
-| `/institucion` | Panel institucional (métricas, zonas prioritarias, agregados, CSV, piloto) | `institucion`, `admin` |
+| `/institucion` | Centro de vigilancia epidemiológica (señales, zonas y métricas) | `admin` |
 | `/administracion` | Fuentes, moderación, bitácora y separación de módulos | `admin` |
 
 Sin sesión, una ruta protegida redirige a `/acceso?siguiente=…` y vuelve a la ruta pedida al elegir un rol válido. Con un rol sin permiso, muestra «Sin permiso». El menú lateral y las pestañas móviles solo muestran lo que el rol puede abrir.
@@ -85,8 +85,7 @@ Sin sesión, una ruta protegida redirige a `/acceso?siguiente=…` y vuelve a la
 |---|---|---|
 | invitado (sin sesión) | Inicio, cómo funciona, mapa, enfermedades, brigadas, normativa. Puede enviar reportes. | — |
 | ciudadano | Todo lo anterior, más seguimiento de reportes propios | Ciudadanía DEMO |
-| institucion | Lo público, más el panel institucional con datos agregados | Jurisdicción sanitaria (DEMO) |
-| admin | Todo, incluida la administración y la bitácora | Administración Ondara (DEMO) |
+| admin | Centro de vigilancia, reportes, moderación, fuentes y bitácora | Administrador del sector salud (DEMO) |
 
 **No es autenticación ni autorización real.** Las restricciones existen solo en la interfaz y se pueden eludir desde el navegador.
 
@@ -101,7 +100,7 @@ Sin sesión, una ruta protegida redirige a `/acceso?siguiente=…` y vuelve a la
 - **Reportes de ejemplo (~100)** con historiales coherentes. Las métricas de oportunidad y seguimiento se calculan con esas marcas de tiempo, no se inventan aparte.
 - **Servicios** (`src/services`): funciones `async` con latencia de 300–800 ms y fallos opcionales en modo prueba. Latencia y tasa de error se configuran solo en `src/services/config.ts`.
 
-### Persistencia: solo 4 claves de `localStorage`
+### Persistencia: solo 3 claves de `localStorage`
 
 | Clave | Contenido |
 |---|---|
