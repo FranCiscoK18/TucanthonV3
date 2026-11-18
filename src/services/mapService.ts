@@ -15,10 +15,10 @@ import { weeksForPeriod } from './epidemiologyService';
 import { getAllReportsSnapshot } from './reportService';
 import { isUsefulObservation } from './moderation';
 
-/** Publica un conteo suprimiendo valores pequeños (p. ej. «<3») en vistas públicas. */
+/** Oculta el conteo exacto de valores positivos pequeños mediante un intervalo público. */
 export function publishCount(value: number): PublishedCount {
   if (value > 0 && value < MIN_PUBLIC_COUNT) {
-    return { value, display: `<${MIN_PUBLIC_COUNT}`, suppressed: true };
+    return { value, display: `1–${MIN_PUBLIC_COUNT - 1}`, suppressed: true };
   }
   return { value, display: String(value), suppressed: false };
 }
@@ -39,12 +39,12 @@ function diseaseLabel(filters: MapFilters): string {
 }
 
 /**
- * Límites superiores de 5 clases de intervalos iguales entre 1 y el máximo.
+ * Límites superiores de 7 clases de intervalos iguales entre 1 y el máximo.
  * La clase 0 se reserva para «sin registros».
  */
 function equalIntervalBreaks(max: number): number[] {
   if (max <= 0) return [];
-  return [0.2, 0.4, 0.6, 0.8, 1].map((fraction) => Math.max(1, Math.ceil(max * fraction)));
+  return [1, 2, 3, 4, 5, 6, 7].map((step) => Math.max(1, Math.ceil((max * step) / 7)));
 }
 
 function binFor(value: number, breaks: readonly number[]): number {
