@@ -1,8 +1,6 @@
-import { Camera, CheckCircle2, ClipboardList, ImageOff, LogIn, MessageSquarePlus, ShieldCheck, Trash2 } from 'lucide-react';
+import { Camera, CheckCircle2, ClipboardList, ImageOff, MessageSquarePlus, ShieldCheck, Trash2 } from 'lucide-react';
 import { useMemo, useRef, useState, type FormEvent } from 'react';
 import { Link } from 'react-router';
-import { canAccess } from '../app/access';
-import { useSession } from '../app/session';
 import { ReportStatusPill, StatusGuide } from '../components/reports/ReportStatus';
 import { DataKindBadge, DemoTag } from '../components/ui/Badges';
 import { Button, ButtonLink } from '../components/ui/Button';
@@ -69,8 +67,6 @@ function toInput(state: FormState): NewReportInput | null {
 }
 
 function Confirmation({ report, onAnother }: { report: CitizenReport; onAnother: () => void }) {
-  const { role } = useSession();
-  const canTrack = canAccess(role, 'mis-reportes');
   return (
     <section aria-labelledby="confirmacion" className="space-y-6">
       <div className="card card-keylime" role="status">
@@ -111,25 +107,14 @@ function Confirmation({ report, onAnother }: { report: CitizenReport; onAnother:
       </div>
 
       <div className="flex flex-wrap gap-3">
-        {canTrack ? (
-          <ButtonLink to="/mis-reportes" icon={ClipboardList}>
-            Ver el seguimiento en «Mis reportes»
-          </ButtonLink>
-        ) : (
-          <ButtonLink to="/acceso?siguiente=%2Fmis-reportes&area=mis-reportes" icon={LogIn}>
-            Dar seguimiento (sesión DEMO de ciudadanía)
-          </ButtonLink>
-        )}
+        <ButtonLink to="/mis-reportes" icon={ClipboardList}>
+          Consultar mis reportes sin cuenta
+        </ButtonLink>
         <Button variant="secondary" icon={MessageSquarePlus} onClick={onAnother}>
           Enviar otro reporte
         </Button>
       </div>
-      {!canTrack && (
-        <p className="text-sm text-muted">
-          El seguimiento es opcional. Los reportes enviados desde este navegador aparecen en «Mis reportes» al entrar como
-          ciudadanía DEMO.
-        </p>
-      )}
+      <p className="text-sm text-muted">El seguimiento está disponible sin iniciar sesión desde este mismo navegador.</p>
     </section>
   );
 }

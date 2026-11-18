@@ -1,5 +1,5 @@
 /**
- * Ruta protegida (solo de interfaz). Sin sesión, redirige a «Acceso DEMO» con el
+ * Ruta protegida (solo de interfaz). Sin sesión, redirige a «Acceso administrativo DEMO» con el
  * destino solicitado; con un rol sin permiso, muestra el mensaje «Sin permiso».
  */
 import type { ReactNode } from 'react';
